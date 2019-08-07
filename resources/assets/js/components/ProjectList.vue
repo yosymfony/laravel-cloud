@@ -10,7 +10,7 @@
 
                 <div v-else>
                     <ul>
-                        <li v-for="project in projects">
+                        <li v-for="(project, index) in projects" :key="index">
                             {{ project.name }}
                         </li>
                     </ul>
