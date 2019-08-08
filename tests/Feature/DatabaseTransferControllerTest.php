@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Database;
-use App\Jobs\SyncNetwork;
 use App\Project;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
+use App\Database;
 use Tests\TestCase;
+use App\Jobs\SyncNetwork;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DatabaseTransferControllerTest extends TestCase
 {

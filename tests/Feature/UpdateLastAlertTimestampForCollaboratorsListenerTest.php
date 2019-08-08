@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Project;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Project;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateLastAlertTimestampForCollaboratorsListenerTest extends TestCase
 {

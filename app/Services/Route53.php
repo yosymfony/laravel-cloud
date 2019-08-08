@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Contracts\DnsProvider;
 use App\Stack;
-use Aws\Route53\Route53Client;
 use Exception;
+use App\Contracts\DnsProvider;
+use Aws\Route53\Route53Client;
 
 class Route53 implements DnsProvider
 {
@@ -70,7 +70,7 @@ class Route53 implements DnsProvider
      */
     public function deleteRecord(Stack $stack)
     {
-        if (!$stack->dns_address) {
+        if (! $stack->dns_address) {
             return;
         }
 

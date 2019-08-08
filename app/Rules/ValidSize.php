@@ -36,7 +36,7 @@ class ValidSize implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (!$this->project instanceof Project) {
+        if (! $this->project instanceof Project) {
             return true;
         }
 

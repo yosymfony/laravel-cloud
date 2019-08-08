@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
 class ServerProviderController extends Controller
@@ -41,7 +41,7 @@ class ServerProviderController extends Controller
             'meta' => $request->meta,
         ]);
 
-        if (!$provider->client()->valid()) {
+        if (! $provider->client()->valid()) {
             $provider->delete();
 
             throw ValidationException::withMessages([

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Database;
 use App\DatabaseBackup;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateDatabaseBackupRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
+use App\Http\Requests\CreateDatabaseBackupRequest;
 
 class DatabaseBackupController extends Controller
 {
@@ -41,7 +41,7 @@ class DatabaseBackupController extends Controller
     {
         $this->authorize('view', $database->project);
 
-        if (!$database->isProvisioned()) {
+        if (! $database->isProvisioned()) {
             throw ValidationException::withMessages([
                 'database' => ['This database has not finished provisioning.'],
             ]);

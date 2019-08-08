@@ -36,11 +36,11 @@ class ValidDatabaseName implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (!$this->project instanceof Project) {
+        if (! $this->project instanceof Project) {
             return true;
         }
 
-        return !is_null(
+        return ! is_null(
             $this->project->databases->where('name', $value)->first()
         );
     }

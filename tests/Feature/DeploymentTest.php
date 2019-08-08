@@ -4,18 +4,18 @@ namespace Tests\Feature;
 
 use App\AppServer;
 use App\WebServer;
+use App\WebServer;
 use App\Deployment;
+use Tests\TestCase;
+use App\WorkerServer;
+use App\Jobs\Activate;
+use App\ServerDeployment;
 use App\Events\DeploymentFailed;
 use App\Events\DeploymentFinished;
 use App\Events\DeploymentTimedOut;
-use App\Jobs\Activate;
-use App\ServerDeployment;
-use App\WebServer;
-use App\WorkerServer;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeploymentTest extends TestCase
 {

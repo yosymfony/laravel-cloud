@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Facades\App\StorageProviderClientFactory;
 use Illuminate\Database\Eloquent\Model;
+use Facades\App\StorageProviderClientFactory;
 
 class StorageProvider extends Model
 {

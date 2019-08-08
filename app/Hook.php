@@ -107,7 +107,7 @@ class Hook extends Model
      */
     public function receives(array $payload)
     {
-        return !$this->published || $this->sourceProvider()->client()->receivesHookPayload(
+        return ! $this->published || $this->sourceProvider()->client()->receivesHookPayload(
             $this, $payload
         );
     }

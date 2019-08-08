@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Environment;
 use App\Stack;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Environment;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EnvironmentTest extends TestCase
 {

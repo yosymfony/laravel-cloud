@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateProjectRequest;
 use App\Project;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProjectRequest;
 use Illuminate\Validation\ValidationException;
 
 class ProjectController extends Controller
@@ -76,7 +76,7 @@ class ProjectController extends Controller
     {
         $this->authorize('delete', $project);
 
-        if (!$project->allStacks()->every->isProvisioned() ||
+        if (! $project->allStacks()->every->isProvisioned() ||
             $project->allStacks()->contains->isDeploying()) {
             throw ValidationException::withMessages([
                 'stack' => ['This project has stacks that are provisioning or deploying.'],

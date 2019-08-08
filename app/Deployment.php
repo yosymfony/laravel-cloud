@@ -2,18 +2,18 @@
 
 namespace App;
 
-use App\Events\DeploymentActivating;
-use App\Events\DeploymentBuilding;
-use App\Events\DeploymentCancelled;
+use Carbon\Carbon;
+use App\Jobs\Build;
+use App\Jobs\Activate;
+use App\Jobs\MonitorDeployment;
 use App\Events\DeploymentFailed;
+use App\Events\DeploymentBuilding;
 use App\Events\DeploymentFinished;
 use App\Events\DeploymentTimedOut;
-use App\Jobs\Activate;
-use App\Jobs\Build;
-use App\Jobs\MonitorDeployment;
-use App\Jobs\TimeOutDeploymentIfStillRunning;
-use Carbon\Carbon;
+use App\Events\DeploymentCancelled;
+use App\Events\DeploymentActivating;
 use Illuminate\Database\Eloquent\Model;
+use App\Jobs\TimeOutDeploymentIfStillRunning;
 
 class Deployment extends Model
 {
@@ -231,7 +231,7 @@ class Deployment extends Model
     protected function buildCommandsFor($server)
     {
         return $this->buildCommands()->filter->appliesTo($server)->reject->prefixed(
-            !$server->isMaster() ? 'once:' : null
+            ! $server->isMaster() ? 'once:' : null
         )->map->trim()->values();
     }
 
@@ -255,7 +255,7 @@ class Deployment extends Model
     protected function activationCommandsFor($server)
     {
         return $this->activationCommands()->filter->appliesTo($server)->reject->prefixed(
-            !$server->isMaster() ? 'once:' : null
+            ! $server->isMaster() ? 'once:' : null
         )->map->trim()->values();
     }
 

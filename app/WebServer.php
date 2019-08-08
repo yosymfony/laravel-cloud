@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\Jobs\ProvisionWebServer;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Jobs\ProvisionWebServer;
 
 class WebServer extends HttpServer
 {
@@ -17,7 +17,7 @@ class WebServer extends HttpServer
      */
     public function runsCommand($command)
     {
-        return !Str::startsWith($command, 'worker:');
+        return ! Str::startsWith($command, 'worker:');
     }
 
     /**

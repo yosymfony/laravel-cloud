@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Deployment;
 use App\Hook;
-use App\Services\GitHub;
-use App\SourceProvider;
 use App\Stack;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\Yaml\Yaml;
+use App\Deployment;
 use Tests\TestCase;
+use App\SourceProvider;
+use App\Services\GitHub;
+use Symfony\Component\Yaml\Yaml;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GitHubTest extends TestCase
 {

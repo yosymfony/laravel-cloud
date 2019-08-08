@@ -2,19 +2,19 @@
 
 namespace App;
 
-use App\Events\ServerDeploymentActivated;
+use App\Jobs\Build;
+use App\Jobs\Activate;
+use App\Jobs\StopDaemons;
+use App\Jobs\PauseDaemons;
+use App\Jobs\StartDaemons;
+use App\Jobs\StopScheduler;
+use App\Jobs\RestartDaemons;
+use App\Jobs\StartScheduler;
+use App\Jobs\UnpauseDaemons;
 use App\Events\ServerDeploymentBuilt;
 use App\Events\ServerDeploymentFailed;
-use App\Jobs\Activate;
-use App\Jobs\Build;
-use App\Jobs\PauseDaemons;
-use App\Jobs\RestartDaemons;
-use App\Jobs\StartDaemons;
-use App\Jobs\StartScheduler;
-use App\Jobs\StopDaemons;
-use App\Jobs\StopScheduler;
-use App\Jobs\UnpauseDaemons;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\ServerDeploymentActivated;
 
 class ServerDeployment extends Model
 {
@@ -380,7 +380,7 @@ class ServerDeployment extends Model
      */
     public function startScheduler()
     {
-        if (!empty($this->schedule())) {
+        if (! empty($this->schedule())) {
             StartScheduler::dispatch($this);
         }
     }
@@ -392,7 +392,7 @@ class ServerDeployment extends Model
      */
     public function stopScheduler()
     {
-        if (!empty($this->schedule())) {
+        if (! empty($this->schedule())) {
             StopScheduler::dispatch($this);
         }
     }

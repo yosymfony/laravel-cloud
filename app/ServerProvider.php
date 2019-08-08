@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Facades\App\ServerProviderClientFactory;
 use Illuminate\Database\Eloquent\Model;
+use Facades\App\ServerProviderClientFactory;
 
 class ServerProvider extends Model
 {

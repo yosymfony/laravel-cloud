@@ -45,7 +45,7 @@ class ValidServeList implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (!$this->project instanceof Project || empty($value)) {
+        if (! $this->project instanceof Project || empty($value)) {
             return true;
         }
 

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Events\ProjectShared;
 use App\Project;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
+use App\Events\ProjectShared;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
 {

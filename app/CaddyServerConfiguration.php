@@ -46,7 +46,7 @@ class CaddyServerConfiguration
             'domain'          => $this->domain,
             'root'            => $this->root(),
             'tls'             => $this->tls(),
-            'index'           => !Str::contains($this->domain, '.laravel.build'),
+            'index'           => ! Str::contains($this->domain, '.laravel.build'),
         ])->render();
     }
 
@@ -57,7 +57,7 @@ class CaddyServerConfiguration
      */
     protected function script()
     {
-        if (!$this->server->stack->isCanonicalDomain($this->domain) ||
+        if (! $this->server->stack->isCanonicalDomain($this->domain) ||
             Str::contains($this->domain, ':80')) {
             return 'scripts.caddy-configuration.redirect';
         }
@@ -73,7 +73,7 @@ class CaddyServerConfiguration
     protected function root()
     {
         if ($this->server->stack->under_maintenance &&
-            !Str::contains($this->domain, 'laravel.build')) {
+            ! Str::contains($this->domain, 'laravel.build')) {
             return '/home/cloud/maintenance/public';
         }
 

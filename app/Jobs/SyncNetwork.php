@@ -3,12 +3,12 @@
 namespace App\Jobs;
 
 use App\Database;
-use App\Scripts\SyncNetwork as SyncNetworkScript;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use App\Scripts\SyncNetwork as SyncNetworkScript;
 
 class SyncNetwork implements ShouldQueue
 {
@@ -54,8 +54,8 @@ class SyncNetwork implements ShouldQueue
      */
     public function handle()
     {
-        if (!$this->database->isProvisioned() ||
-            !$this->database->networkLock()->get()) {
+        if (! $this->database->isProvisioned() ||
+            ! $this->database->networkLock()->get()) {
             return $this->release(15);
         }
 

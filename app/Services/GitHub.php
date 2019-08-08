@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Contracts\SourceProviderClient;
-use App\Deployment;
-use App\Exceptions\ManifestNotFoundException;
 use App\Hook;
-use App\SourceProvider;
 use App\Stack;
 use Exception;
+use App\Deployment;
 use GuzzleHttp\Client;
+use App\SourceProvider;
+use App\Contracts\SourceProviderClient;
 use GuzzleHttp\Exception\ClientException;
+use App\Exceptions\ManifestNotFoundException;
 
 class GitHub implements SourceProviderClient
 {
@@ -185,7 +185,7 @@ class GitHub implements SourceProviderClient
      */
     public function receivesHookPayload(Hook $hook, array $payload)
     {
-        return !$this->isTestHookPayload($hook, $payload) &&
+        return ! $this->isTestHookPayload($hook, $payload) &&
                $payload['ref'] == "refs/heads/{$hook->branch}" &&
                $payload['repository']['full_name'] == $hook->project()->repository;
     }
@@ -211,7 +211,7 @@ class GitHub implements SourceProviderClient
      */
     public function unpublishHook(Hook $hook)
     {
-        if (!$providerHookId = ($hook->meta['provider_hook_id'] ?? null)) {
+        if (! $providerHookId = ($hook->meta['provider_hook_id'] ?? null)) {
             return;
         }
 

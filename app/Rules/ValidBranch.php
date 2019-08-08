@@ -45,7 +45,7 @@ class ValidBranch implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (!$this->source instanceof SourceProvider) {
+        if (! $this->source instanceof SourceProvider) {
             return false;
         }
 

@@ -2,19 +2,19 @@
 
 namespace Tests\Feature;
 
+use App\Stack;
+use App\Project;
 use App\Balancer;
-use App\Environment;
 use App\IpAddress;
-use App\Jobs\DeleteServerOnProvider;
+use App\WebServer;
+use Tests\TestCase;
+use App\Environment;
 use App\Jobs\ProvisionBalancer;
 use App\Jobs\UpdateStackDnsRecords;
-use App\Project;
-use App\Stack;
-use App\WebServer;
+use Illuminate\Support\Facades\Bus;
+use App\Jobs\DeleteServerOnProvider;
 use Facades\App\ServerProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
-use Tests\TestCase;
 
 class BalancerControllerTest extends TestCase
 {

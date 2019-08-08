@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Database;
 use App\User;
+use App\Database;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DatabasePolicy

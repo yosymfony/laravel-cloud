@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Stack;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
 class DaemonController extends Controller
@@ -25,7 +25,7 @@ class DaemonController extends Controller
             'action' => 'required|string|in:start,restart,pause,continue,unpause',
         ]);
 
-        if (!$deployment = $stack->lastDeployment()) {
+        if (! $deployment = $stack->lastDeployment()) {
             throw ValidationException::withMessages([
                 'stack' => ['This stack does not have any deployments.'],
             ]);

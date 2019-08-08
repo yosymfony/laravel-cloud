@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Project;
-use App\Rules\ValidSourceName;
-use App\SourceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\SourceProvider;
+use App\Rules\ValidSourceName;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ValidSourceNameRuleTest extends TestCase
 {

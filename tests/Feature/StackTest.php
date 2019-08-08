@@ -2,23 +2,23 @@
 
 namespace Tests\Feature;
 
-use App\AppServer;
+use App\Hook;
+use App\Stack;
 use App\Balancer;
 use App\Database;
-use App\Deployment;
-use App\Hook;
+use App\AppServer;
 use App\IpAddress;
-use App\Jobs\DeleteServerOnProvider;
-use App\Jobs\EnsureFloatingIpExists;
-use App\Jobs\MonitorDeployment;
-use App\Jobs\SyncNetwork;
-use App\ServerDeployment;
-use App\Stack;
 use App\StackTask;
 use App\WebServer;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
+use App\Deployment;
 use Tests\TestCase;
+use App\Jobs\SyncNetwork;
+use App\ServerDeployment;
+use App\Jobs\MonitorDeployment;
+use Illuminate\Support\Facades\Bus;
+use App\Jobs\DeleteServerOnProvider;
+use App\Jobs\EnsureFloatingIpExists;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StackTest extends TestCase
 {

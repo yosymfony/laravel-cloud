@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Contracts\StackDefinition;
-use App\FiltersConfigurationArrays;
 use App\MemoizesMethods;
-use App\Rules\DatabaseIsProvisioned;
-use App\Rules\ValidAppServerStack;
-use App\Rules\ValidDatabaseName;
-use App\Rules\ValidServeList;
 use App\Rules\ValidSize;
+use App\Rules\ValidServeList;
+use App\Rules\ValidDatabaseName;
+use App\Contracts\StackDefinition;
+use App\Rules\ValidAppServerStack;
+use App\FiltersConfigurationArrays;
+use App\Rules\DatabaseIsProvisioned;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProvisionStackRequest extends FormRequest implements StackDefinition
@@ -124,7 +124,7 @@ class ProvisionStackRequest extends FormRequest implements StackDefinition
             $this->deploymentRules(),
             $this->metaRules()
         ))->after(function ($validator) {
-            if (!$this->hasAppServers() && !$this->hasWebServers()) {
+            if (! $this->hasAppServers() && ! $this->hasWebServers()) {
                 $validator->errors()->add('web', 'At least one web server must be defined.');
             }
         });

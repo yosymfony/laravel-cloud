@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Callbacks\CheckDatabaseRestore;
 use App\DatabaseRestore;
-use App\Scripts\RestoreDatabaseBackup as RestoreDatabaseBackupScript;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use App\Callbacks\CheckDatabaseRestore;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use App\Scripts\RestoreDatabaseBackup as RestoreDatabaseBackupScript;
 
 class RestoreDatabaseBackup implements ShouldQueue
 {

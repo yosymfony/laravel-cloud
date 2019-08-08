@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Callbacks\CheckBuild;
-use App\ServerDeployment;
 use App\Task;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\ServerDeployment;
+use App\Callbacks\CheckBuild;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CheckBuildCallbackTest extends TestCase
 {

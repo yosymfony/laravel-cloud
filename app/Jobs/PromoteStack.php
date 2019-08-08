@@ -4,11 +4,11 @@ namespace App\Jobs;
 
 use App\Stack;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Bus;
 
 class PromoteStack implements ShouldQueue
 {
@@ -70,7 +70,7 @@ class PromoteStack implements ShouldQueue
         // services such as its queue workers and schedulers. This will allow it to
         // begin fully functioning as a new production stack for the application.
         if ($stack->environment->isProduction() &&
-            !$this->options['wait']) {
+            ! $this->options['wait']) {
             $stack->allServers()->each->startBackgroundServices();
         }
 

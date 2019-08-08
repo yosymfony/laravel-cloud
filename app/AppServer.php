@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Jobs\ProvisionAppServer;
 use Carbon\Carbon;
+use App\Jobs\ProvisionAppServer;
 
 class AppServer extends HttpServer
 {

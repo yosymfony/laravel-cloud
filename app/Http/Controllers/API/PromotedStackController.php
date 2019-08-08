@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Environment;
-use App\Http\Controllers\Controller;
-use App\Rules\StackIsPromotable;
 use App\Stack;
+use App\Environment;
 use Illuminate\Http\Request;
+use App\Rules\StackIsPromotable;
+use App\Http\Controllers\Controller;
 
 class PromotedStackController extends Controller
 {
@@ -22,7 +22,7 @@ class PromotedStackController extends Controller
     {
         $this->authorize('view', $environment->project);
 
-        if (!$environment->promotedStack()) {
+        if (! $environment->promotedStack()) {
             abort(404);
         }
 
@@ -50,7 +50,7 @@ class PromotedStackController extends Controller
 
         $this->authorize('view', $stack);
 
-        if (!$environment->promotionLock()->get()) {
+        if (! $environment->promotionLock()->get()) {
             return response()->json([
                 'environment' => ['This environment is already promoting another stack.'],
             ], 409);
