@@ -2,17 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Hook;
-use App\Stack;
 use App\Deployment;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Bus;
+use App\Hook;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class HookDeploymentControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -20,7 +18,6 @@ class HookDeploymentControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_deployment_can_be_created_from_hook_payload()
     {
@@ -39,7 +36,7 @@ class HookDeploymentControllerTest extends TestCase
         ]);
 
         $response = $this->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'         => 'refs/heads/'.$hook->branch,
             'head_commit' => [
                 'id' => 'd8f05f1696032982dd8bf77aa9186d2aea744801',
             ],
@@ -54,7 +51,6 @@ class HookDeploymentControllerTest extends TestCase
         $this->assertNull($response->original->branch);
         $this->assertEquals('d8f05f1696032982dd8bf77aa9186d2aea744801', $response->original->commit_hash);
     }
-
 
     public function test_deployment_can_be_created_from_codeship_payloads()
     {
@@ -76,7 +72,7 @@ class HookDeploymentControllerTest extends TestCase
             'User-Agent' => 'Codeship Webhook',
         ])->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
             'build' => [
-                'status' => 'success',
+                'status'    => 'success',
                 'commit_id' => 'd8f05f1696032982dd8bf77aa9186d2aea744801',
             ],
         ]);
@@ -87,7 +83,6 @@ class HookDeploymentControllerTest extends TestCase
         $this->assertNull($response->original->branch);
         $this->assertEquals('d8f05f1696032982dd8bf77aa9186d2aea744801', $response->original->commit_hash);
     }
-
 
     public function test_deployment_can_be_created_for_latest_commit()
     {
@@ -106,7 +101,7 @@ class HookDeploymentControllerTest extends TestCase
         ]);
 
         $response = $this->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'        => 'refs/heads/'.$hook->branch,
             'repository' => [
                 'full_name' => 'taylorotwell/hello-world',
             ],
@@ -121,7 +116,6 @@ class HookDeploymentControllerTest extends TestCase
         $this->assertEquals($latestCommit, $response->original->commit_hash);
     }
 
-
     public function test_request_token_must_match_hook_token()
     {
         Bus::fake();
@@ -131,7 +125,7 @@ class HookDeploymentControllerTest extends TestCase
         $hook->stack->deploymentLock()->release();
 
         $response = $this->withExceptionHandling()->json('post', '/api/hook-deployment/'.$hook->id.'/token', [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'         => 'refs/heads/'.$hook->branch,
             'head_commit' => [
                 'id' => '3b478197c05f0bb60ee484e01389bd2fff1d2bfc',
             ],
@@ -143,7 +137,6 @@ class HookDeploymentControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
-
     public function test_branch_must_be_received_by_hook()
     {
         Bus::fake();
@@ -153,7 +146,7 @@ class HookDeploymentControllerTest extends TestCase
         $hook->stack->deploymentLock()->release();
 
         $response = $this->withExceptionHandling()->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/something',
+            'ref'         => 'refs/heads/something',
             'head_commit' => [
                 'id' => '3b478197c05f0bb60ee484e01389bd2fff1d2bfc',
             ],
@@ -165,7 +158,6 @@ class HookDeploymentControllerTest extends TestCase
         $response->assertStatus(204);
         $this->assertNull($response->original);
     }
-
 
     public function test_irrelevant_codeship_hooks_are_discarded()
     {
@@ -179,7 +171,7 @@ class HookDeploymentControllerTest extends TestCase
             'User-Agent' => 'Codeship Webhook',
         ])->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
             'build' => [
-                'status' => 'failed',
+                'status'    => 'failed',
                 'commit_id' => 'something',
             ],
         ]);
@@ -187,7 +179,6 @@ class HookDeploymentControllerTest extends TestCase
         $response->assertStatus(204);
         $this->assertNull($response->original);
     }
-
 
     public function test_hook_always_receives_commits_if_it_is_not_published()
     {
@@ -206,7 +197,7 @@ class HookDeploymentControllerTest extends TestCase
         ]);
 
         $response = $this->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/something',
+            'ref'        => 'refs/heads/something',
             'repository' => [
                 'full_name' => 'taylorotwell/hello-world',
             ],
@@ -214,7 +205,6 @@ class HookDeploymentControllerTest extends TestCase
 
         $response->assertStatus(201);
     }
-
 
     public function test_404_is_returned_if_manifest_is_not_found()
     {
@@ -225,7 +215,7 @@ class HookDeploymentControllerTest extends TestCase
         $hook->stack->deploymentLock()->release();
 
         $response = $this->withExceptionHandling()->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'         => 'refs/heads/'.$hook->branch,
             'head_commit' => [
                 'id' => '3b478197c05f0bb60ee484e01389bd2fff1d2bfc',
             ],

@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\Jobs\RunStackTask;
 use App\Events\StackTaskFailed;
-use App\Events\StackTaskRunning;
 use App\Events\StackTaskFinished;
+use App\Events\StackTaskRunning;
+use App\Jobs\RunStackTask;
 use Illuminate\Database\Eloquent\Model;
 
 class StackTask extends Model
@@ -67,7 +67,7 @@ class StackTask extends Model
 
         $this->stack->allServers()->each(function ($server) {
             $commands = $this->shellCommands()->filter->appliesTo($server)->reject->prefixed(
-                ! $server->isMaster() ? 'once:' : null
+                !$server->isMaster() ? 'once:' : null
             )->map->trim()->values()->all();
 
             if (empty($commands)) {
@@ -75,9 +75,9 @@ class StackTask extends Model
             }
 
             $this->serverTasks()->create([
-                'taskable_id' => $server->id,
+                'taskable_id'   => $server->id,
                 'taskable_type' => get_class($server),
-                'commands' => $commands,
+                'commands'      => $commands,
             ])->run();
         });
 

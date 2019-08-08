@@ -2,19 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Stack;
-use App\WebServer;
-use Tests\TestCase;
-use App\Environment;
 use App\Jobs\PromoteStack;
-use Illuminate\Support\Facades\Bus;
+use App\Stack;
+use App\User;
+use App\WebServer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class PromotedStackControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -22,7 +20,6 @@ class PromotedStackControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stacks_can_be_promoted()
     {
@@ -48,7 +45,6 @@ class PromotedStackControllerTest extends TestCase
         $stack->environment->promotionLock()->release();
     }
 
-
     public function test_stacks_cant_be_promoted_if_not_serving()
     {
         Bus::fake();
@@ -66,7 +62,6 @@ class PromotedStackControllerTest extends TestCase
         $stack->environment->promotionLock()->release();
     }
 
-
     public function test_stacks_can_be_promoted_and_daemons_will_wait()
     {
         Bus::fake();
@@ -82,7 +77,7 @@ class PromotedStackControllerTest extends TestCase
         $response = $this->actingAs($stack->project()->user, 'api')
             ->json('PUT', '/api/environment/'.$stack->environment_id.'/promoted-stack', [
                 'stack' => $stack->id,
-                'wait' => true,
+                'wait'  => true,
             ]);
 
         $response->assertStatus(200);
@@ -94,7 +89,6 @@ class PromotedStackControllerTest extends TestCase
 
         $stack->environment->promotionLock()->release();
     }
-
 
     public function test_stack_cant_be_promoted_if_locked()
     {
@@ -118,7 +112,6 @@ class PromotedStackControllerTest extends TestCase
         $stack->environment->promotionLock()->release();
     }
 
-
     public function test_stacks_cant_be_promoted_if_not_promotable()
     {
         $stack = factory(Stack::class)->create();
@@ -132,7 +125,6 @@ class PromotedStackControllerTest extends TestCase
 
         $stack->environment->promotionLock()->release();
     }
-
 
     public function test_collaborator_can_promote_stacks()
     {

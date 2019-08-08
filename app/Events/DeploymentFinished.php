@@ -2,14 +2,14 @@
 
 namespace App\Events;
 
-use App\Deployment;
-use App\Contracts\HasStack;
 use App\Contracts\Alertable;
+use App\Contracts\HasStack;
+use App\Deployment;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class DeploymentFinished implements Alertable, HasStack, ShouldBroadcast
 {
@@ -25,7 +25,8 @@ class DeploymentFinished implements Alertable, HasStack, ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param  \App\Deployment  $deployment
+     * @param \App\Deployment $deployment
+     *
      * @return void
      */
     public function __construct(Deployment $deployment)
@@ -51,14 +52,14 @@ class DeploymentFinished implements Alertable, HasStack, ShouldBroadcast
     public function toAlert()
     {
         return $this->deployment->project()->alerts()->create([
-            'stack_id' => $this->deployment->stack->id,
-            'level' => 'success',
-            'type' => 'DeploymentFinished',
+            'stack_id'  => $this->deployment->stack->id,
+            'level'     => 'success',
+            'type'      => 'DeploymentFinished',
             'exception' => '',
-            'meta' => [
+            'meta'      => [
                 'deployment_id' => $this->deployment->id,
-                'repository' => $this->deployment->repository(),
-                'commit_hash' => $this->deployment->commit_hash,
+                'repository'    => $this->deployment->repository(),
+                'commit_hash'   => $this->deployment->commit_hash,
             ],
         ]);
     }

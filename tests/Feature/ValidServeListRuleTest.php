@@ -2,17 +2,16 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\WebServer;
-use Tests\TestCase;
 use App\Environment;
 use App\Rules\ValidServeList;
+use App\Stack;
+use App\WebServer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ValidServeListRuleTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function test_rule_passes_when_not_being_served_by_other_environments()
     {
@@ -20,7 +19,6 @@ class ValidServeListRuleTest extends TestCase
         $rule = new ValidServeList($stack->environment->project);
         $this->assertTrue($rule->passes('web.serves', ['laravel.com']));
     }
-
 
     public function test_rule_fails_when_being_served_by_other_environments()
     {

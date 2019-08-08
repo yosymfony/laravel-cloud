@@ -2,20 +2,19 @@
 
 namespace Tests\Feature;
 
-use Exception;
-use Carbon\Carbon;
-use Tests\TestCase;
 use App\Deployment;
 use App\Jobs\Activate;
-use App\ServerDeployment;
 use App\Jobs\MonitorDeployment;
-use Illuminate\Support\Facades\Bus;
+use App\ServerDeployment;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class MonitorDeploymentJobTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -23,7 +22,6 @@ class MonitorDeploymentJobTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_marked_as_finished_if_activated()
     {
@@ -41,7 +39,6 @@ class MonitorDeploymentJobTest extends TestCase
         $this->assertTrue($deployment->isFinished());
     }
 
-
     public function test_marked_as_failed_if_has_failures()
     {
         $deployment = factory(Deployment::class)->create();
@@ -57,7 +54,6 @@ class MonitorDeploymentJobTest extends TestCase
         $this->assertTrue($job->deleted);
         $this->assertEquals('failed', $deployment->status);
     }
-
 
     public function test_marked_as_timed_out_if_old()
     {
@@ -76,7 +72,6 @@ class MonitorDeploymentJobTest extends TestCase
         $this->assertTrue($job->deleted);
         $this->assertEquals('timeout', $deployment->status);
     }
-
 
     public function test_activated_if_built()
     {
@@ -101,20 +96,18 @@ class MonitorDeploymentJobTest extends TestCase
         });
     }
 
-
     public function test_failed_method_marks_as_failed()
     {
         $deployment = factory(Deployment::class)->create();
 
         $job = new FakeMonitorDeploymentJob($deployment);
 
-        $job->failed(new Exception);
+        $job->failed(new Exception());
 
         $this->assertEquals('failed', $deployment->status);
         $this->assertCount(1, $deployment->project()->alerts);
     }
 }
-
 
 class FakeMonitorDeploymentJob extends MonitorDeployment
 {

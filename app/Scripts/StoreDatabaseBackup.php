@@ -23,7 +23,8 @@ class StoreDatabaseBackup extends Script
     /**
      * Create a new script instance.
      *
-     * @param  \App\DatabaseBackup  $backup
+     * @param \App\DatabaseBackup $backup
+     *
      * @return void
      */
     public function __construct(DatabaseBackup $backup)

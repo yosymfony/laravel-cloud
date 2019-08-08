@@ -2,15 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
 use App\AppServer;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ServerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -18,7 +16,6 @@ class ServerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_should_respond_to_returns_proper_addresses()
     {
@@ -39,7 +36,6 @@ class ServerTest extends TestCase
             $server->stack->url.'.laravel.build:443',
         ], $server->shouldRespondToWithPorts());
     }
-
 
     public function test_daemon_generations_are_trimmed()
     {

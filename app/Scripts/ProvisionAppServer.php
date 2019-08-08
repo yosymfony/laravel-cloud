@@ -18,7 +18,8 @@ class ProvisionAppServer extends ProvisioningScript
     /**
      * Create a new script instance.
      *
-     * @param  \App\AppServer  $server
+     * @param \App\AppServer $server
+     *
      * @return void
      */
     public function __construct(AppServer $server)
@@ -46,10 +47,10 @@ class ProvisionAppServer extends ProvisioningScript
     public function script()
     {
         return view('scripts.app.provision', [
-            'script' => $this,
-            'server' => $this->server,
+            'script'           => $this,
+            'server'           => $this->server,
             'databasePassword' => $this->server->database_password,
-            'customScripts' => $this->server->stack->meta['scripts']['app'] ?? [],
+            'customScripts'    => $this->server->stack->meta['scripts']['app'] ?? [],
         ])->render();
     }
 }

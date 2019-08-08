@@ -2,19 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Task;
 use App\Database;
-use Carbon\Carbon;
-use Tests\TestCase;
+use App\Scripts\GetCurrentDirectory;
 use App\Scripts\Sleep;
 use App\Scripts\WriteDummyFile;
-use App\Scripts\GetCurrentDirectory;
+use App\Task;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function test_scripts_can_be_run_in_foreground()
     {
@@ -22,13 +21,12 @@ class TaskTest extends TestCase
             'port' => 2288,
         ]);
 
-        $task = $database->run(new GetCurrentDirectory);
+        $task = $database->run(new GetCurrentDirectory());
 
         $this->assertEquals('finished', $task->status);
         $this->assertEquals(0, $task->exit_code);
         $this->assertEquals('/root', $task->output);
     }
-
 
     public function test_scripts_can_be_run_in_background()
     {
@@ -36,7 +34,7 @@ class TaskTest extends TestCase
             'port' => 2288,
         ]);
 
-        $task = $database->runInBackground(new WriteDummyFile);
+        $task = $database->runInBackground(new WriteDummyFile());
 
         sleep(2);
 
@@ -45,20 +43,18 @@ class TaskTest extends TestCase
         $this->assertEquals('Hello World', $output);
     }
 
-
     public function test_scripts_can_timeout()
     {
         $database = factory(Database::class)->create([
             'port' => 2288,
         ]);
 
-        $task = $database->run(new Sleep, ['timeout' => 3]);
+        $task = $database->run(new Sleep(), ['timeout' => 3]);
 
         $this->assertEquals('timeout', $task->status);
         $this->assertNotEquals(0, $task->exit_code);
         $this->assertEquals('', $task->output);
     }
-
 
     public function test_tasks_can_be_pruned()
     {

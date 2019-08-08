@@ -3,17 +3,16 @@
 namespace Tests\Feature;
 
 use App\Database;
-use Tests\TestCase;
 use App\DatabaseBackup;
 use App\DatabaseRestore;
-use Illuminate\Support\Facades\Bus;
 use App\Jobs\RestoreDatabaseBackup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class DatabaseRestoreControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -21,7 +20,6 @@ class DatabaseRestoreControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_restores_can_be_listed()
     {
@@ -66,7 +64,6 @@ class DatabaseRestoreControllerTest extends TestCase
         $this->assertCount(0, $response->original);
     }
 
-
     public function test_restores_can_be_created()
     {
         Bus::fake();
@@ -86,7 +83,6 @@ class DatabaseRestoreControllerTest extends TestCase
         });
     }
 
-
     public function test_only_project_owners_can_restore_databases()
     {
         Bus::fake();
@@ -101,7 +97,6 @@ class DatabaseRestoreControllerTest extends TestCase
 
         $response->assertStatus(403);
     }
-
 
     public function test_restores_cant_be_created_if_database_is_not_provisioned()
     {

@@ -2,16 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Task;
-use Tests\TestCase;
-use App\ServerDeployment;
 use App\Callbacks\CheckBuild;
+use App\ServerDeployment;
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CheckBuildCallbackTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -19,7 +18,6 @@ class CheckBuildCallbackTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_deployment_status_is_properly_updated_if_successful()
     {
@@ -34,7 +32,6 @@ class CheckBuildCallbackTest extends TestCase
 
         $this->assertEquals('built', $deployment->fresh()->status);
     }
-
 
     public function test_deployment_status_is_properly_updated_if_failed()
     {

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Balancer;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBalancerRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class BalancerController extends Controller
@@ -13,7 +13,8 @@ class BalancerController extends Controller
     /**
      * Get all of the balancers for the given project.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function index(Request $request)
@@ -26,7 +27,8 @@ class BalancerController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \App\Http\Requests\CreateBalancerRequest  $request
+     * @param \App\Http\Requests\CreateBalancerRequest $request
+     *
      * @return mixed
      */
     public function store(CreateBalancerRequest $request)
@@ -43,7 +45,8 @@ class BalancerController extends Controller
     /**
      * Delete the given balancer.
      *
-     * @param  \App\Balancer  $balancer
+     * @param \App\Balancer $balancer
+     *
      * @return Response
      */
     public function destroy(Balancer $balancer)
@@ -55,7 +58,7 @@ class BalancerController extends Controller
         if (count($balancer->project->balancers) === 1 &&
             $balancer->project->allStacks()->contains->balanced) {
             throw ValidationException::withMessages(['balancer' => [
-                'You may not delete the last load balancer if it is currently in use.'
+                'You may not delete the last load balancer if it is currently in use.',
             ]]);
         }
 

@@ -23,7 +23,8 @@ class ProvisionBalancer extends ProvisioningScript
     /**
      * Create a new script instance.
      *
-     * @param  \App\Balancer  $balancer
+     * @param \App\Balancer $balancer
+     *
      * @return void
      */
     public function __construct(Balancer $balancer)

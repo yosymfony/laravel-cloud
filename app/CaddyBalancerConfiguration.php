@@ -37,10 +37,11 @@ class CaddyBalancerConfiguration
     /**
      * Create a new Caddy configuration instance.
      *
-     * @param  \App\Balancer  $balancer
-     * @param  \App\Stack  $balancer
-     * @param  string  $domain
-     * @param  array  $proxyTo
+     * @param \App\Balancer $balancer
+     * @param \App\Stack    $balancer
+     * @param string        $domain
+     * @param array         $proxyTo
+     *
      * @return void
      */
     public function __construct(Balancer $balancer, Stack $stack, $domain, array $proxyTo)
@@ -60,9 +61,9 @@ class CaddyBalancerConfiguration
     {
         return view($this->script(), [
             'canonicalDomain' => $this->stack->canonicalDomain($this->domain),
-            'domain' => $this->domain,
-            'tls' => $this->tls(),
-            'proxyTo' => $this->proxyTo,
+            'domain'          => $this->domain,
+            'tls'             => $this->tls(),
+            'proxyTo'         => $this->proxyTo,
         ])->render();
     }
 
@@ -73,7 +74,7 @@ class CaddyBalancerConfiguration
      */
     protected function script()
     {
-        return ! $this->stack->isCanonicalDomain($this->domain) || Str::contains($this->domain, ':80')
+        return !$this->stack->isCanonicalDomain($this->domain) || Str::contains($this->domain, ':80')
                         ? 'scripts.caddy-configuration.redirect'
                         : 'scripts.caddy-configuration.proxy';
     }

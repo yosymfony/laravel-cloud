@@ -13,15 +13,15 @@
 
 $factory->define(App\Task::class, function () {
     return [
-        'project_id' => factory(App\Project::class),
-        'provisionable_id' => factory(App\Database::class),
+        'project_id'         => factory(App\Project::class),
+        'provisionable_id'   => factory(App\Database::class),
         'provisionable_type' => 'App\Database',
-        'name' => 'Task Name',
-        'user' => 'root',
-        'status' => 'finished',
-        'exit_code' => 0,
-        'script' => '',
-        'output' => '',
-        'options' => [],
+        'name'               => 'Task Name',
+        'user'               => 'root',
+        'status'             => 'finished',
+        'exit_code'          => 0,
+        'script'             => '',
+        'output'             => '',
+        'options'            => [],
     ];
 });

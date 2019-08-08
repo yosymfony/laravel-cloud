@@ -3,14 +3,13 @@
 namespace Tests\Feature;
 
 use App\Task;
-use Tests\TestCase;
 use Facades\App\ShellProcessRunner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CallbackControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -19,14 +18,13 @@ class CallbackControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-
     public function test_task_status_is_updated()
     {
         $task = factory(Task::class)->create(['status' => 'running']);
 
         ShellProcessRunner::shouldReceive('run')->andReturn((object) [
             'exitCode' => 0,
-            'output' => 'output',
+            'output'   => 'output',
             'timedOut' => false,
         ]);
 
@@ -37,7 +35,6 @@ class CallbackControllerTest extends TestCase
         $this->assertEquals(0, $task->exit_code);
         $this->assertEquals('finished', $task->status);
     }
-
 
     public function test_404_is_returned_for_tasks_that_dont_exist()
     {
@@ -51,14 +48,13 @@ class CallbackControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
-
     public function test_task_is_updated_with_exit_code_from_query_string()
     {
         $task = factory(Task::class)->create(['status' => 'running']);
 
         ShellProcessRunner::shouldReceive('run')->andReturn((object) [
             'exitCode' => 0,
-            'output' => 'output',
+            'output'   => 'output',
             'timedOut' => false,
         ]);
 
@@ -70,19 +66,18 @@ class CallbackControllerTest extends TestCase
         $this->assertEquals('finished', $task->status);
     }
 
-
     public function test_callbacks_are_executed()
     {
         TestCallbackHandler::$called = false;
 
         $task = factory(Task::class)->create([
-            'status' => 'running',
+            'status'  => 'running',
             'options' => ['then' => [TestCallbackHandler::class]],
         ]);
 
         ShellProcessRunner::shouldReceive('run')->andReturn((object) [
             'exitCode' => 0,
-            'output' => 'output',
+            'output'   => 'output',
             'timedOut' => false,
         ]);
 
@@ -94,7 +89,6 @@ class CallbackControllerTest extends TestCase
         $this->assertTrue(TestCallbackHandler::$called);
     }
 }
-
 
 class TestCallbackHandler
 {

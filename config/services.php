@@ -24,12 +24,12 @@ return [
     ],
 
     'route53' => [
-        'key' => env('ROUTE_53_KEY'),
+        'key'    => env('ROUTE_53_KEY'),
         'secret' => env('ROUTE_53_SECRET'),
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -39,16 +39,16 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => App\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 
     'testing' => [
         'digital_ocean' => env('DIGITAL_OCEAN_TEST_KEY'),
-        'github' => env('GITHUB_TEST_KEY'),
-        's3_key' => env('S3_KEY'),
-        's3_secret' => env('S3_SECRET'),
+        'github'        => env('GITHUB_TEST_KEY'),
+        's3_key'        => env('S3_KEY'),
+        's3_secret'     => env('S3_SECRET'),
     ],
 
 ];

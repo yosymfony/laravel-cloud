@@ -32,7 +32,8 @@ trait FiltersConfigurationArrays
     /**
      * Filter the given daemon definition.
      *
-     * @param  array  $daemons
+     * @param array $daemons
+     *
      * @return array
      */
     protected function filterDaemons(array $daemons)
@@ -45,7 +46,8 @@ trait FiltersConfigurationArrays
     /**
      * Filter the given schedule definition.
      *
-     * @param  array  $schedule
+     * @param array $schedule
+     *
      * @return array
      */
     protected function filterSchedule(array $schedule)

@@ -17,11 +17,11 @@ $factory->define(App\User::class, function ($faker) {
     static $workerKey;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'name'           => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'keypair' => $key = $key ?: App\SecureShellKey::forNewUser(),
+        'keypair'        => $key = $key ?: App\SecureShellKey::forNewUser(),
         'worker_keypair' => $workerKey = $workerKey ?: App\SecureShellKey::forNewUser(),
     ];
 });

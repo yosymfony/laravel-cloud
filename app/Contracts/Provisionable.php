@@ -2,8 +2,8 @@
 
 namespace App\Contracts;
 
-use App\User;
 use App\Scripts\Script;
+use App\User;
 
 interface Provisionable
 {
@@ -69,7 +69,8 @@ interface Provisionable
     /**
      * Determine if the given user can SSH into the server.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return bool
      */
     public function canSsh(User $user);
@@ -140,8 +141,9 @@ interface Provisionable
     /**
      * Run the given script on the server.
      *
-     * @param  Script  $script
-     * @param  array  $options
+     * @param Script $script
+     * @param array  $options
+     *
      * @return Task
      */
     public function run(Script $script, array $options = []);
@@ -149,8 +151,9 @@ interface Provisionable
     /**
      * Run the given script in the background the server.
      *
-     * @param  \App\Scripts\Script  $script
-     * @param  array  $options
+     * @param \App\Scripts\Script $script
+     * @param array               $options
+     *
      * @return Task
      */
     public function runInBackground(Script $script, array $options = []);

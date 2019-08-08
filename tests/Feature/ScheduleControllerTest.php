@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Jobs\PruneTasks;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class ScheduleControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -18,7 +17,6 @@ class ScheduleControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_prune_tasks_can_is_dispatched()
     {

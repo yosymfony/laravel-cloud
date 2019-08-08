@@ -2,16 +2,15 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\DatabaseBackup;
 use App\DatabaseRestore;
 use App\Scripts\RestoreDatabaseBackup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class RestoreDatabaseBackupScriptTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -19,7 +18,6 @@ class RestoreDatabaseBackupScriptTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_script_can_be_rendered()
     {

@@ -23,7 +23,8 @@ class Build extends Script
     /**
      * Create a new script instance.
      *
-     * @param  \App\ServerDeployment  $deployment
+     * @param \App\ServerDeployment $deployment
+     *
      * @return void
      */
     public function __construct(ServerDeployment $deployment)
@@ -49,9 +50,9 @@ class Build extends Script
     public function script()
     {
         return view('scripts.deployment.build', [
-            'script' => $this,
-            'deployment' => $this->deployment,
-            'deployable' => $this->deployment->deployable,
+            'script'      => $this,
+            'deployment'  => $this->deployment,
+            'deployable'  => $this->deployment->deployable,
             'directories' => $this->deployment->deployment->directories,
         ])->render();
     }

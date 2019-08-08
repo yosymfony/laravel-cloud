@@ -16,7 +16,8 @@ interface StorageProviderClient
     /**
      * Determine if the given bucket exists.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return bool
      */
     public function hasBucket($name);
@@ -24,7 +25,8 @@ interface StorageProviderClient
     /**
      * Create a bucket with the given name.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return void
      */
     public function createBucket($name);
@@ -32,7 +34,8 @@ interface StorageProviderClient
     /**
      * Delete the given bucket.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return void
      */
     public function deleteBucket($name);
@@ -40,7 +43,8 @@ interface StorageProviderClient
     /**
      * Determine if the given object exists.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return bool
      */
     public function has($path);
@@ -48,8 +52,9 @@ interface StorageProviderClient
     /**
      * Store an object at the given path.
      *
-     * @param  string  $path
-     * @param  string  $data
+     * @param string $path
+     * @param string $data
+     *
      * @return void
      */
     public function put($path, $data);
@@ -57,7 +62,8 @@ interface StorageProviderClient
     /**
      * Delete the object at the given path.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return void
      */
     public function delete($path);
@@ -72,7 +78,8 @@ interface StorageProviderClient
     /**
      * Get the upload script for the storage provider.
      *
-     * @param  \App\DatabaseBackup  $backup
+     * @param \App\DatabaseBackup $backup
+     *
      * @return string
      */
     public function uploadScript(DatabaseBackup $backup);
@@ -80,7 +87,8 @@ interface StorageProviderClient
     /**
      * Get the download script for the storage provider.
      *
-     * @param  \App\DatabaseBackup  $backup
+     * @param \App\DatabaseBackup $backup
+     *
      * @return string
      */
     public function downloadScript(DatabaseBackup $backup);

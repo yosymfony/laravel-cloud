@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         $user = User::where('email', request('email'))->firstOrFail();
 
-        if (! Hash::check(request('password'), $user->password)) {
+        if (!Hash::check(request('password'), $user->password)) {
             abort(422);
         }
 

@@ -2,24 +2,23 @@
 
 namespace Tests\Feature;
 
+use App\Events\ServerTaskFailed;
+use App\Events\ServerTaskFinished;
+use App\Events\StackTaskFailed;
+use App\Events\StackTaskFinished;
+use App\ServerTask;
+use App\ShellProcessRunner;
 use App\Stack;
 use App\StackTask;
 use App\WebServer;
-use App\ServerTask;
-use Tests\TestCase;
 use App\WorkerServer;
-use App\ShellProcessRunner;
-use App\Events\StackTaskFailed;
-use App\Events\ServerTaskFailed;
-use App\Events\StackTaskFinished;
-use App\Events\ServerTaskFinished;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class StackTaskTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -27,7 +26,6 @@ class StackTaskTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_commands_are_distributed_to_appropriate_servers()
     {
@@ -42,8 +40,8 @@ class StackTaskTest extends TestCase
         $stack->workerServers()->save(factory(WorkerServer::class)->make());
 
         $task = $stack->tasks()->create([
-            'name' => 'Task',
-            'user' => 'cloud',
+            'name'     => 'Task',
+            'user'     => 'cloud',
             'commands' => [
                 'echo 1',
                 'web: echo 2',
@@ -72,7 +70,6 @@ class StackTaskTest extends TestCase
         $this->assertInstanceOf(WorkerServer::class, $serverTasks[1]->taskable);
     }
 
-
     public function test_server_tasks_are_not_created_if_no_applicable_commands()
     {
         ShellProcessRunner::mock([
@@ -85,8 +82,8 @@ class StackTaskTest extends TestCase
         $stack->webServers()->save(factory(WebServer::class)->make());
 
         $task = $stack->tasks()->create([
-            'name' => 'Task',
-            'user' => 'cloud',
+            'name'     => 'Task',
+            'user'     => 'cloud',
             'commands' => [
                 'worker: echo 1',
             ],
@@ -99,7 +96,6 @@ class StackTaskTest extends TestCase
         $this->assertCount(0, $serverTasks);
     }
 
-
     public function test_updating_status_is_properly_synced()
     {
         Event::fake();
@@ -110,7 +106,6 @@ class StackTaskTest extends TestCase
         Event::assertDispatched(ServerTaskFinished::class);
         Event::assertDispatched(StackTaskFinished::class);
     }
-
 
     public function test_stack_task_not_marked_as_finished_if_server_tasks_still_running()
     {
@@ -127,7 +122,6 @@ class StackTaskTest extends TestCase
         Event::assertNotDispatched(StackTaskFinished::class);
     }
 
-
     public function test_stack_test_is_updated_if_all_server_tasks_have_failed()
     {
         Event::fake();
@@ -142,7 +136,6 @@ class StackTaskTest extends TestCase
         $this->assertTrue($task->stackTask->hasFailed());
     }
 
-
     public function test_tasks_actually_execute()
     {
         $stack = factory(Stack::class)->create();
@@ -155,8 +148,8 @@ class StackTaskTest extends TestCase
         ]));
 
         $task = $stack->tasks()->create([
-            'name' => 'Task',
-            'user' => 'root',
+            'name'     => 'Task',
+            'user'     => 'root',
             'commands' => [
                 'echo "Hello Stack Test" > /root/stack_test',
             ],

@@ -13,10 +13,10 @@
 
 $factory->define(App\Environment::class, function () {
     return [
-        'project_id' => factory(App\Project::class),
-        'creator_id' => factory(App\User::class),
-        'name' => 'production',
+        'project_id'     => factory(App\Project::class),
+        'creator_id'     => factory(App\User::class),
+        'name'           => 'production',
         'encryption_key' => '',
-        'variables' => '',
+        'variables'      => '',
     ];
 });

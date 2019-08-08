@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Project;
 use App\Database;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateDatabaseRequest;
+use App\Project;
+use Illuminate\Http\Request;
 
 class DatabaseController extends Controller
 {
     /**
      * Get all of the databases for the given project.
      *
-     * @param  Project  $project
+     * @param Project $project
+     *
      * @return Response
      */
     public function index(Project $project)
@@ -26,7 +27,8 @@ class DatabaseController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  CreateDatabaseRequest  $request
+     * @param CreateDatabaseRequest $request
+     *
      * @return mixed
      */
     public function store(CreateDatabaseRequest $request)
@@ -43,7 +45,8 @@ class DatabaseController extends Controller
     /**
      * Delete the given database.
      *
-     * @param  Database  $database
+     * @param Database $database
+     *
      * @return Response
      */
     public function destroy(Database $database)

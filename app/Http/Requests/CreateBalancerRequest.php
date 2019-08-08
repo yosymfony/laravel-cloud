@@ -26,20 +26,21 @@ class CreateBalancerRequest extends FormRequest
         return $this->validateRegionAndSize(validator($this->all(), [
             'name' => 'required|string|alpha_dash|max:255|unique:balancers,name,NULL,id,project_id,'.$this->project->id,
             'size' => 'required|string',
-            'tls' => 'nullable|string|in:self-signed',
+            'tls'  => 'nullable|string|in:self-signed',
         ]));
     }
 
     /**
      * Validate the size of the server.
      *
-     * @param  \Illuminate\Validator\Validator  $validator
+     * @param \Illuminate\Validator\Validator $validator
+     *
      * @return \Illuminate\Validator\Validator
      */
     protected function validateRegionAndSize($validator)
     {
         return $validator->after(function ($validator) {
-            if (! $this->project->serverProvider->validSize($this->size)) {
+            if (!$this->project->serverProvider->validSize($this->size)) {
                 $validator->errors()->add('size', 'The provided size is invalid.');
             }
         });

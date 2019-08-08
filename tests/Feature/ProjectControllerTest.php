@@ -2,23 +2,22 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\Project;
+use App\AppServer;
 use App\Balancer;
 use App\Database;
-use App\AppServer;
-use Tests\TestCase;
-use App\SourceProvider;
-use App\ServerProvider;
 use App\Jobs\ProvisionDatabase;
-use Illuminate\Support\Facades\Bus;
+use App\Project;
+use App\ServerProvider;
+use App\SourceProvider;
+use App\Stack;
 use Facades\App\ServerProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class ProjectControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -26,7 +25,6 @@ class ProjectControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_projects_can_be_listed()
     {
@@ -42,7 +40,6 @@ class ProjectControllerTest extends TestCase
         $this->assertCount(2, $response->original);
     }
 
-
     public function test_no_database_is_created_if_no_database_is_specified()
     {
         Bus::fake();
@@ -57,11 +54,11 @@ class ProjectControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($provider->user, 'api')->json('POST', '/api/project', [
-            'name' => 'Laravel',
+            'name'               => 'Laravel',
             'server_provider_id' => $provider->id,
-            'region' => 'nyc3',
+            'region'             => 'nyc3',
             'source_provider_id' => $source->id,
-            'repository' => 'taylorotwell/hello-world',
+            'repository'         => 'taylorotwell/hello-world',
         ]);
 
         $response->assertStatus(201);
@@ -73,7 +70,6 @@ class ProjectControllerTest extends TestCase
         $this->assertEquals('nyc3', $project->region);
         $this->assertEquals('Laravel', $project->name);
     }
-
 
     public function test_job_to_provision_database_server_is_dispatched()
     {
@@ -93,13 +89,13 @@ class ProjectControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($provider->user, 'api')->json('POST', '/api/project', [
-            'name' => 'Laravel',
+            'name'               => 'Laravel',
             'server_provider_id' => $provider->id,
-            'region' => 'nyc3',
+            'region'             => 'nyc3',
             'source_provider_id' => $source->id,
-            'repository' => 'taylorotwell/hello-world',
-            'database' => 'mysql',
-            'database_size' => '2GB',
+            'repository'         => 'taylorotwell/hello-world',
+            'database'           => 'mysql',
+            'database_size'      => '2GB',
         ]);
 
         $response->assertStatus(201);
@@ -114,7 +110,6 @@ class ProjectControllerTest extends TestCase
         $this->assertEquals('2GB', $project->databases->first()->size);
         $this->assertEquals(123, $project->databases->first()->provider_server_id);
     }
-
 
     public function test_projects_can_be_deleted()
     {
@@ -138,7 +133,6 @@ class ProjectControllerTest extends TestCase
         $this->assertTrue($project->fresh()->archived);
     }
 
-
     public function test_project_cant_be_deleted_if_stacks_are_provisioning()
     {
         Bus::fake();
@@ -152,7 +146,6 @@ class ProjectControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_project_cant_be_deleted_if_stacks_are_deploying()
     {
