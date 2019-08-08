@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Callbacks\CheckBuild;
+use Illuminate\Bus\Queueable;
 use App\Scripts\Build as BuildScript;
 use App\ServerDeployment;
 use Exception;

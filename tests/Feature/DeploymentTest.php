@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\AppServer;
+use App\WebServer;
 use App\Deployment;
 use App\Events\DeploymentFailed;
 use App\Events\DeploymentFinished;

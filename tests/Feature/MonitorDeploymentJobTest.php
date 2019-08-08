@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Deployment;
+use Tests\TestCase;
 use App\Jobs\Activate;
 use App\Jobs\MonitorDeployment;
 use App\ServerDeployment;

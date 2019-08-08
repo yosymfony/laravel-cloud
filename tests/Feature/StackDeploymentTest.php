@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\AppServer;
 use App\Deployment;
 use App\Jobs\Build;
+use Tests\TestCase;
 use App\Jobs\MonitorDeployment;
 use App\Jobs\TimeOutDeploymentIfStillRunning;
 use App\Stack;
