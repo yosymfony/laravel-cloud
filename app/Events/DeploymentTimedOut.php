@@ -2,12 +2,12 @@
 
 namespace App\Events;
 
-use App\Deployment;
-use App\Contracts\HasStack;
 use App\Contracts\Alertable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
+use App\Contracts\HasStack;
+use App\Deployment;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class DeploymentTimedOut implements Alertable, HasStack
 {
@@ -23,7 +23,8 @@ class DeploymentTimedOut implements Alertable, HasStack
     /**
      * Create a new event instance.
      *
-     * @param  \App\Deployment  $deployment
+     * @param \App\Deployment $deployment
+     *
      * @return void
      */
     public function __construct(Deployment $deployment)
@@ -49,10 +50,10 @@ class DeploymentTimedOut implements Alertable, HasStack
     public function toAlert()
     {
         return $this->deployment->project()->alerts()->create([
-            'stack_id' => $this->deployment->stack->id,
-            'type' => 'DeploymentTimedOut',
+            'stack_id'  => $this->deployment->stack->id,
+            'type'      => 'DeploymentTimedOut',
             'exception' => '',
-            'meta' => [
+            'meta'      => [
                 'deployment_id' => $this->deployment->id,
             ],
         ]);

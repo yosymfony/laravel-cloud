@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\Project;
 use App\AppServer;
-use Tests\TestCase;
 use App\Environment;
-use Illuminate\Support\Facades\Bus;
+use App\Project;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class EnvironmentControllerTest extends TestCase
 {
@@ -52,7 +52,7 @@ class EnvironmentControllerTest extends TestCase
 
         $response = $this->actingAs($project->user, 'api')
                     ->post('/api/project/'.$project->id.'/environment', [
-                        'name' => 'Test Environment',
+                        'name'      => 'Test Environment',
                         'variables' => 'APP_DEBUG=true',
                     ]);
 
@@ -68,7 +68,7 @@ class EnvironmentControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($environment->project->user, 'api')
                     ->json('POST', '/api/project/'.$environment->project->id.'/environment', [
-                        'name' => 'Test Environment',
+                        'name'      => 'Test Environment',
                         'variables' => 'APP_DEBUG=true',
                     ]);
 
@@ -78,7 +78,7 @@ class EnvironmentControllerTest extends TestCase
     public function test_environments_can_be_updated()
     {
         $environment = factory(Environment::class)->create([
-            'name' => 'Test Environment',
+            'name'      => 'Test Environment',
             'variables' => 'APP_DEBUG=true',
         ]);
 
@@ -94,7 +94,7 @@ class EnvironmentControllerTest extends TestCase
     public function test_non_collaborator_cant_update_environment()
     {
         $environment = factory(Environment::class)->create([
-            'name' => 'Test Environment',
+            'name'      => 'Test Environment',
             'variables' => 'APP_DEBUG=true',
         ]);
 
@@ -111,7 +111,7 @@ class EnvironmentControllerTest extends TestCase
     public function test_collaborator_can_update_environment()
     {
         $environment = factory(Environment::class)->create([
-            'name' => 'Test Environment',
+            'name'      => 'Test Environment',
             'variables' => 'APP_DEBUG=true',
         ]);
 

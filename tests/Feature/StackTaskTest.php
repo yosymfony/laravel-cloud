@@ -2,19 +2,19 @@
 
 namespace Tests\Feature;
 
+use App\Events\ServerTaskFailed;
+use App\Events\ServerTaskFinished;
+use App\Events\StackTaskFailed;
+use App\Events\StackTaskFinished;
+use App\ServerTask;
+use App\ShellProcessRunner;
 use App\Stack;
 use App\StackTask;
 use App\WebServer;
-use App\ServerTask;
-use Tests\TestCase;
 use App\WorkerServer;
-use App\ShellProcessRunner;
-use App\Events\StackTaskFailed;
-use App\Events\ServerTaskFailed;
-use App\Events\StackTaskFinished;
-use App\Events\ServerTaskFinished;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class StackTaskTest extends TestCase
 {
@@ -40,8 +40,8 @@ class StackTaskTest extends TestCase
         $stack->workerServers()->save(factory(WorkerServer::class)->make());
 
         $task = $stack->tasks()->create([
-            'name' => 'Task',
-            'user' => 'cloud',
+            'name'     => 'Task',
+            'user'     => 'cloud',
             'commands' => [
                 'echo 1',
                 'web: echo 2',
@@ -82,8 +82,8 @@ class StackTaskTest extends TestCase
         $stack->webServers()->save(factory(WebServer::class)->make());
 
         $task = $stack->tasks()->create([
-            'name' => 'Task',
-            'user' => 'cloud',
+            'name'     => 'Task',
+            'user'     => 'cloud',
             'commands' => [
                 'worker: echo 1',
             ],
@@ -148,8 +148,8 @@ class StackTaskTest extends TestCase
         ]));
 
         $task = $stack->tasks()->create([
-            'name' => 'Task',
-            'user' => 'root',
+            'name'     => 'Task',
+            'user'     => 'root',
             'commands' => [
                 'echo "Hello Stack Test" > /root/stack_test',
             ],

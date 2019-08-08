@@ -13,8 +13,8 @@
 
 $factory->define(App\Certificate::class, function () {
     return [
-        'project_id' => factory(App\Project::class),
-        'name' => 'Test Certificate',
+        'project_id'  => factory(App\Project::class),
+        'name'        => 'Test Certificate',
         'private_key' => 'private-key',
         'certificate' => 'certificate',
     ];

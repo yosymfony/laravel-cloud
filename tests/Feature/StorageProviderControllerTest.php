@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use App\Services\S3;
 use App\DatabaseBackup;
+use App\Services\S3;
 use App\StorageProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class StorageProviderControllerTest extends TestCase
 {
@@ -27,7 +27,7 @@ class StorageProviderControllerTest extends TestCase
             'name' => 'Personal',
             'type' => 'S3',
             'meta' => [
-                'key' => env('S3_KEY'),
+                'key'    => env('S3_KEY'),
                 'secret' => env('S3_SECRET'),
                 'region' => 'us-east-1',
                 'bucket' => 'laravel-cloud-test',

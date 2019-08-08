@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Mockery;
-use Tests\TestCase;
 use App\ShellProcessRunner;
-use Symfony\Component\Process\Process;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
+use Symfony\Component\Process\Process;
+use Tests\TestCase;
 
 class ShellProcessRunnerTest extends TestCase
 {
@@ -26,7 +26,7 @@ class ShellProcessRunnerTest extends TestCase
         $process->shouldReceive('run');
         $process->shouldReceive('getExitCode')->andReturn(0);
 
-        $response = (new ShellProcessRunner)->run($process);
+        $response = (new ShellProcessRunner())->run($process);
 
         $this->assertEquals(0, $response->exitCode);
         $this->assertEquals('', $response->output);
@@ -37,7 +37,7 @@ class ShellProcessRunnerTest extends TestCase
     {
         $process = (new Process('sleep 2'))->setTimeout(2);
 
-        $response = (new ShellProcessRunner)->run($process);
+        $response = (new ShellProcessRunner())->run($process);
 
         $this->assertEquals(0, $response->exitCode);
         $this->assertEquals('', $response->output);

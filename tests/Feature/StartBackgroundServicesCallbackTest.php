@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Task;
-use Tests\TestCase;
-use App\ServerDeployment;
+use App\Callbacks\StartBackgroundServices;
 use App\Jobs\RestartDaemons;
 use App\Jobs\StartScheduler;
-use Illuminate\Support\Facades\Bus;
-use App\Callbacks\StartBackgroundServices;
+use App\ServerDeployment;
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class StartBackgroundServicesCallbackTest extends TestCase
 {
@@ -34,7 +34,7 @@ class StartBackgroundServicesCallbackTest extends TestCase
 
         $deployment->deployment->update([
             'stack_id' => $deployment->stack()->id,
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]);
 
@@ -59,7 +59,7 @@ class StartBackgroundServicesCallbackTest extends TestCase
         $deployment = factory(ServerDeployment::class)->create();
         $deployment->deployment->update([
             'stack_id' => $deployment->stack()->id,
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]);
 
@@ -84,7 +84,7 @@ class StartBackgroundServicesCallbackTest extends TestCase
 
         $deployment->deployment->update([
             'stack_id' => $deployment->stack()->id,
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]);
 

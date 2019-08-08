@@ -30,8 +30,9 @@ class AddKeyToServer extends Script
     /**
      * Create a new script instance.
      *
-     * @param  string  $name
-     * @param  string  $key
+     * @param string $name
+     * @param string $key
+     *
      * @return void
      */
     public function __construct($name, $key)
@@ -59,7 +60,7 @@ class AddKeyToServer extends Script
     {
         return view('scripts.provisionable.addKey', [
             'name' => $this->name,
-            'key' => $this->key,
+            'key'  => $this->key,
         ])->render();
     }
 

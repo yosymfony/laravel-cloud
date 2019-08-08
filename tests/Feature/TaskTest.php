@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Task;
 use App\Database;
-use Carbon\Carbon;
-use Tests\TestCase;
+use App\Scripts\GetCurrentDirectory;
 use App\Scripts\Sleep;
 use App\Scripts\WriteDummyFile;
-use App\Scripts\GetCurrentDirectory;
+use App\Task;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
@@ -21,7 +21,7 @@ class TaskTest extends TestCase
             'port' => 2288,
         ]);
 
-        $task = $database->run(new GetCurrentDirectory);
+        $task = $database->run(new GetCurrentDirectory());
 
         $this->assertEquals('finished', $task->status);
         $this->assertEquals(0, $task->exit_code);
@@ -34,7 +34,7 @@ class TaskTest extends TestCase
             'port' => 2288,
         ]);
 
-        $task = $database->runInBackground(new WriteDummyFile);
+        $task = $database->runInBackground(new WriteDummyFile());
 
         sleep(2);
 
@@ -49,7 +49,7 @@ class TaskTest extends TestCase
             'port' => 2288,
         ]);
 
-        $task = $database->run(new Sleep, ['timeout' => 3]);
+        $task = $database->run(new Sleep(), ['timeout' => 3]);
 
         $this->assertEquals('timeout', $task->status);
         $this->assertNotEquals(0, $task->exit_code);

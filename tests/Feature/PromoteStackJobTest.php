@@ -2,19 +2,19 @@
 
 namespace Tests\Feature;
 
-use App\Hook;
-use App\Stack;
 use App\AppServer;
 use App\Deployment;
-use Tests\TestCase;
-use App\Jobs\StopDaemons;
-use App\ServerDeployment;
+use App\Hook;
 use App\Jobs\PromoteStack;
-use App\Jobs\StopScheduler;
 use App\Jobs\RestartDaemons;
 use App\Jobs\StartScheduler;
-use Illuminate\Support\Facades\Bus;
+use App\Jobs\StopDaemons;
+use App\Jobs\StopScheduler;
+use App\ServerDeployment;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class PromoteStackJobTest extends TestCase
 {
@@ -35,13 +35,13 @@ class PromoteStackJobTest extends TestCase
         $previousStack->appServers()->save($previousServer = factory(AppServer::class)->make());
 
         $previousStack->deployments()->save($previousDeployment = factory(Deployment::class)->make([
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]));
 
         $previousDeployment->serverDeployments()->save(
             $previousServerDeployment = factory(ServerDeployment::class)->make([
-                'deployable_id' => $previousServer->id,
+                'deployable_id'   => $previousServer->id,
                 'deployable_type' => get_class($previousServer),
             ])
         );
@@ -50,13 +50,13 @@ class PromoteStackJobTest extends TestCase
         $stack->appServers()->save($server = factory(AppServer::class)->make());
 
         $stack->deployments()->save($deployment = factory(Deployment::class)->make([
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]));
 
         $deployment->serverDeployments()->save(
             $serverDeployment = factory(ServerDeployment::class)->make([
-                'deployable_id' => $server->id,
+                'deployable_id'   => $server->id,
                 'deployable_type' => get_class($server),
             ])
         );
@@ -96,7 +96,7 @@ class PromoteStackJobTest extends TestCase
         ]));
         $previousDeployment->serverDeployments()->save(
             $previousServerDeployment = factory(ServerDeployment::class)->make([
-                'deployable_id' => $previousServer->id,
+                'deployable_id'   => $previousServer->id,
                 'deployable_type' => get_class($previousServer),
             ])
         );
@@ -109,7 +109,7 @@ class PromoteStackJobTest extends TestCase
 
         $deployment->serverDeployments()->save(
             $serverDeployment = factory(ServerDeployment::class)->make([
-                'deployable_id' => $server->id,
+                'deployable_id'   => $server->id,
                 'deployable_type' => get_class($server),
             ])
         );

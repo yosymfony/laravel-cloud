@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Project;
-use Tests\TestCase;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UpdateLastAlertTimestampForCollaboratorsListenerTest extends TestCase
 {
@@ -27,9 +27,9 @@ class UpdateLastAlertTimestampForCollaboratorsListenerTest extends TestCase
         $this->assertNull($collaborator->fresh()->last_alert_received_at);
 
         $alert = $project->alerts()->create([
-            'type' => 'Something',
+            'type'      => 'Something',
             'exception' => 'exception',
-            'meta' => [],
+            'meta'      => [],
         ]);
 
         $this->assertNotNull($project->user->fresh()->last_alert_received_at);

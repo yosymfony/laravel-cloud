@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
 use App\Deployment;
-use Tests\TestCase;
 use App\Jobs\MonitorDeployment;
-use Illuminate\Support\Facades\Bus;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class DeploymentControllerTest extends TestCase
 {
@@ -46,8 +46,8 @@ class DeploymentControllerTest extends TestCase
         $response = $this->withExceptionHandling()->actingAs(
             $stack->environment->project->user, 'api'
         )->json('post', '/api/stack/'.$stack->id.'/deployment', [
-            'branch' => 'master',
-            'build' => ['first', 'second'],
+            'branch'   => 'master',
+            'build'    => ['first', 'second'],
             'activate' => ['third', 'fourth'],
         ]);
 

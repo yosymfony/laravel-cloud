@@ -16,7 +16,8 @@ class ProvisionWorkerServer extends ProvisioningScript
     /**
      * Create a new script instance.
      *
-     * @param  \App\WorkerServer  $server
+     * @param \App\WorkerServer $server
+     *
      * @return void
      */
     public function __construct(WorkerServer $server)
@@ -44,7 +45,7 @@ class ProvisionWorkerServer extends ProvisioningScript
     public function script()
     {
         return view('scripts.worker.provision', [
-            'script' => $this,
+            'script'        => $this,
             'customScripts' => $this->server->stack->meta['scripts']['worker'] ?? [],
         ])->render();
     }

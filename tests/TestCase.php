@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use App\User;
 use App\SecureShellKey;
-use Illuminate\Support\Facades\Mail;
+use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Mail;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -41,13 +41,14 @@ abstract class TestCase extends BaseTestCase
     /**
      * Refresh the SSH keys on the user instance.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return \App\User
      */
     protected function refreshKeys($user)
     {
         return tap($user)->update([
-            'keypair' => SecureShellKey::make(),
+            'keypair'        => SecureShellKey::make(),
             'worker_keypair' => SecureShellKey::make(),
         ]);
     }

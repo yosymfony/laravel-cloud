@@ -2,18 +2,18 @@
 
 namespace App;
 
-use Carbon\Carbon;
-use App\Jobs\Build;
-use App\Jobs\Activate;
-use App\Jobs\MonitorDeployment;
-use App\Events\DeploymentFailed;
+use App\Events\DeploymentActivating;
 use App\Events\DeploymentBuilding;
+use App\Events\DeploymentCancelled;
+use App\Events\DeploymentFailed;
 use App\Events\DeploymentFinished;
 use App\Events\DeploymentTimedOut;
-use App\Events\DeploymentCancelled;
-use App\Events\DeploymentActivating;
-use Illuminate\Database\Eloquent\Model;
+use App\Jobs\Activate;
+use App\Jobs\Build;
+use App\Jobs\MonitorDeployment;
 use App\Jobs\TimeOutDeploymentIfStillRunning;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Deployment extends Model
 {
@@ -25,13 +25,13 @@ class Deployment extends Model
      * @var array
      */
     protected $casts = [
-        'activated' => 'boolean',
-        'build_commands' => 'json',
+        'activated'           => 'boolean',
+        'build_commands'      => 'json',
         'activation_commands' => 'json',
-        'directories' => 'json',
-        'daemons' => 'json',
-        'schedule' => 'json',
-        'meta' => 'json',
+        'directories'         => 'json',
+        'daemons'             => 'json',
+        'schedule'            => 'json',
+        'meta'                => 'json',
     ];
 
     /**
@@ -202,11 +202,11 @@ class Deployment extends Model
     {
         return $this->stack->allServers()->map(function ($server) {
             return $this->serverDeployments()->create([
-                'deployable_id' => $server->id,
-                'deployable_type' => get_class($server),
-                'build_commands' => $this->buildCommandsFor($server)->all(),
+                'deployable_id'       => $server->id,
+                'deployable_type'     => get_class($server),
+                'build_commands'      => $this->buildCommandsFor($server)->all(),
                 'activation_commands' => $this->activationCommandsFor($server)->all(),
-                'status' => 'building',
+                'status'              => 'building',
             ]);
         });
     }
@@ -224,13 +224,14 @@ class Deployment extends Model
     /**
      * Get the build commands for the given server.
      *
-     * @param  \App\Server  $server
+     * @param \App\Server $server
+     *
      * @return \Illuminate\Support\Collection
      */
     protected function buildCommandsFor($server)
     {
         return $this->buildCommands()->filter->appliesTo($server)->reject->prefixed(
-            ! $server->isMaster() ? 'once:' : null
+            !$server->isMaster() ? 'once:' : null
         )->map->trim()->values();
     }
 
@@ -247,13 +248,14 @@ class Deployment extends Model
     /**
      * Get the activation commands for the given server.
      *
-     * @param  \App\Server  $server
+     * @param \App\Server $server
+     *
      * @return \Illuminate\Support\Collection
      */
     protected function activationCommandsFor($server)
     {
         return $this->activationCommands()->filter->appliesTo($server)->reject->prefixed(
-            ! $server->isMaster() ? 'once:' : null
+            !$server->isMaster() ? 'once:' : null
         )->map->trim()->values();
     }
 
@@ -287,7 +289,7 @@ class Deployment extends Model
     {
         $this->update([
             'activated' => true,
-            'status' => 'activating',
+            'status'    => 'activating',
         ]);
 
         $this->serverDeployments->each->activate();
@@ -362,7 +364,8 @@ class Deployment extends Model
     /**
      * Mark the deployment as failed.
      *
-     * @param  \Exception|null  $exception
+     * @param \Exception|null $exception
+     *
      * @return void
      */
     public function markAsFailed($exception = null)

@@ -3,13 +3,13 @@
 namespace Tests\Feature;
 
 use App\Database;
-use Tests\TestCase;
 use App\DatabaseBackup;
-use App\StorageProvider;
-use App\Jobs\StoreDatabaseBackup;
 use App\Jobs\DeleteDatabaseBackup;
-use Illuminate\Support\Facades\Bus;
+use App\Jobs\StoreDatabaseBackup;
+use App\StorageProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class DatabaseBackupControllerTest extends TestCase
 {
@@ -61,7 +61,7 @@ class DatabaseBackupControllerTest extends TestCase
 
         $response = $this->actingAs($database->project->user, 'api')->json('POST', "/api/database/{$database->id}/backup", [
             'storage_provider_id' => $provider->id,
-            'database_name' => 'cloud',
+            'database_name'       => 'cloud',
         ]);
 
         $response->assertStatus(201);
@@ -88,7 +88,7 @@ class DatabaseBackupControllerTest extends TestCase
         $response = $this->withExceptionHandling()->actingAs($database->project->user, 'api')
                     ->json('POST', "/api/database/{$database->id}/backup", [
                         'storage_provider_id' => $provider->id,
-                        'database_name' => 'cloud',
+                        'database_name'       => 'cloud',
                     ]);
 
         $response->assertStatus(422);
@@ -115,7 +115,7 @@ class DatabaseBackupControllerTest extends TestCase
         $response = $this->withExceptionHandling()->actingAs($user, 'api')
                     ->json('POST', "/api/database/{$database->id}/backup", [
                         'storage_provider_id' => $otherProvider->id,
-                        'database_name' => 'cloud',
+                        'database_name'       => 'cloud',
                     ]);
 
         $response->assertStatus(201);

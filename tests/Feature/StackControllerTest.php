@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
 use App\Database;
-use Tests\TestCase;
 use App\Environment;
-use App\SourceProvider;
-use Illuminate\Support\Facades\Bus;
 use App\Jobs\CreateLoadBalancerIfNecessary;
+use App\SourceProvider;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class StackControllerTest extends TestCase
 {
@@ -44,23 +44,23 @@ class StackControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($user, 'api')->json('POST', '/api/stack/24820439', [
             'source_provider_id' => 'github',
-            'name' => 'test-stack',
-            'repository' => 'laravel/laravel',
-            'branch' => 'master',
-            'databases' => ['mysql'],
-            'web' => [
-                'size' => '2GB',
+            'name'               => 'test-stack',
+            'repository'         => 'laravel/laravel',
+            'branch'             => 'master',
+            'databases'          => ['mysql'],
+            'web'                => [
+                'size'   => '2GB',
                 'serves' => ['laravel.com'],
-                'scale' => 2,
+                'scale'  => 2,
             ],
             'worker' => [
-                'size' => '2GB',
-                'scale' => 2,
+                'size'    => '2GB',
+                'scale'   => 2,
                 'daemons' => [
                     'first' => [
-                        'command' => 'php artisan horizon',
+                        'command'   => 'php artisan horizon',
                         'processes' => 1,
-                        'wait' => 60,
+                        'wait'      => 60,
                     ],
                 ],
             ],
@@ -87,18 +87,18 @@ class StackControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($environment->project->user, 'api')->json('POST', '/api/environment/'.$environment->id.'/stack', [
             'source_provider_id' => $source->name,
-            'name' => 'test-stack',
-            'repository' => 'laravel/laravel',
-            'branch' => 'master',
-            'databases' => ['mysql'],
-            'worker' => [
-                'size' => '2GB',
-                'scale' => 2,
+            'name'               => 'test-stack',
+            'repository'         => 'laravel/laravel',
+            'branch'             => 'master',
+            'databases'          => ['mysql'],
+            'worker'             => [
+                'size'    => '2GB',
+                'scale'   => 2,
                 'daemons' => [
                     'first' => [
-                        'command' => 'php artisan horizon',
+                        'command'   => 'php artisan horizon',
                         'processes' => 1,
-                        'wait' => 60,
+                        'wait'      => 60,
                     ],
                 ],
             ],
@@ -125,22 +125,22 @@ class StackControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($environment->project->user, 'api')->json('POST', '/api/environment/'.$environment->id.'/stack', [
             'source_provider_id' => $source->name,
-            'repository' => 'laravel/laravel',
-            'branch' => 'master',
-            'databases' => ['mysql'],
-            'app' => [
-                'size' => '2GB',
+            'repository'         => 'laravel/laravel',
+            'branch'             => 'master',
+            'databases'          => ['mysql'],
+            'app'                => [
+                'size'   => '2GB',
                 'serves' => ['laravel.com'],
-                'scale' => 1,
+                'scale'  => 1,
             ],
             'worker' => [
-                'size' => '2GB',
-                'scale' => 2,
+                'size'    => '2GB',
+                'scale'   => 2,
                 'daemons' => [
                     'first' => [
-                        'command' => 'php artisan horizon',
+                        'command'   => 'php artisan horizon',
                         'processes' => 1,
-                        'wait' => 60,
+                        'wait'      => 60,
                     ],
                 ],
             ],
@@ -169,27 +169,27 @@ class StackControllerTest extends TestCase
 
         $response = $this->actingAs($environment->project->user, 'api')->json('POST', '/api/environment/'.$environment->id.'/stack', [
             'source_provider_id' => $source->name,
-            'name' => 'test-stack',
-            'repository' => 'laravel/laravel',
-            'branch' => 'master',
-            'databases' => ['mysql'],
-            'web' => [
-                'size' => '2GB',
-                'tls' => 'self-signed',
-                'serves' => ['laravel.com'],
-                'scale' => 2,
+            'name'               => 'test-stack',
+            'repository'         => 'laravel/laravel',
+            'branch'             => 'master',
+            'databases'          => ['mysql'],
+            'web'                => [
+                'size'    => '2GB',
+                'tls'     => 'self-signed',
+                'serves'  => ['laravel.com'],
+                'scale'   => 2,
                 'scripts' => [
                     'exit 1',
                 ],
             ],
             'worker' => [
-                'size' => '2GB',
-                'scale' => 2,
+                'size'    => '2GB',
+                'scale'   => 2,
                 'daemons' => [
                     'first' => [
-                        'command' => 'php artisan horizon',
+                        'command'   => 'php artisan horizon',
                         'processes' => 1,
-                        'wait' => 60,
+                        'wait'      => 60,
                     ],
                 ],
             ],
@@ -236,19 +236,19 @@ class StackControllerTest extends TestCase
 
         $response = $this->actingAs($environment->project->user, 'api')->json('POST', '/api/environment/'.$environment->id.'/stack', [
             'source_provider_id' => $source->name,
-            'name' => 'test-stack',
-            'name' => 'test-stack',
-            'repository' => 'laravel/laravel',
-            'branch' => 'master',
-            'databases' => ['mysql'],
-            'app' => [
-                'size' => '2GB',
-                'serves' => ['laravel.com'],
+            'name'               => 'test-stack',
+            'name'               => 'test-stack',
+            'repository'         => 'laravel/laravel',
+            'branch'             => 'master',
+            'databases'          => ['mysql'],
+            'app'                => [
+                'size'    => '2GB',
+                'serves'  => ['laravel.com'],
                 'daemons' => [
                     'first' => [
-                        'command' => 'php artisan horizon',
+                        'command'   => 'php artisan horizon',
                         'processes' => 1,
-                        'wait' => 60,
+                        'wait'      => 60,
                     ],
                 ],
             ],

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Mockery;
 use Exception;
-use Tests\TestCase;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
+use Tests\TestCase;
 
 class ReportHelperTest extends TestCase
 {
@@ -21,7 +21,7 @@ class ReportHelperTest extends TestCase
 
     public function test_helper_reports_exceptions()
     {
-        $e = new Exception;
+        $e = new Exception();
         $mock = Mockery::mock();
         $mock->shouldReceive('report')->once()->with($e);
         $this->swap(ExceptionHandler::class, $mock);

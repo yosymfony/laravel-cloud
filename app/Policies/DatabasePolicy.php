@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Database;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DatabasePolicy
@@ -13,8 +13,9 @@ class DatabasePolicy
     /**
      * Determine whether the user can transfer the database.
      *
-     * @param  \App\User  $user
-     * @param  \App\Database  $database
+     * @param \App\User     $user
+     * @param \App\Database $database
+     *
      * @return mixed
      */
     public function transfer(User $user, Database $database)
@@ -25,8 +26,9 @@ class DatabasePolicy
     /**
      * Determine whether the user can delete the database.
      *
-     * @param  \App\User  $user
-     * @param  \App\Database  $database
+     * @param \App\User     $user
+     * @param \App\Database $database
+     *
      * @return mixed
      */
     public function delete(User $user, Database $database)

@@ -2,18 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\Project;
+use App\AppServer;
 use App\Balancer;
 use App\Database;
-use App\AppServer;
-use Tests\TestCase;
+use App\Jobs\ProvisionDatabase;
+use App\Project;
 use App\ServerProvider;
 use App\SourceProvider;
-use App\Jobs\ProvisionDatabase;
-use Illuminate\Support\Facades\Bus;
+use App\Stack;
 use Facades\App\ServerProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class ProjectControllerTest extends TestCase
 {
@@ -54,11 +54,11 @@ class ProjectControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($provider->user, 'api')->json('POST', '/api/project', [
-            'name' => 'Laravel',
+            'name'               => 'Laravel',
             'server_provider_id' => $provider->id,
-            'region' => 'nyc3',
+            'region'             => 'nyc3',
             'source_provider_id' => $source->id,
-            'repository' => 'taylorotwell/hello-world',
+            'repository'         => 'taylorotwell/hello-world',
         ]);
 
         $response->assertStatus(201);
@@ -89,13 +89,13 @@ class ProjectControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($provider->user, 'api')->json('POST', '/api/project', [
-            'name' => 'Laravel',
+            'name'               => 'Laravel',
             'server_provider_id' => $provider->id,
-            'region' => 'nyc3',
+            'region'             => 'nyc3',
             'source_provider_id' => $source->id,
-            'repository' => 'taylorotwell/hello-world',
-            'database' => 'mysql',
-            'database_size' => '2GB',
+            'repository'         => 'taylorotwell/hello-world',
+            'database'           => 'mysql',
+            'database_size'      => '2GB',
         ]);
 
         $response->assertStatus(201);

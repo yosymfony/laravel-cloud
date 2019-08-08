@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Callbacks\CheckBuild;
 use App\Jobs\Build;
-use Tests\TestCase;
+use App\Scripts\Build as BuildScript;
 use App\ServerDeployment;
 use App\ShellProcessRunner;
-use App\Callbacks\CheckBuild;
-use App\Scripts\Build as BuildScript;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class BuildJobTest extends TestCase
 {
@@ -24,7 +24,7 @@ class BuildJobTest extends TestCase
     public function test_task_id_is_stored()
     {
         $serverDeployment = factory(ServerDeployment::class)->create();
-        $serverDeployment->setRelation('deployable', $deployable = new BuildJobTestFakeDeployable);
+        $serverDeployment->setRelation('deployable', $deployable = new BuildJobTestFakeDeployable());
 
         $job = new Build($serverDeployment);
 

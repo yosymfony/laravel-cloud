@@ -9,7 +9,8 @@ class ProvisionAppServer extends ServerProvisioner
     /**
      * Create a new job instance.
      *
-     * @param  \App\AppServer  $provisionable
+     * @param \App\AppServer $provisionable
+     *
      * @return void
      */
     public function __construct(AppServer $provisionable)

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Hook;
 use App\Deployment;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Bus;
+use App\Hook;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class HookDeploymentControllerTest extends TestCase
 {
@@ -36,7 +36,7 @@ class HookDeploymentControllerTest extends TestCase
         ]);
 
         $response = $this->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'         => 'refs/heads/'.$hook->branch,
             'head_commit' => [
                 'id' => 'd8f05f1696032982dd8bf77aa9186d2aea744801',
             ],
@@ -72,7 +72,7 @@ class HookDeploymentControllerTest extends TestCase
             'User-Agent' => 'Codeship Webhook',
         ])->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
             'build' => [
-                'status' => 'success',
+                'status'    => 'success',
                 'commit_id' => 'd8f05f1696032982dd8bf77aa9186d2aea744801',
             ],
         ]);
@@ -101,7 +101,7 @@ class HookDeploymentControllerTest extends TestCase
         ]);
 
         $response = $this->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'        => 'refs/heads/'.$hook->branch,
             'repository' => [
                 'full_name' => 'taylorotwell/hello-world',
             ],
@@ -125,7 +125,7 @@ class HookDeploymentControllerTest extends TestCase
         $hook->stack->deploymentLock()->release();
 
         $response = $this->withExceptionHandling()->json('post', '/api/hook-deployment/'.$hook->id.'/token', [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'         => 'refs/heads/'.$hook->branch,
             'head_commit' => [
                 'id' => '3b478197c05f0bb60ee484e01389bd2fff1d2bfc',
             ],
@@ -146,7 +146,7 @@ class HookDeploymentControllerTest extends TestCase
         $hook->stack->deploymentLock()->release();
 
         $response = $this->withExceptionHandling()->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/something',
+            'ref'         => 'refs/heads/something',
             'head_commit' => [
                 'id' => '3b478197c05f0bb60ee484e01389bd2fff1d2bfc',
             ],
@@ -171,7 +171,7 @@ class HookDeploymentControllerTest extends TestCase
             'User-Agent' => 'Codeship Webhook',
         ])->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
             'build' => [
-                'status' => 'failed',
+                'status'    => 'failed',
                 'commit_id' => 'something',
             ],
         ]);
@@ -197,7 +197,7 @@ class HookDeploymentControllerTest extends TestCase
         ]);
 
         $response = $this->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/something',
+            'ref'        => 'refs/heads/something',
             'repository' => [
                 'full_name' => 'taylorotwell/hello-world',
             ],
@@ -215,7 +215,7 @@ class HookDeploymentControllerTest extends TestCase
         $hook->stack->deploymentLock()->release();
 
         $response = $this->withExceptionHandling()->json('post', '/api/hook-deployment/'.$hook->id.'/'.$hook->token, [
-            'ref' => 'refs/heads/'.$hook->branch,
+            'ref'         => 'refs/heads/'.$hook->branch,
             'head_commit' => [
                 'id' => '3b478197c05f0bb60ee484e01389bd2fff1d2bfc',
             ],

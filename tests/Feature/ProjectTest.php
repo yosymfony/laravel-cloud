@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Project;
-use Tests\TestCase;
 use App\Events\ProjectShared;
-use Illuminate\Support\Facades\Event;
+use App\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class ProjectTest extends TestCase
 {
@@ -54,9 +54,9 @@ class ProjectTest extends TestCase
 
         for ($i = 0; $i < 40; $i++) {
             $project->alerts()->create([
-                'type' => 'Test',
+                'type'      => 'Test',
                 'exception' => '',
-                'meta' => [],
+                'meta'      => [],
             ]);
         }
 

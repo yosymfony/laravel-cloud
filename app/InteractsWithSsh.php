@@ -3,8 +3,8 @@
 namespace App;
 
 use Facades\App\ShellProcessRunner;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
+use Symfony\Component\Process\Process;
 
 trait InteractsWithSsh
 {
@@ -35,15 +35,16 @@ trait InteractsWithSsh
     /**
      * Update the model for the given SSH response.
      *
-     * @param  object  $response
+     * @param object $response
+     *
      * @return $this
      */
     protected function updateForResponse($response)
     {
         return tap($this)->update([
-            'status' => $response->timedOut ? 'timeout' : 'finished',
+            'status'    => $response->timedOut ? 'timeout' : 'finished',
             'exit_code' => $response->exitCode,
-            'output' => $response->output,
+            'output'    => $response->output,
         ]);
     }
 
@@ -84,8 +85,8 @@ trait InteractsWithSsh
     {
         $this->update([
             'script' => view('scripts.tools.callback', [
-                'task' => $this,
-                'path' => str_replace('.sh', '-script.sh', $this->scriptFile()),
+                'task'  => $this,
+                'path'  => str_replace('.sh', '-script.sh', $this->scriptFile()),
                 'token' => str_random(20),
             ])->render(),
         ]);
@@ -141,7 +142,8 @@ trait InteractsWithSsh
     /**
      * Download the output of the task from the remote server.
      *
-     * @param  string|null  $path
+     * @param string|null $path
+     *
      * @return string
      */
     public function retrieveOutput($path = null)
@@ -152,8 +154,9 @@ trait InteractsWithSsh
     /**
      * Run a given script inline on the remote server.
      *
-     * @param  string  $script
-     * @param  int  $timeout
+     * @param string $script
+     * @param int    $timeout
+     *
      * @return ShellResponse
      */
     protected function runInline($script, $timeout = 60)
@@ -200,8 +203,9 @@ trait InteractsWithSsh
     /**
      * Create a Process instance for the given script.
      *
-     * @param  string  $script
-     * @param  int  $timeout
+     * @param string $script
+     * @param int    $timeout
+     *
      * @return Process
      */
     protected function toProcess($script, $timeout)

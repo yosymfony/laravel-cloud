@@ -21,7 +21,8 @@ class StackProvisioned extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \App\Stack  $stack
+     * @param \App\Stack $stack
+     *
      * @return void
      */
     public function __construct(Stack $stack)

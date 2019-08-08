@@ -14,7 +14,8 @@ class StackMetadata
     /**
      * Create a new metadata instance.
      *
-     * @param  array  $meta
+     * @param array $meta
+     *
      * @return void
      */
     public function __construct(array $meta)
@@ -25,7 +26,8 @@ class StackMetadata
     /**
      * Create a new metadata instance.
      *
-     * @param  array  $meta
+     * @param array $meta
+     *
      * @return static
      */
     public static function from(array $meta)

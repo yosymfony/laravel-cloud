@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Stack;
-use App\WebServer;
-use Tests\TestCase;
 use App\Jobs\PromoteStack;
-use Illuminate\Support\Facades\Bus;
+use App\Stack;
+use App\User;
+use App\WebServer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class PromotedStackControllerTest extends TestCase
 {
@@ -77,7 +77,7 @@ class PromotedStackControllerTest extends TestCase
         $response = $this->actingAs($stack->project()->user, 'api')
             ->json('PUT', '/api/environment/'.$stack->environment_id.'/promoted-stack', [
                 'stack' => $stack->id,
-                'wait' => true,
+                'wait'  => true,
             ]);
 
         $response->assertStatus(200);

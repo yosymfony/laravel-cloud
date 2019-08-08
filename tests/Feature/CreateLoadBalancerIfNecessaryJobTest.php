@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
 use App\AppServer;
-use App\WebServer;
-use Tests\TestCase;
 use App\Jobs\CreateLoadBalancerIfNecessary;
+use App\Stack;
+use App\WebServer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CreateLoadBalancerIfNecessaryJobTest extends TestCase
 {
@@ -26,7 +26,7 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
 
         $stack->webServers()->save(factory(WebServer::class)->create(['size' => '2GB']));
         $stack->webServers()->save(factory(WebServer::class)->create(['size' => '2GB']));
-        $stack->setRelation('environment', (object) ['project' => $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject]);
+        $stack->setRelation('environment', (object) ['project' => $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject()]);
 
         $job = new CreateLoadBalancerIfNecessary($stack);
         $job->handle();
@@ -41,7 +41,7 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $stack = factory(Stack::class)->create();
 
         $stack->webServers()->save(factory(WebServer::class)->create(['size' => '2GB']));
-        $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject;
+        $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject();
         $fake->balancers = collect([(object) []]);
         $stack->setRelation('environment', (object) ['project' => $fake]);
 
@@ -58,7 +58,7 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $stack = factory(Stack::class)->create();
 
         $stack->webServers()->save(factory(WebServer::class)->create(['size' => '2GB']));
-        $stack->setRelation('environment', (object) ['project' => $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject]);
+        $stack->setRelation('environment', (object) ['project' => $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject()]);
 
         $job = new CreateLoadBalancerIfNecessary($stack);
         $job->handle();
@@ -73,7 +73,7 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $stack = factory(Stack::class)->create();
 
         $stack->appServers()->save(factory(AppServer::class)->create(['size' => '2GB']));
-        $stack->setRelation('environment', (object) ['project' => $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject]);
+        $stack->setRelation('environment', (object) ['project' => $fake = new CreateLoadBalancerIfNecessaryJobTestFakeProject()]);
 
         $job = new CreateLoadBalancerIfNecessary($stack);
         $job->handle();

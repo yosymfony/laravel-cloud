@@ -13,11 +13,11 @@
 
 $factory->define(App\Project::class, function () {
     return [
-        'user_id' => factory(App\User::class),
+        'user_id'            => factory(App\User::class),
         'server_provider_id' => factory(App\ServerProvider::class),
         'source_provider_id' => factory(App\SourceProvider::class),
-        'repository' => 'taylorotwell/hello-world',
-        'name' => 'Laravel',
-        'region' => 'nyc3',
+        'repository'         => 'taylorotwell/hello-world',
+        'name'               => 'Laravel',
+        'region'             => 'nyc3',
     ];
 });

@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Services\Route53;
-use App\Contracts\YamlParser;
 use App\Contracts\DnsProvider;
-use Aws\Route53\Route53Client;
+use App\Contracts\YamlParser;
 use App\Services\LocalYamlParser;
+use App\Services\Route53;
+use Aws\Route53\Route53Client;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,10 +33,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(Route53Client::class, function () {
             return new Route53Client([
-                'version' => 'latest',
-                'region' => 'us-east-1',
+                'version'     => 'latest',
+                'region'      => 'us-east-1',
                 'credentials' => [
-                    'key' => config('services.route53.key'),
+                    'key'    => config('services.route53.key'),
                     'secret' => config('services.route53.secret'),
                 ],
             ]);

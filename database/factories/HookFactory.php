@@ -13,11 +13,11 @@
 
 $factory->define(App\Hook::class, function () {
     return [
-        'stack_id' => factory(App\Stack::class),
-        'name' => 'Test Hook',
-        'branch' => 'master',
-        'token' => str_random(40),
-        'meta' => [],
+        'stack_id'  => factory(App\Stack::class),
+        'name'      => 'Test Hook',
+        'branch'    => 'master',
+        'token'     => str_random(40),
+        'meta'      => [],
         'published' => false,
     ];
 });

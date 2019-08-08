@@ -23,7 +23,8 @@ class Activate extends Script
     /**
      * Create a new script instance.
      *
-     * @param  \App\ServerDeployment  $deployment
+     * @param \App\ServerDeployment $deployment
+     *
      * @return void
      */
     public function __construct(ServerDeployment $deployment)
@@ -49,7 +50,7 @@ class Activate extends Script
     public function script()
     {
         return view('scripts.deployment.activate', [
-            'script' => $this,
+            'script'     => $this,
             'deployment' => $this->deployment,
             'deployable' => $this->deployment->deployable,
         ])->render();
@@ -62,7 +63,7 @@ class Activate extends Script
      */
     public function shouldRestartFpm()
     {
-        return ! $this->deployment->deployable->isTrueWorker();
+        return !$this->deployment->deployable->isTrueWorker();
     }
 
     /**

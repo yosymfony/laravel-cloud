@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Task;
-use App\Database;
-use Tests\TestCase;
 use App\Callbacks\MarkAsProvisioned;
+use App\Database;
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MarkAsProvisionedCallbackTest extends TestCase
 {
@@ -27,7 +27,7 @@ class MarkAsProvisionedCallbackTest extends TestCase
 
         $database->tasks()->save($task = factory(Task::class)->create());
 
-        $handler = new MarkAsProvisioned;
+        $handler = new MarkAsProvisioned();
         $handler->handle($task);
 
         $this->assertEquals('provisioned', $database->fresh()->status);
@@ -39,7 +39,7 @@ class MarkAsProvisionedCallbackTest extends TestCase
             'options' => ['type' => Database::class, 'id' => 1000],
         ]);
 
-        $handler = new MarkAsProvisioned;
+        $handler = new MarkAsProvisioned();
         $handler->handle($task);
 
         $this->assertTrue(true);

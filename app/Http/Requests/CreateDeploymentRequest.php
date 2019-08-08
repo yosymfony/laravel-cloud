@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\FiltersConfigurationArrays;
 use App\MemoizesMethods;
 use App\Rules\ValidBranch;
 use App\Rules\ValidCommit;
-use App\FiltersConfigurationArrays;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateDeploymentRequest extends FormRequest
@@ -36,19 +36,19 @@ class CreateDeploymentRequest extends FormRequest
             'hash' => ['required_without:branch', 'string', 'max:40', new ValidCommit(
                 $this->stack->project()->sourceProvider, $this->stack->project()->repository
             )],
-            'build' => 'array',
-            'build.*' => 'string',
-            'activate' => 'array',
-            'activate.*' => 'string',
-            'daemons' => 'array',
-            'daemons.*.command' => 'required_with:daemons|string',
-            'daemons.*.directory' => 'string',
-            'daemons.*.processes' => 'integer|min:1',
-            'daemons.*.wait' => 'integer|min:1',
-            'schedule.*' => 'array',
-            'schedule.*.command' => 'required_with:schedule|string|max:1000',
+            'build'                => 'array',
+            'build.*'              => 'string',
+            'activate'             => 'array',
+            'activate.*'           => 'string',
+            'daemons'              => 'array',
+            'daemons.*.command'    => 'required_with:daemons|string',
+            'daemons.*.directory'  => 'string',
+            'daemons.*.processes'  => 'integer|min:1',
+            'daemons.*.wait'       => 'integer|min:1',
+            'schedule.*'           => 'array',
+            'schedule.*.command'   => 'required_with:schedule|string|max:1000',
             'schedule.*.frequency' => 'required_with:schedule|string|max:50',
-            'schedule.*.user' => 'string|max:50',
+            'schedule.*.user'      => 'string|max:50',
         ]);
     }
 

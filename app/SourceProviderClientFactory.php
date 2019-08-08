@@ -10,7 +10,8 @@ class SourceProviderClientFactory
     /**
      * Create a source control provider client instance for the given provider.
      *
-     * @param  \App\SourceProvider  $source
+     * @param \App\SourceProvider $source
+     *
      * @return \App\Contracts\SourceProviderClient
      */
     public function make(SourceProvider $source)

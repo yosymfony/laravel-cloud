@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Mockery;
 use App\Hook;
 use App\Stack;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Bus;
 use Facades\App\SourceProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Mockery;
+use Tests\TestCase;
 
 class HookControllerTest extends TestCase
 {
@@ -42,8 +42,8 @@ class HookControllerTest extends TestCase
         $response = $this->actingAs(
             $stack->environment->project->user, 'api'
         )->json('post', '/api/stack/'.$stack->id.'/hook', [
-            'name' => 'Test',
-            'branch' => 'master',
+            'name'    => 'Test',
+            'branch'  => 'master',
             'publish' => true,
         ]);
 
@@ -77,8 +77,8 @@ class HookControllerTest extends TestCase
         $response = $this->actingAs(
             $stack->environment->project->user, 'api'
         )->json('post', '/api/stack/'.$stack->id.'/hook', [
-            'name' => 'Test',
-            'branch' => 'master',
+            'name'    => 'Test',
+            'branch'  => 'master',
             'publish' => false,
         ]);
 
@@ -96,8 +96,8 @@ class HookControllerTest extends TestCase
         $response = $this->withExceptionHandling()->actingAs(
             $stack->environment->project->user, 'api'
         )->json('post', '/api/stack/'.$stack->id.'/hook', [
-            'name' => 'Test',
-            'branch' => 'does-not-exist',
+            'name'    => 'Test',
+            'branch'  => 'does-not-exist',
             'publish' => true,
         ]);
 

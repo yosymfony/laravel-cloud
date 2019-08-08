@@ -2,16 +2,16 @@
 
 namespace Tests\Feature;
 
-use Mockery;
-use App\Database;
-use Tests\TestCase;
-use App\DatabaseBackup;
-use Tests\Fakes\FakeTask;
-use Facades\App\TaskFactory;
-use App\Jobs\StoreDatabaseBackup;
 use App\Callbacks\CheckDatabaseBackup;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Database;
+use App\DatabaseBackup;
+use App\Jobs\StoreDatabaseBackup;
 use App\Scripts\StoreDatabaseBackup as StoreDatabaseBackupScript;
+use Facades\App\TaskFactory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
+use Tests\Fakes\FakeTask;
+use Tests\TestCase;
 
 class StoreDatabaseBackupJobTest extends TestCase
 {
@@ -35,7 +35,7 @@ class StoreDatabaseBackupJobTest extends TestCase
                 return $options['then'][0] instanceof CheckDatabaseBackup &&
                        $options['then'][0]->id === $backup->id;
             })
-        )->andReturn($task = new FakeTask);
+        )->andReturn($task = new FakeTask());
 
         $job->handle();
 

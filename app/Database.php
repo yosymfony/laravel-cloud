@@ -2,15 +2,15 @@
 
 namespace App;
 
-use Carbon\Carbon;
-use App\Jobs\SyncNetwork;
+use App\Callbacks\MarkAsProvisioned;
+use App\Contracts\Provisionable as ProvisionableContract;
+use App\Jobs\DeleteServerOnProvider;
 use App\Jobs\ProvisionDatabase;
 use App\Jobs\StoreDatabaseBackup;
-use App\Callbacks\MarkAsProvisioned;
-use App\Jobs\DeleteServerOnProvider;
-use Illuminate\Support\Facades\Cache;
+use App\Jobs\SyncNetwork;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use App\Contracts\Provisionable as ProvisionableContract;
+use Illuminate\Support\Facades\Cache;
 
 class Database extends Model implements ProvisionableContract
 {
@@ -78,7 +78,8 @@ class Database extends Model implements ProvisionableContract
     /**
      * Determine if the given user can SSH into the balancer.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return bool
      */
     public function canSsh(User $user)
@@ -89,7 +90,8 @@ class Database extends Model implements ProvisionableContract
     /**
      * Sync the network for the database.
      *
-     * @param  int  $delay
+     * @param int $delay
+     *
      * @return void
      */
     public function syncNetwork($delay = 0)
@@ -113,7 +115,8 @@ class Database extends Model implements ProvisionableContract
     /**
      * Determine if the database allows access from a given IP address.
      *
-     * @param  object|string  $address
+     * @param object|string $address
+     *
      * @return bool
      */
     public function allowsAccessFrom($address)
@@ -149,18 +152,19 @@ class Database extends Model implements ProvisionableContract
     /**
      * Create a new backup of the database.
      *
-     * @param  \App\StorageProvider  $provider
-     * @param  string  $databaseName
+     * @param \App\StorageProvider $provider
+     * @param string               $databaseName
+     *
      * @return \App\DatabaseBackup
      */
     public function backup(StorageProvider $provider, $databaseName)
     {
         return tap($this->backups()->create([
             'storage_provider_id' => $provider->id,
-            'database_name' => $databaseName,
-            'backup_path' => DatabaseBackup::newPathFor($this->project),
-            'status' => 'pending',
-            'output' => '',
+            'database_name'       => $databaseName,
+            'backup_path'         => DatabaseBackup::newPathFor($this->project),
+            'status'              => 'pending',
+            'output'              => '',
         ]), function ($backup) {
             $this->trimBackups($backup);
 
@@ -171,7 +175,8 @@ class Database extends Model implements ProvisionableContract
     /**
      * Trim the backups for a given database.
      *
-     * @param  \App\DatabaseBackup  $backup
+     * @param \App\DatabaseBackup $backup
+     *
      * @return void
      */
     protected function trimBackups(DatabaseBackup $backup)
@@ -228,9 +233,9 @@ class Database extends Model implements ProvisionableContract
     /**
      * Delete the model from the database.
      *
-     * @return bool|null
-     *
      * @throws \Exception
+     *
+     * @return bool|null
      */
     public function delete()
     {

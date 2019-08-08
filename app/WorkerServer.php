@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\Jobs\ProvisionWorkerServer;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use App\Jobs\ProvisionWorkerServer;
 
 class WorkerServer extends Server
 {
@@ -31,12 +31,13 @@ class WorkerServer extends Server
     /**
      * Determine if this server will run a given deployment command.
      *
-     * @param  string  $command
+     * @param string $command
+     *
      * @return bool
      */
     public function runsCommand($command)
     {
-        return ! Str::startsWith($command, 'web:');
+        return !Str::startsWith($command, 'web:');
     }
 
     /**

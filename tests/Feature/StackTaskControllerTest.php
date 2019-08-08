@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use Tests\TestCase;
 use App\Jobs\RunStackTask;
-use Illuminate\Support\Facades\Bus;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class StackTaskControllerTest extends TestCase
 {
@@ -27,8 +27,8 @@ class StackTaskControllerTest extends TestCase
 
         $response = $this->actingAs($stack->environment->project->user, 'api')->json(
             'post', '/api/stack/'.$stack->id.'/stack-tasks', [
-                'name' => 'Some Task',
-                'user' => 'root',
+                'name'     => 'Some Task',
+                'user'     => 'root',
                 'commands' => [
                     'exit 1',
                 ],
@@ -52,8 +52,8 @@ class StackTaskControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($user, 'api')->json(
             'post', '/api/stack/'.$stack->id.'/stack-tasks', [
-                'name' => 'Some Task',
-                'user' => 'cloud',
+                'name'     => 'Some Task',
+                'user'     => 'cloud',
                 'commands' => [
                     'exit 1',
                 ],
@@ -75,8 +75,8 @@ class StackTaskControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($user, 'api')->json(
             'post', '/api/stack/'.$stack->id.'/stack-tasks', [
-                'name' => 'Some Task',
-                'user' => 'root',
+                'name'     => 'Some Task',
+                'user'     => 'root',
                 'commands' => [
                     'exit 1',
                 ],
@@ -98,8 +98,8 @@ class StackTaskControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($user, 'api')->json(
             'post', '/api/stack/'.$stack->id.'/stack-tasks', [
-                'name' => 'Some Task',
-                'user' => 'root',
+                'name'     => 'Some Task',
+                'user'     => 'root',
                 'commands' => [
                     'exit 1',
                 ],

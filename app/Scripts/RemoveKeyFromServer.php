@@ -23,7 +23,8 @@ class RemoveKeyFromServer extends Script
     /**
      * Create a new script instance.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return void
      */
     public function __construct($name)

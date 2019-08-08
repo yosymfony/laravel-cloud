@@ -13,14 +13,14 @@
 
 $factory->define(App\Deployment::class, function () {
     return [
-        'stack_id' => factory(App\Stack::class),
-        'branch' => 'master',
-        'commit_hash' => str_random(20),
-        'build_commands' => ['first'],
+        'stack_id'            => factory(App\Stack::class),
+        'branch'              => 'master',
+        'commit_hash'         => str_random(20),
+        'build_commands'      => ['first'],
         'activation_commands' => ['second'],
-        'directories' => ['storage'],
-        'daemons' => [],
-        'schedule' => [],
-        'status' => 'pending',
+        'directories'         => ['storage'],
+        'daemons'             => [],
+        'schedule'            => [],
+        'status'              => 'pending',
     ];
 });

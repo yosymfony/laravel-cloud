@@ -32,7 +32,7 @@ class RestartDaemons extends DaemonScript
     public function daemonConfiguration()
     {
         return view('scripts.daemon.build', [
-            'script' => $this,
+            'script'     => $this,
             'deployment' => $this->deployment,
             'generation' => $this->deployment->currentDaemonGeneration(),
         ])->render();
@@ -46,8 +46,8 @@ class RestartDaemons extends DaemonScript
     public function activateDaemons()
     {
         return view('scripts.daemon.activate', [
-            'script' => $this,
-            'generation' => $this->deployment->currentDaemonGeneration(),
+            'script'              => $this,
+            'generation'          => $this->deployment->currentDaemonGeneration(),
             'previousGenerations' => $this->deployment->previousDaemonGenerations(),
         ])->render();
     }

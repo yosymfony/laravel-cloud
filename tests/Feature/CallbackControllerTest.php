@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Task;
-use Tests\TestCase;
 use Facades\App\ShellProcessRunner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CallbackControllerTest extends TestCase
 {
@@ -24,7 +24,7 @@ class CallbackControllerTest extends TestCase
 
         ShellProcessRunner::shouldReceive('run')->andReturn((object) [
             'exitCode' => 0,
-            'output' => 'output',
+            'output'   => 'output',
             'timedOut' => false,
         ]);
 
@@ -54,7 +54,7 @@ class CallbackControllerTest extends TestCase
 
         ShellProcessRunner::shouldReceive('run')->andReturn((object) [
             'exitCode' => 0,
-            'output' => 'output',
+            'output'   => 'output',
             'timedOut' => false,
         ]);
 
@@ -71,13 +71,13 @@ class CallbackControllerTest extends TestCase
         TestCallbackHandler::$called = false;
 
         $task = factory(Task::class)->create([
-            'status' => 'running',
+            'status'  => 'running',
             'options' => ['then' => [TestCallbackHandler::class]],
         ]);
 
         ShellProcessRunner::shouldReceive('run')->andReturn((object) [
             'exitCode' => 0,
-            'output' => 'output',
+            'output'   => 'output',
             'timedOut' => false,
         ]);
 

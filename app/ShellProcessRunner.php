@@ -10,14 +10,15 @@ class ShellProcessRunner
     /**
      * Run the given process and return it.
      *
-     * @param  \Symfony\Component\Process\Process  $process
-     * @param  mixed  $output
+     * @param \Symfony\Component\Process\Process $process
+     * @param mixed                              $output
+     *
      * @return ShellResponse
      */
     public function run($process)
     {
         try {
-            $process = tap($process)->run($output = new ShellOutput);
+            $process = tap($process)->run($output = new ShellOutput());
         } catch (ProcessTimedOutException $e) {
             $timedOut = true;
         }
@@ -30,7 +31,8 @@ class ShellProcessRunner
     /**
      * Mock the responses for the process runner.
      *
-     * @param  array  $responses
+     * @param array $responses
+     *
      * @return void
      */
     public static function mock(array $responses)

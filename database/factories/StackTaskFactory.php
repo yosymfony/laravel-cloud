@@ -14,8 +14,8 @@
 $factory->define(App\StackTask::class, function () {
     return [
         'stack_id' => factory(App\Stack::class),
-        'name' => 'Test Name',
-        'user' => 'cloud',
+        'name'     => 'Test Name',
+        'user'     => 'cloud',
         'commands' => [
             'exit 1',
         ],

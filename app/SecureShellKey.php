@@ -9,7 +9,8 @@ class SecureShellKey
     /**
      * Create a new SSH key for a new user.
      *
-     * @param  string  $password
+     * @param string $password
+     *
      * @return object
      */
     public static function forNewUser($password = '')
@@ -27,7 +28,7 @@ class SecureShellKey
     protected static function forTesting()
     {
         return (object) [
-            'publicKey' => file_get_contents(env('TEST_SSH_CONTAINER_PUBLIC_KEY')),
+            'publicKey'  => file_get_contents(env('TEST_SSH_CONTAINER_PUBLIC_KEY')),
             'privateKey' => file_get_contents(env('TEST_SSH_CONTAINER_KEY')),
         ];
     }
@@ -35,7 +36,8 @@ class SecureShellKey
     /**
      * Create a new SSH key.
      *
-     * @param  string  $password
+     * @param string $password
+     *
      * @return object
      */
     public static function make($password = '')
@@ -61,7 +63,8 @@ class SecureShellKey
     /**
      * Store a secure shell key for the given user.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return string
      */
     public static function storeFor(User $user)
@@ -80,7 +83,7 @@ class SecureShellKey
      */
     protected static function ensureKeyDirectoryExists()
     {
-        if (! is_dir(storage_path('app/keys'))) {
+        if (!is_dir(storage_path('app/keys'))) {
             mkdir(storage_path('app/keys'), 0755, true);
         }
     }
@@ -88,9 +91,10 @@ class SecureShellKey
     /**
      * Ensure the given file exists.
      *
-     * @param  string  $path
-     * @param  string  $contents
-     * @param  string  $chmod
+     * @param string $path
+     * @param string $contents
+     * @param string $chmod
+     *
      * @return string
      */
     protected static function ensureFileExists($path, $contents, $chmod)
