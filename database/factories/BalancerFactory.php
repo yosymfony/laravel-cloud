@@ -13,12 +13,12 @@
 
 $factory->define(App\Balancer::class, function () {
     return [
-        'project_id' => factory(App\Project::class),
-        'name' => str_random(6),
-        'size' => '2GB',
+        'project_id'         => factory(App\Project::class),
+        'name'               => str_random(6),
+        'size'               => '2GB',
         'provider_server_id' => 1,
-        'port' => 22,
-        'sudo_password' => str_random(40),
-        'status' => 'provisioned',
+        'port'               => 22,
+        'sudo_password'      => str_random(40),
+        'status'             => 'provisioned',
     ];
 });

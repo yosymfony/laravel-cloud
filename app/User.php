@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -87,7 +87,8 @@ class User extends Authenticatable
     /**
      * Determine if the user has access to the given project.
      *
-     * @param  Project  $project
+     * @param Project $project
+     *
      * @return bool
      */
     public function canAccessProject($project)
@@ -99,13 +100,14 @@ class User extends Authenticatable
     /**
      * Set the SSH key attributes on the model.
      *
-     * @param  object  $value
+     * @param object $value
+     *
      * @return void
      */
     public function setKeypairAttribute($value)
     {
         $this->attributes = [
-            'public_key' => $value->publicKey,
+            'public_key'  => $value->publicKey,
             'private_key' => $value->privateKey,
         ] + $this->attributes;
     }
@@ -113,13 +115,14 @@ class User extends Authenticatable
     /**
      * Set the SSH key attributes on the model.
      *
-     * @param  object  $value
+     * @param object $value
+     *
      * @return void
      */
     public function setWorkerKeypairAttribute($value)
     {
         $this->attributes = [
-            'public_worker_key' => $value->publicKey,
+            'public_worker_key'  => $value->publicKey,
             'private_worker_key' => $value->privateKey,
         ] + $this->attributes;
     }
@@ -127,7 +130,8 @@ class User extends Authenticatable
     /**
      * Revoke API tokens with the given name.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return void
      */
     public function revokeTokens($name)

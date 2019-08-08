@@ -16,7 +16,8 @@ class SyncNetwork extends Script
     /**
      * Create a new script instance.
      *
-     * @param  \App\Database  $database
+     * @param \App\Database $database
+     *
      * @return void
      */
     public function __construct(Database $database)
@@ -42,9 +43,9 @@ class SyncNetwork extends Script
     public function script()
     {
         return view('scripts.database.network', [
-            'script' => $this,
-            'database' => $this->database,
-            'ipAddresses' => $this->database->shouldAllowAccessFrom(),
+            'script'              => $this,
+            'database'            => $this->database,
+            'ipAddresses'         => $this->database->shouldAllowAccessFrom(),
             'previousIpAddresses' => $this->database->allows_access_from,
         ])->render();
     }

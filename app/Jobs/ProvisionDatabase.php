@@ -11,7 +11,8 @@ class ProvisionDatabase extends ServerProvisioner
     /**
      * Create a new job instance.
      *
-     * @param  \App\Database  $provisionable
+     * @param \App\Database $provisionable
+     *
      * @return void
      */
     public function __construct(Database $provisionable)

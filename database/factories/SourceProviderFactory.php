@@ -11,12 +11,11 @@
 |
 */
 
-
 $factory->define(App\SourceProvider::class, function () {
     return [
         'user_id' => factory(App\User::class),
-        'name' => 'GitHub',
-        'type' => 'GitHub',
-        'meta' => ['token' => config('services.testing.github')],
+        'name'    => 'GitHub',
+        'type'    => 'GitHub',
+        'meta'    => ['token' => config('services.testing.github')],
     ];
 });

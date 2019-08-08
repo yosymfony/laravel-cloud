@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use Tests\TestCase;
 use App\Environment;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class EnvironmentTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function test_active_stack_can_be_retrieved()
     {

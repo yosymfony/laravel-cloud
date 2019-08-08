@@ -3,18 +3,17 @@
 namespace Tests\Feature;
 
 use App\Database;
-use Tests\TestCase;
 use App\DatabaseBackup;
-use App\StorageProvider;
-use App\Jobs\StoreDatabaseBackup;
 use App\Jobs\DeleteDatabaseBackup;
-use Illuminate\Support\Facades\Bus;
+use App\Jobs\StoreDatabaseBackup;
+use App\StorageProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class DatabaseBackupControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -22,7 +21,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_backups_can_be_listed()
     {
@@ -35,7 +33,6 @@ class DatabaseBackupControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertEquals($backup->id, $response->original['Test Database'][0]['id']);
 
-
         // Filter by database...
         $response = $this->actingAs($backup->database->project->user, 'api')->json(
             'GET', "/api/database/{$backup->database->id}/backups?database_name=Test+Database"
@@ -43,7 +40,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals($backup->id, $response->original['Test Database'][0]['id']);
-
 
         // Filter that doesn't exist...
         $response = $this->actingAs($backup->database->project->user, 'api')->json(
@@ -53,7 +49,6 @@ class DatabaseBackupControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertCount(0, $response->original);
     }
-
 
     public function test_backup_can_be_created()
     {
@@ -66,7 +61,7 @@ class DatabaseBackupControllerTest extends TestCase
 
         $response = $this->actingAs($database->project->user, 'api')->json('POST', "/api/database/{$database->id}/backup", [
             'storage_provider_id' => $provider->id,
-            'database_name' => 'cloud',
+            'database_name'       => 'cloud',
         ]);
 
         $response->assertStatus(201);
@@ -78,7 +73,6 @@ class DatabaseBackupControllerTest extends TestCase
             return $job->backup->id === $response->original->id;
         });
     }
-
 
     public function test_backup_cant_be_started_if_database_is_not_finished_provisioning()
     {
@@ -94,7 +88,7 @@ class DatabaseBackupControllerTest extends TestCase
         $response = $this->withExceptionHandling()->actingAs($database->project->user, 'api')
                     ->json('POST', "/api/database/{$database->id}/backup", [
                         'storage_provider_id' => $provider->id,
-                        'database_name' => 'cloud',
+                        'database_name'       => 'cloud',
                     ]);
 
         $response->assertStatus(422);
@@ -102,7 +96,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         Bus::assertNotDispatched(StoreDatabaseBackup::class);
     }
-
 
     public function test_collaborators_can_manually_start_database_backups()
     {
@@ -122,12 +115,11 @@ class DatabaseBackupControllerTest extends TestCase
         $response = $this->withExceptionHandling()->actingAs($user, 'api')
                     ->json('POST', "/api/database/{$database->id}/backup", [
                         'storage_provider_id' => $otherProvider->id,
-                        'database_name' => 'cloud',
+                        'database_name'       => 'cloud',
                     ]);
 
         $response->assertStatus(201);
     }
-
 
     public function test_backups_can_be_deleted()
     {
@@ -143,7 +135,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         Bus::assertDispatched(DeleteDatabaseBackup::class);
     }
-
 
     public function test_only_project_owners_can_delete_backups()
     {

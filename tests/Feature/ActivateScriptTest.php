@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Scripts\Activate;
 use App\ServerDeployment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ActivateScriptTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -18,7 +17,6 @@ class ActivateScriptTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_script_can_be_rendered()
     {

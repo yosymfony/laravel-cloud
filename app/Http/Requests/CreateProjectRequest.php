@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\SourceProvider;
 use App\Rules\ValidRepository;
-use Illuminate\Validation\Rule;
+use App\SourceProvider;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateProjectRequest extends FormRequest
 {
@@ -27,20 +27,20 @@ class CreateProjectRequest extends FormRequest
     public function validator()
     {
         $validator = validator($this->all(), [
-            'name' => 'required|max:255',
+            'name'               => 'required|max:255',
             'server_provider_id' => ['required', Rule::exists('server_providers', 'id')->where(function ($query) {
                 $query->where('user_id', $this->user()->id);
             })],
-            'region' => 'required|string',
+            'region'             => 'required|string',
             'source_provider_id' => ['required', Rule::exists('source_providers', 'id')->where(function ($query) {
                 $query->where('user_id', $this->user()->id);
             })],
             'repository' => [
                 'required',
                 'string',
-                new ValidRepository(SourceProvider::find($this->source_provider_id))
+                new ValidRepository(SourceProvider::find($this->source_provider_id)),
             ],
-            'database' => 'string|alpha_dash|max:255',
+            'database'      => 'string|alpha_dash|max:255',
             'database_size' => 'string',
         ]);
 
@@ -50,7 +50,8 @@ class CreateProjectRequest extends FormRequest
     /**
      * Validate the region and size for the provider.
      *
-     * @param  \Illuminate\Validator\Validator  $validator
+     * @param \Illuminate\Validator\Validator $validator
+     *
      * @return \Illuminate\Validator\Validator
      */
     protected function validateRegionAndSize($validator)
@@ -58,11 +59,11 @@ class CreateProjectRequest extends FormRequest
         return $validator->after(function ($validator) {
             $provider = $this->user()->serverProviders()->find($this->server_provider_id);
 
-            if (! $provider->validRegion($this->region)) {
+            if (!$provider->validRegion($this->region)) {
                 $validator->errors()->add('region', 'Invalid region for provider.');
             }
 
-            if ($this->database && ! $provider->validSize($this->database_size)) {
+            if ($this->database && !$provider->validSize($this->database_size)) {
                 $validator->errors()->add('database_size', 'Invalid size for database.');
             }
         });

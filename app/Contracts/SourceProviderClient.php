@@ -2,9 +2,9 @@
 
 namespace App\Contracts;
 
+use App\Deployment;
 use App\Hook;
 use App\Stack;
-use App\Deployment;
 
 interface SourceProviderClient
 {
@@ -18,8 +18,9 @@ interface SourceProviderClient
     /**
      * Validate the given repository and branch are valid.
      *
-     * @param  string  $repository
-     * @param  string  $branch
+     * @param string $repository
+     * @param string $branch
+     *
      * @return bool
      */
     public function validRepository($repository, $branch);
@@ -27,8 +28,9 @@ interface SourceProviderClient
     /**
      * Validate the given repository and commit hash are valid.
      *
-     * @param  string  $repository
-     * @param  string  $hash
+     * @param string $repository
+     * @param string $hash
+     *
      * @return bool
      */
     public function validCommit($repository, $hash);
@@ -36,8 +38,9 @@ interface SourceProviderClient
     /**
      * Get the latest commit hash for the given repository and branch.
      *
-     * @param  string  $repository
-     * @param  string  $branch
+     * @param string $repository
+     * @param string $branch
+     *
      * @return string
      */
     public function latestHashFor($repository, $branch);
@@ -45,7 +48,8 @@ interface SourceProviderClient
     /**
      * Get the tarball URL for the given deployment.
      *
-     * @param  \App\Deployment  $deployment
+     * @param \App\Deployment $deployment
+     *
      * @return string
      */
     public function tarballUrl(Deployment $deployment);
@@ -53,7 +57,8 @@ interface SourceProviderClient
     /**
      * Publish the given hook.
      *
-     * @param  \App\Hook  $hook
+     * @param \App\Hook $hook
+     *
      * @return void
      */
     public function publishHook(Hook $hook);
@@ -61,8 +66,9 @@ interface SourceProviderClient
     /**
      * Determine if the given hook payload is a test.
      *
-     * @param  \App\Hook  $hook
-     * @param  array  $payload
+     * @param \App\Hook $hook
+     * @param array     $payload
+     *
      * @return bool
      */
     public function isTestHookPayload(Hook $hook, array $payload);
@@ -70,8 +76,9 @@ interface SourceProviderClient
     /**
      * Determine if the given hook payload applies to the hook.
      *
-     * @param  \App\Hook  $hook
-     * @param  array  $payload
+     * @param \App\Hook $hook
+     * @param array     $payload
+     *
      * @return bool
      */
     public function receivesHookPayload(Hook $hook, array $payload);
@@ -79,7 +86,8 @@ interface SourceProviderClient
     /**
      * Get the commit hash from the given hook payload.
      *
-     * @param  array  $payload
+     * @param array $payload
+     *
      * @return string
      */
     public function extractCommitFromHookPayload(array $payload);
@@ -87,7 +95,8 @@ interface SourceProviderClient
     /**
      * Unpublish the given hook.
      *
-     * @param  \App\Hook  $hook
+     * @param \App\Hook $hook
+     *
      * @return void
      */
     public function unpublishHook(Hook $hook);
@@ -95,9 +104,10 @@ interface SourceProviderClient
     /**
      * Get the manifest content for the given stack and hash.
      *
-     * @param  \App\Stack  $stack
-     * @param  string  $repository
-     * @param  string  $hash
+     * @param \App\Stack $stack
+     * @param string     $repository
+     * @param string     $hash
+     *
      * @return string
      */
     public function manifest(Stack $stack, $repository, $hash);

@@ -2,17 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\Project;
-use Tests\TestCase;
 use App\Jobs\SyncServers;
-use Illuminate\Support\Facades\Bus;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class ServerConfigurationControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -20,7 +18,6 @@ class ServerConfigurationControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stack_server_configurations_can_be_rebuilt()
     {

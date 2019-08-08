@@ -3,14 +3,13 @@
 namespace Tests\Feature;
 
 use App\Database;
-use Tests\TestCase;
 use App\Scripts\ProvisionDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProvisionDatabaseScriptTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -18,7 +17,6 @@ class ProvisionDatabaseScriptTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_script_can_be_rendered()
     {

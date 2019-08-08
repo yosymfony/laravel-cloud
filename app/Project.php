@@ -4,10 +4,10 @@ namespace App;
 
 use App\Events\ProjectShared;
 use App\Events\ProjectUnshared;
-use App\Jobs\ProvisionDatabase;
 use App\Jobs\ProvisionBalancer;
-use Illuminate\Database\Eloquent\Model;
+use App\Jobs\ProvisionDatabase;
 use Facades\App\ServerProviderClientFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
@@ -56,7 +56,8 @@ class Project extends Model
     /**
      * Share the project with the given user.
      *
-     * @param  User  $user
+     * @param User $user
+     *
      * @return void
      */
     public function shareWith(User $user)
@@ -73,7 +74,8 @@ class Project extends Model
     /**
      * Stop sharing the project with the given user.
      *
-     * @param  User  $user
+     * @param User $user
+     *
      * @return void
      */
     public function stopSharingWith(User $user)
@@ -184,8 +186,9 @@ class Project extends Model
     /**
      * Start provisioning a new database for the project.
      *
-     * @param  string  $name
-     * @param  string  $size
+     * @param string $name
+     * @param string $size
+     *
      * @return \App\Database
      */
     public function provisionDatabase($name, $size)
@@ -193,23 +196,24 @@ class Project extends Model
         $id = $this->withProvider()->createServer($name, $size, $this->region);
 
         return tap($this->databases()->create([
-            'name' => $name,
-            'size' => $size,
+            'name'               => $name,
+            'size'               => $size,
             'provider_server_id' => $id,
-            'sudo_password' => str_random(40),
-            'username' => 'cloud',
-            'password' => str_random(40),
+            'sudo_password'      => str_random(40),
+            'username'           => 'cloud',
+            'password'           => str_random(40),
             'allows_access_from' => [],
-            'status' => 'creating',
+            'status'             => 'creating',
         ]))->provision();
     }
 
     /**
      * Start provisioning a new balancer for the project.
      *
-     * @param  string  $name
-     * @param  string  $size
-     * @param  bool  $selfSigns
+     * @param string $name
+     * @param string $size
+     * @param bool   $selfSigns
+     *
      * @return \App\Balancer
      */
     public function provisionBalancer($name, $size, $selfSigns = false)
@@ -217,12 +221,12 @@ class Project extends Model
         $id = $this->withProvider()->createServer($name, $size, $this->region);
 
         return tap($this->balancers()->create([
-            'name' => $name,
-            'size' => $size,
+            'name'               => $name,
+            'size'               => $size,
             'provider_server_id' => $id,
-            'sudo_password' => str_random(40),
-            'tls' => $selfSigns ? 'self-signed' : null,
-            'status' => 'creating',
+            'sudo_password'      => str_random(40),
+            'tls'                => $selfSigns ? 'self-signed' : null,
+            'status'             => 'creating',
         ]))->provision();
     }
 

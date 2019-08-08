@@ -2,21 +2,22 @@
 
 namespace App;
 
+use App\Jobs\ProvisionWebServer;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use App\Jobs\ProvisionWebServer;
 
 class WebServer extends HttpServer
 {
     /**
      * Determine if this server will run a given deployment command.
      *
-     * @param  string  $command
+     * @param string $command
+     *
      * @return bool
      */
     public function runsCommand($command)
     {
-        return ! Str::startsWith($command, 'worker:');
+        return !Str::startsWith($command, 'worker:');
     }
 
     /**

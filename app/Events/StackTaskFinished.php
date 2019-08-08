@@ -3,9 +3,9 @@
 namespace App\Events;
 
 use App\StackTask;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class StackTaskFinished
 {
@@ -21,7 +21,8 @@ class StackTaskFinished
     /**
      * Create a new event instance.
      *
-     * @param  \App\StackTask  $task
+     * @param \App\StackTask $task
+     *
      * @return void
      */
     public function __construct(StackTask $task)

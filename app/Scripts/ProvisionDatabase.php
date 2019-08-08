@@ -23,7 +23,8 @@ class ProvisionDatabase extends ProvisioningScript
     /**
      * Create a new script instance.
      *
-     * @param  \App\Database  $database
+     * @param \App\Database $database
+     *
      * @return void
      */
     public function __construct(Database $database)
@@ -41,8 +42,8 @@ class ProvisionDatabase extends ProvisioningScript
     public function script()
     {
         return view('scripts.database.provision', [
-            'script' => $this,
-            'database' => $this->database,
+            'script'           => $this,
+            'database'         => $this->database,
             'databasePassword' => $this->database->password,
         ])->render();
     }

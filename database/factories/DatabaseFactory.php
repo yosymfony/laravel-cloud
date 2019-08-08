@@ -13,15 +13,15 @@
 
 $factory->define(App\Database::class, function () {
     return [
-        'project_id' => factory(App\Project::class),
-        'name' => str_random(6),
-        'size' => '2gb',
+        'project_id'         => factory(App\Project::class),
+        'name'               => str_random(6),
+        'size'               => '2gb',
         'provider_server_id' => 1,
-        'port' => 22,
-        'sudo_password' => str_random(40),
-        'username' => str_random(40),
-        'password' => str_random(40),
+        'port'               => 22,
+        'sudo_password'      => str_random(40),
+        'username'           => str_random(40),
+        'password'           => str_random(40),
         'allows_access_from' => [],
-        'status' => 'provisioned',
+        'status'             => 'provisioned',
     ];
 });

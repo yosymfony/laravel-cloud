@@ -28,14 +28,14 @@ class CreateHookRequest extends FormRequest
     public function validator()
     {
         return validator($this->all(), [
-            'name' => 'required|string|max:255',
+            'name'   => 'required|string|max:255',
             'branch' => [
                 'required',
                 'string',
                 'max:255',
                 new ValidBranch(
                     $this->stack->project()->sourceProvider, $this->stack->project()->repository
-                )
+                ),
             ],
             'publish' => 'required|boolean',
         ]);

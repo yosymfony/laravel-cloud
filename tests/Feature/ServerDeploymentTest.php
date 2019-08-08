@@ -2,18 +2,16 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
+use App\AppServer;
 use App\Database;
 use App\IpAddress;
-use App\AppServer;
-use Tests\TestCase;
 use App\ServerDeployment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ServerDeploymentTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function test_database_methods_return_first_database_if_only_one()
     {
@@ -24,7 +22,6 @@ class ServerDeploymentTest extends TestCase
         $this->assertEquals($database->address->private_address, $deployment->databaseHost());
         $this->assertEquals($database->password, $deployment->databasePassword());
     }
-
 
     public function test_app_server_information_is_used_if_no_other_databases_are_present()
     {

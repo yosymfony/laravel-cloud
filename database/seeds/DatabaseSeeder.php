@@ -1,8 +1,8 @@
 <?php
 
-use App\User;
 use App\Project;
 use App\ServerProvider;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = factory(User::class)->create([
-            'name' => 'Taylor Otwell',
-            'email' => 'taylor@laravel.com',
+            'name'      => 'Taylor Otwell',
+            'email'     => 'taylor@laravel.com',
             'api_token' => 'laravel',
         ]);
 
@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $project = factory(Project::class)->create([
-            'user_id' => $user->id,
+            'user_id'            => $user->id,
             'server_provider_id' => $provider->id,
-            'region' => 'nyc3',
+            'region'             => 'nyc3',
         ]);
     }
 }

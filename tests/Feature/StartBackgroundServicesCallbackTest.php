@@ -2,19 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Task;
-use Tests\TestCase;
-use App\ServerDeployment;
-use App\Jobs\StartScheduler;
-use App\Jobs\RestartDaemons;
-use Illuminate\Support\Facades\Bus;
 use App\Callbacks\StartBackgroundServices;
+use App\Jobs\RestartDaemons;
+use App\Jobs\StartScheduler;
+use App\ServerDeployment;
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class StartBackgroundServicesCallbackTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -22,7 +21,6 @@ class StartBackgroundServicesCallbackTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_background_services_are_started_if_applicable()
     {
@@ -36,7 +34,7 @@ class StartBackgroundServicesCallbackTest extends TestCase
 
         $deployment->deployment->update([
             'stack_id' => $deployment->stack()->id,
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]);
 
@@ -54,8 +52,6 @@ class StartBackgroundServicesCallbackTest extends TestCase
         });
     }
 
-
-
     public function test_background_services_are_not_started_if_in_production_and_are_not_already_running()
     {
         Bus::fake();
@@ -63,7 +59,7 @@ class StartBackgroundServicesCallbackTest extends TestCase
         $deployment = factory(ServerDeployment::class)->create();
         $deployment->deployment->update([
             'stack_id' => $deployment->stack()->id,
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]);
 
@@ -75,7 +71,6 @@ class StartBackgroundServicesCallbackTest extends TestCase
         Bus::assertNotDispatched(StartScheduler::class);
         Bus::assertNotDispatched(RestartDaemons::class);
     }
-
 
     public function test_background_services_are_started_if_in_production_and_are_already_running()
     {
@@ -89,7 +84,7 @@ class StartBackgroundServicesCallbackTest extends TestCase
 
         $deployment->deployment->update([
             'stack_id' => $deployment->stack()->id,
-            'daemons' => ['first'],
+            'daemons'  => ['first'],
             'schedule' => ['first'],
         ]);
 

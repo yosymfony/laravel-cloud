@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,16 +13,16 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Balancer' => 'App\Policies\BalancerPolicy',
-        'App\Database' => 'App\Policies\DatabasePolicy',
-        'App\DatabaseBackup' => 'App\Policies\DatabaseBackupPolicy',
+        'App\Balancer'        => 'App\Policies\BalancerPolicy',
+        'App\Database'        => 'App\Policies\DatabasePolicy',
+        'App\DatabaseBackup'  => 'App\Policies\DatabaseBackupPolicy',
         'App\DatabaseRestore' => 'App\Policies\DatabaseRestorePolicy',
-        'App\Project' => 'App\Policies\ProjectPolicy',
-        'App\Environment' => 'App\Policies\EnvironmentPolicy',
-        'App\Stack' => 'App\Policies\StackPolicy',
-        'App\AppServer' => 'App\Policies\AppServerPolicy',
-        'App\WebServer' => 'App\Policies\WebServerPolicy',
-        'App\WorkerServer' => 'App\Policies\WorkerServerPolicy',
+        'App\Project'         => 'App\Policies\ProjectPolicy',
+        'App\Environment'     => 'App\Policies\EnvironmentPolicy',
+        'App\Stack'           => 'App\Policies\StackPolicy',
+        'App\AppServer'       => 'App\Policies\AppServerPolicy',
+        'App\WebServer'       => 'App\Policies\WebServerPolicy',
+        'App\WorkerServer'    => 'App\Policies\WorkerServerPolicy',
     ];
 
     /**

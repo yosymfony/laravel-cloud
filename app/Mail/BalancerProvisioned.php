@@ -21,7 +21,8 @@ class BalancerProvisioned extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \App\Balancer  $balancer
+     * @param \App\Balancer $balancer
+     *
      * @return void
      */
     public function __construct(Balancer $balancer)

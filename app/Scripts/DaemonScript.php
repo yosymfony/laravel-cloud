@@ -16,7 +16,8 @@ abstract class DaemonScript extends Script
     /**
      * Create a new script instance.
      *
-     * @param  \App\ServerDeployment  $deployment
+     * @param \App\ServerDeployment $deployment
+     *
      * @return void
      */
     public function __construct(ServerDeployment $deployment)
@@ -39,7 +40,7 @@ abstract class DaemonScript extends Script
     public function script()
     {
         return view($this->scriptName(), [
-            'script' => $this,
+            'script'     => $this,
             'generation' => $this->deployment->currentDaemonGeneration(),
         ])->render();
     }

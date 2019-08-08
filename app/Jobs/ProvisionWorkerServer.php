@@ -9,7 +9,8 @@ class ProvisionWorkerServer extends ServerProvisioner
     /**
      * Create a new job instance.
      *
-     * @param  \App\WorkerServer  $provisionable
+     * @param \App\WorkerServer $provisionable
+     *
      * @return void
      */
     public function __construct(WorkerServer $provisionable)

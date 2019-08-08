@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\API;
 
 use App\Database;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
 
 class DatabaseTransferController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  Request  $request
-     * @param  \App\Database  $database
+     * @param Request       $request
+     * @param \App\Database $database
+     *
      * @return mixed
      */
     public function store(Request $request, Database $database)
@@ -22,11 +23,11 @@ class DatabaseTransferController extends Controller
 
         $request->validate([
             'project_id' => [
-                'required' ,
+                'required',
                 'integer',
                 Rule::exists('projects', 'id')->where(function ($query) use ($request) {
                     $query->where('user_id', $request->user()->id);
-                })
+                }),
             ],
         ]);
 

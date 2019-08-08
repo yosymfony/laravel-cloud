@@ -3,14 +3,13 @@
 namespace Tests\Feature;
 
 use App\Balancer;
-use Tests\TestCase;
 use App\Scripts\SyncBalancer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class SyncBalancerScriptTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -18,7 +17,6 @@ class SyncBalancerScriptTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_script_can_be_rendered()
     {

@@ -3,20 +3,19 @@
 namespace Tests\Feature;
 
 use App\AppServer;
-use Tests\TestCase;
+use App\Callbacks\CheckActivation;
+use App\Callbacks\StartBackgroundServices;
 use App\Jobs\Activate;
+use App\Scripts\Activate as ActivateScript;
 use App\Scripts\Script;
 use App\ServerDeployment;
 use App\ShellProcessRunner;
-use App\Callbacks\CheckActivation;
-use App\Callbacks\StartBackgroundServices;
-use App\Scripts\Activate as ActivateScript;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ActivateJobTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -25,11 +24,10 @@ class ActivateJobTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-
     public function test_task_id_is_stored()
     {
         $serverDeployment = factory(ServerDeployment::class)->create();
-        $serverDeployment->setRelation('deployable', $deployable = new ActivateJobTestFakeDeployable);
+        $serverDeployment->setRelation('deployable', $deployable = new ActivateJobTestFakeDeployable());
         $serverDeployment->stack()->environment->update([
             'name' => 'workbench',
         ]);
@@ -48,7 +46,6 @@ class ActivateJobTest extends TestCase
         $this->assertInstanceOf(StartBackgroundServices::class, $deployable->options['then'][1]);
     }
 }
-
 
 class ActivateJobTestFakeDeployable extends AppServer
 {

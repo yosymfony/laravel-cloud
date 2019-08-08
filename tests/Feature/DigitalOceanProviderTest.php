@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\ServerProvider;
 use App\Services\DigitalOcean;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DigitalOceanProviderTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -18,7 +17,6 @@ class DigitalOceanProviderTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_ssh_keys_can_be_added_and_removed()
     {
@@ -38,7 +36,6 @@ class DigitalOceanProviderTest extends TestCase
 
         $this->assertNull($ocean->findKey());
     }
-
 
     public function test_can_verify_credentials_are_valid()
     {

@@ -13,11 +13,11 @@
 
 $factory->define(App\ServerDeployment::class, function () {
     return [
-        'deployment_id' => factory(App\Deployment::class),
-        'deployable_id' => factory(App\AppServer::class),
-        'deployable_type' => App\AppServer::class,
-        'build_commands' => [],
+        'deployment_id'       => factory(App\Deployment::class),
+        'deployable_id'       => factory(App\AppServer::class),
+        'deployable_type'     => App\AppServer::class,
+        'build_commands'      => [],
         'activation_commands' => [],
-        'status' => 'running',
+        'status'              => 'running',
     ];
 });

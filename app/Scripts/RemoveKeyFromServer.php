@@ -3,7 +3,6 @@
 namespace App\Scripts;
 
 use App\User;
-use App\Contracts\Provisionable;
 
 class RemoveKeyFromServer extends Script
 {
@@ -24,7 +23,8 @@ class RemoveKeyFromServer extends Script
     /**
      * Create a new script instance.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return void
      */
     public function __construct($name)
@@ -39,7 +39,7 @@ class RemoveKeyFromServer extends Script
      */
     public function name()
     {
-        return "Removing SSH Key";
+        return 'Removing SSH Key';
     }
 
     /**

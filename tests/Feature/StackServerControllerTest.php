@@ -2,18 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
 use App\AppServer;
 use App\IpAddress;
+use App\Stack;
 use App\WebServer;
-use Tests\TestCase;
 use App\WorkerServer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class StackServerControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -21,7 +20,6 @@ class StackServerControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_all_servers_are_returned()
     {

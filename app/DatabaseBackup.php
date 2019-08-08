@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Carbon\Carbon;
-use Illuminate\Support\Str;
+use App\Events\DatabaseBackupFailed;
+use App\Events\DatabaseBackupFinished;
+use App\Events\DatabaseBackupRunning;
 use App\Jobs\DeleteDatabaseBackup;
 use App\Jobs\RestoreDatabaseBackup;
-use App\Events\DatabaseBackupFailed;
-use App\Events\DatabaseBackupRunning;
-use App\Events\DatabaseBackupFinished;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class DatabaseBackup extends Model
 {
@@ -56,7 +56,8 @@ class DatabaseBackup extends Model
     /**
      * Generate a new backup path for the given project.
      *
-     * @param  \App\Project  $project
+     * @param \App\Project $project
+     *
      * @return string
      */
     public static function newPathFor(Project $project)
@@ -118,22 +119,23 @@ class DatabaseBackup extends Model
     public function updateSize()
     {
         $this->update([
-            'size' => $this->storageProvider->client()->size($this->backup_path)
+            'size' => $this->storageProvider->client()->size($this->backup_path),
         ]);
     }
 
     /**
      * Mark the database backup as finished.
      *
-     * @param  string  $output
+     * @param string $output
+     *
      * @return void
      */
     public function markAsFinished($output = '')
     {
         DatabaseBackupFinished::dispatch(tap($this)->update([
-            'status' => 'finished',
+            'status'    => 'finished',
             'exit_code' => 0,
-            'output' => $output,
+            'output'    => $output,
         ]));
     }
 
@@ -145,10 +147,10 @@ class DatabaseBackup extends Model
     public function restore()
     {
         return tap($this->restores()->create([
-            'database_id' => $this->database->id,
+            'database_id'   => $this->database->id,
             'database_name' => $this->database_name,
-            'status' => 'pending',
-            'output' => '',
+            'status'        => 'pending',
+            'output'        => '',
         ]), function ($restore) {
             $this->trimRestores();
 
@@ -173,25 +175,26 @@ class DatabaseBackup extends Model
     /**
      * Mark the database backup as failed.
      *
-     * @param  int  $exitCode
-     * @param  string  $output
+     * @param int    $exitCode
+     * @param string $output
+     *
      * @return void
      */
     public function markAsFailed($exitCode, $output = '')
     {
         DatabaseBackupFailed::dispatch(tap($this)->update([
-            'status' => 'failed',
+            'status'    => 'failed',
             'exit_code' => $exitCode,
-            'output' => $output,
+            'output'    => $output,
         ]));
     }
 
     /**
      * Delete the model from the database.
      *
-     * @return bool|null
-     *
      * @throws \Exception
+     *
+     * @return bool|null
      */
     public function delete()
     {

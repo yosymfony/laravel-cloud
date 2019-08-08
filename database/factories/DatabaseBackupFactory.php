@@ -13,11 +13,11 @@
 
 $factory->define(App\DatabaseBackup::class, function () {
     return [
-        'database_id' => factory(App\Database::class),
+        'database_id'         => factory(App\Database::class),
         'storage_provider_id' => factory(App\StorageProvider::class),
-        'database_name' => 'Test Database',
-        'backup_path' => 'laravel-cloud-test/backups/laravel/2017-01-01-12-01-01.sql.gz',
-        'status' => 'running',
-        'output' => '',
+        'database_name'       => 'Test Database',
+        'backup_path'         => 'laravel-cloud-test/backups/laravel/2017-01-01-12-01-01.sql.gz',
+        'status'              => 'running',
+        'output'              => '',
     ];
 });

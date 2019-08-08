@@ -2,11 +2,11 @@
 
 namespace App\Events;
 
-use App\Stack;
 use App\Contracts\Alertable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
+use App\Stack;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class StackProvisioned implements Alertable
 {
@@ -22,7 +22,8 @@ class StackProvisioned implements Alertable
     /**
      * Create a new event instance.
      *
-     * @param  \App\Stack  $stack
+     * @param \App\Stack $stack
+     *
      * @return void
      */
     public function __construct(Stack $stack)
@@ -38,11 +39,11 @@ class StackProvisioned implements Alertable
     public function toAlert()
     {
         return $this->stack->project()->alerts()->create([
-            'stack_id' => $this->stack->id,
-            'level' => 'success',
-            'type' => 'StackProvisioned',
+            'stack_id'  => $this->stack->id,
+            'level'     => 'success',
+            'type'      => 'StackProvisioned',
             'exception' => '',
-            'meta' => [],
+            'meta'      => [],
         ]);
     }
 }

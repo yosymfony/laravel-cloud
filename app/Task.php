@@ -66,13 +66,14 @@ class Task extends Model
      */
     public function timeout()
     {
-        return (int) ($this->options['timeout'] ?? Task::DEFAULT_TIMEOUT);
+        return (int) ($this->options['timeout'] ?? self::DEFAULT_TIMEOUT);
     }
 
     /**
      * Get the value of the options array.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return array
      */
     public function getOptionsAttribute($value)
@@ -83,7 +84,8 @@ class Task extends Model
     /**
      * Set the value of the options array.
      *
-     * @param  array  $value
+     * @param array $value
+     *
      * @return array
      */
     public function setOptionsAttribute(array $value)
@@ -94,7 +96,8 @@ class Task extends Model
     /**
      * Mark the task as finished and gather its output.
      *
-     * @param  int  $exitCode
+     * @param int $exitCode
+     *
      * @return void
      */
     public function finish($exitCode = 0)
@@ -137,31 +140,33 @@ class Task extends Model
     /**
      * Mark the task as timed out.
      *
-     * @param  string  $output
+     * @param string $output
+     *
      * @return $this
      */
     protected function markAsTimedOut($output = '')
     {
         return tap($this)->update([
             'exit_code' => 1,
-            'status' => 'timeout',
-            'output' => $output,
+            'status'    => 'timeout',
+            'output'    => $output,
         ]);
     }
 
     /**
      * Mark the task as finished.
      *
-     * @param  int  $exitCode
-     * @param  string  $output
+     * @param int    $exitCode
+     * @param string $output
+     *
      * @return $this
      */
     protected function markAsFinished($exitCode = 0, $output = '')
     {
         return tap($this)->update([
             'exit_code' => $exitCode,
-            'status' => 'finished',
-            'output' => $output,
+            'status'    => 'finished',
+            'output'    => $output,
         ]);
     }
 }

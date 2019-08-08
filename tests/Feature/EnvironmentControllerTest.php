@@ -2,18 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\Project;
 use App\AppServer;
-use Tests\TestCase;
 use App\Environment;
-use Illuminate\Support\Facades\Bus;
+use App\Project;
+use App\Stack;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class EnvironmentControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -21,7 +20,6 @@ class EnvironmentControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_environments_can_be_listed()
     {
@@ -35,11 +33,10 @@ class EnvironmentControllerTest extends TestCase
         $this->assertEquals($environment->id, $response->original[0]->id);
     }
 
-
     public function test_environment_variables_can_be_retrieved()
     {
         $environment = factory(Environment::class)->create([
-            'variables' => 'APP_DEBUG=true'
+            'variables' => 'APP_DEBUG=true',
         ]);
 
         $response = $this->actingAs($environment->project->user, 'api')
@@ -49,21 +46,19 @@ class EnvironmentControllerTest extends TestCase
         $this->assertEquals('APP_DEBUG=true', $response->original->variables);
     }
 
-
     public function test_environments_can_be_created()
     {
         $project = factory(Project::class)->create();
 
         $response = $this->actingAs($project->user, 'api')
                     ->post('/api/project/'.$project->id.'/environment', [
-                        'name' => 'Test Environment',
-                        'variables' => 'APP_DEBUG=true'
+                        'name'      => 'Test Environment',
+                        'variables' => 'APP_DEBUG=true',
                     ]);
 
         $response->assertStatus(201);
         $this->assertInstanceOf(Environment::class, $response->original);
     }
-
 
     public function test_duplicate_environment_names_can_not_be_created()
     {
@@ -73,18 +68,17 @@ class EnvironmentControllerTest extends TestCase
 
         $response = $this->withExceptionHandling()->actingAs($environment->project->user, 'api')
                     ->json('POST', '/api/project/'.$environment->project->id.'/environment', [
-                        'name' => 'Test Environment',
-                        'variables' => 'APP_DEBUG=true'
+                        'name'      => 'Test Environment',
+                        'variables' => 'APP_DEBUG=true',
                     ]);
 
         $response->assertStatus(422);
     }
 
-
     public function test_environments_can_be_updated()
     {
         $environment = factory(Environment::class)->create([
-            'name' => 'Test Environment',
+            'name'      => 'Test Environment',
             'variables' => 'APP_DEBUG=true',
         ]);
 
@@ -97,11 +91,10 @@ class EnvironmentControllerTest extends TestCase
         $this->assertEquals('APP_DEBUG=false', $environment->fresh()->variables);
     }
 
-
     public function test_non_collaborator_cant_update_environment()
     {
         $environment = factory(Environment::class)->create([
-            'name' => 'Test Environment',
+            'name'      => 'Test Environment',
             'variables' => 'APP_DEBUG=true',
         ]);
 
@@ -115,11 +108,10 @@ class EnvironmentControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
-
     public function test_collaborator_can_update_environment()
     {
         $environment = factory(Environment::class)->create([
-            'name' => 'Test Environment',
+            'name'      => 'Test Environment',
             'variables' => 'APP_DEBUG=true',
         ]);
 
@@ -133,7 +125,6 @@ class EnvironmentControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
-
 
     public function test_environments_can_be_deleted()
     {
@@ -154,7 +145,6 @@ class EnvironmentControllerTest extends TestCase
         $this->assertCount(0, AppServer::all());
     }
 
-
     public function test_environments_cant_be_deleted_without_permission()
     {
         Bus::fake();
@@ -171,7 +161,6 @@ class EnvironmentControllerTest extends TestCase
 
         $response->assertStatus(403);
     }
-
 
     public function test_environments_can_always_be_deleted_by_their_creator()
     {
@@ -191,7 +180,6 @@ class EnvironmentControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-
     public function test_environment_cant_be_deleted_if_their_stacks_are_provisioning()
     {
         Bus::fake();
@@ -206,7 +194,6 @@ class EnvironmentControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_environment_cant_be_deleted_if_their_stacks_are_deploying()
     {

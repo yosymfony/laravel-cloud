@@ -11,14 +11,13 @@
 |
 */
 
-
 $factory->define(App\StorageProvider::class, function () {
     return [
         'user_id' => factory(App\User::class),
-        'name' => 'S3',
-        'type' => 'S3',
-        'meta' => [
-            'key' => config('services.testing.s3_key'),
+        'name'    => 'S3',
+        'type'    => 'S3',
+        'meta'    => [
+            'key'    => config('services.testing.s3_key'),
             'secret' => config('services.testing.s3_secret'),
             'region' => 'us-east-1',
             'bucket' => 'laravel-cloud-test',

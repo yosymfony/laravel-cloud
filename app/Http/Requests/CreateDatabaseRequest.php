@@ -32,13 +32,14 @@ class CreateDatabaseRequest extends FormRequest
     /**
      * Validate the size of the server.
      *
-     * @param  \Illuminate\Validator\Validator  $validator
+     * @param \Illuminate\Validator\Validator $validator
+     *
      * @return \Illuminate\Validator\Validator
      */
     protected function validateRegionAndSize($validator)
     {
         return $validator->after(function ($validator) {
-            if (! $this->project->serverProvider->validSize($this->size)) {
+            if (!$this->project->serverProvider->validSize($this->size)) {
                 $validator->errors()->add('size', 'The provided size is invalid.');
             }
         });

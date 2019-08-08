@@ -18,7 +18,8 @@ class ProvisionWebServer extends ProvisioningScript
     /**
      * Create a new script instance.
      *
-     * @param  \App\WebServer  $server
+     * @param \App\WebServer $server
+     *
      * @return void
      */
     public function __construct(WebServer $server)
@@ -46,8 +47,8 @@ class ProvisionWebServer extends ProvisioningScript
     public function script()
     {
         return view('scripts.web.provision', [
-            'script' => $this,
-            'server' => $this->server,
+            'script'        => $this,
+            'server'        => $this->server,
             'customScripts' => $this->server->stack->meta['scripts']['web'] ?? [],
         ])->render();
     }

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Hook;
-use App\Stack;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateHookRequest;
+use App\Stack;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class HookController extends Controller
@@ -16,8 +16,9 @@ class HookController extends Controller
     /**
      * Get the hooks for the given environment / stack.
      *
-     * @param  Request  $request
-     * @param  \App\Stack  $stack
+     * @param Request    $request
+     * @param \App\Stack $stack
+     *
      * @return Response
      */
     public function index(Request $request, Stack $stack)
@@ -30,15 +31,16 @@ class HookController extends Controller
     /**
      * Create a new hook for the stack.
      *
-     * @param  \App\Http\Requests\CreateHookRequest  $request
-     * @param  \App\Stack  $stack
+     * @param \App\Http\Requests\CreateHookRequest $request
+     * @param \App\Stack                           $stack
+     *
      * @return Response
      */
     public function store(CreateHookRequest $request, Stack $stack)
     {
         $this->authorize('view', $stack->project());
 
-        if (! $stack->isProvisioned()) {
+        if (!$stack->isProvisioned()) {
             throw ValidationException::withMessages([
                 'stack' => ['This stack has not finished provisioning.'],
             ]);
@@ -46,10 +48,10 @@ class HookController extends Controller
 
         $hook = DB::transaction(function () use ($request, $stack) {
             return tap($stack->hooks()->create([
-                'name' => $request->name,
-                'token' => Str::random(40),
+                'name'   => $request->name,
+                'token'  => Str::random(40),
                 'branch' => $request->branch,
-                'meta' => [],
+                'meta'   => [],
             ]), function ($hook) use ($request) {
                 if ($request->publish) {
                     $hook->publish();
@@ -63,7 +65,8 @@ class HookController extends Controller
     /**
      * Delete the given hook.
      *
-     * @param  \App\Hook  $hook
+     * @param \App\Hook $hook
+     *
      * @return Response
      */
     public function destroy(Hook $hook)

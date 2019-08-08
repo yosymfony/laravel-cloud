@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\Scripts\Script;
-use Facades\App\TaskFactory;
 use App\Scripts\GetAptLockStatus;
 use App\Scripts\GetCurrentDirectory;
+use App\Scripts\Script;
+use Facades\App\TaskFactory;
 
 trait Provisionable
 {
@@ -110,13 +110,14 @@ trait Provisionable
     /**
      * Set the SSH key attributes on the model.
      *
-     * @param  object  $value
+     * @param object $value
+     *
      * @return void
      */
     public function setKeypairAttribute($value)
     {
         $this->attributes = [
-            'public_key' => $value->publicKey,
+            'public_key'  => $value->publicKey,
             'private_key' => $value->privateKey,
         ] + $this->attributes;
     }
@@ -128,16 +129,16 @@ trait Provisionable
      */
     public function isReadyForProvisioning()
     {
-        if (! $this->ipAddress()) {
+        if (!$this->ipAddress()) {
             $this->retrieveIpAddresses();
         }
 
         $canAccess = $this->fresh()->ipAddress() && $this->run(
-            new GetCurrentDirectory
+            new GetCurrentDirectory()
         )->output == '/root';
 
         if ($canAccess) {
-            $apt = $this->run(new GetAptLockStatus);
+            $apt = $this->run(new GetAptLockStatus());
         } else {
             return false;
         }
@@ -160,12 +161,12 @@ trait Provisionable
             $project->withProvider()->getPrivateIpAddress($this),
         ];
 
-        if (! $publicIp || ! $privateIp) {
+        if (!$publicIp || !$privateIp) {
             return;
         }
 
         $this->address()->create([
-            'public_address' => $publicIp,
+            'public_address'  => $publicIp,
             'private_address' => $privateIp,
         ]);
     }
@@ -217,37 +218,39 @@ trait Provisionable
      */
     public function provisioningJobDispatched()
     {
-        return ! is_null($this->provisioning_job_dispatched_at);
+        return !is_null($this->provisioning_job_dispatched_at);
     }
 
     /**
      * Run the given script on the server.
      *
-     * @param  \App\Scripts\Script  $script
-     * @param  array  $options
+     * @param \App\Scripts\Script $script
+     * @param array               $options
+     *
      * @return Task
      */
     public function run(Script $script, array $options = [])
     {
-        if (! array_key_exists('timeout', $options)) {
+        if (!array_key_exists('timeout', $options)) {
             $options['timeout'] = $script->timeout();
         }
 
         return $this->tasks()->create([
             'project_id' => $this->projectId(),
-            'name' => $script->name(),
-            'user' => $script->sshAs,
-            'options' => $options,
-            'script' => (string) $script,
-            'output' => '',
+            'name'       => $script->name(),
+            'user'       => $script->sshAs,
+            'options'    => $options,
+            'script'     => (string) $script,
+            'output'     => '',
         ])->run();
     }
 
     /**
      * Run the given script in the background the server.
      *
-     * @param  \App\Scripts\Script  $script
-     * @param  array  $options
+     * @param \App\Scripts\Script $script
+     * @param array               $options
+     *
      * @return Task
      */
     public function runInBackground(Script $script, array $options = [])

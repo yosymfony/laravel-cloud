@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Contracts\Provisionable;
+use App\Exceptions\ProvisioningTimeout;
 use Exception;
 use Illuminate\Bus\Queueable;
-use App\Contracts\Provisionable;
-use Illuminate\Queue\SerializesModels;
-use App\Exceptions\ProvisioningTimeout;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ServerProvisioner implements ShouldQueue
 {
@@ -68,7 +68,8 @@ class ServerProvisioner implements ShouldQueue
     /**
      * Handle a job failure.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
+     *
      * @return void
      */
     public function failed(Exception $exception)
@@ -80,9 +81,9 @@ class ServerProvisioner implements ShouldQueue
         }
 
         $this->provisionable->project->alerts()->create([
-            'type' => 'ServerProvisioningFailed',
+            'type'      => 'ServerProvisioningFailed',
             'exception' => (string) $exception,
-            'meta' => [],
+            'meta'      => [],
         ]);
     }
 }

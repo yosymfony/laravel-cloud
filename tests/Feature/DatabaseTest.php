@@ -2,17 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
-use App\Database;
 use App\AppServer;
+use App\Database;
 use App\IpAddress;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DatabaseTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -20,7 +18,6 @@ class DatabaseTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_network_is_synced_reports_true_if_allows_access_from_all_stacks()
     {
@@ -33,14 +30,12 @@ class DatabaseTest extends TestCase
         $database->update([
             'allows_access_from' => [
                 $appServer->address->public_address,
-                $appServer->address->private_address
+                $appServer->address->private_address,
             ],
         ]);
 
         $this->assertTrue($database->networkIsSynced());
     }
-
-
 
     public function test_network_is_synced_reports_false_if_doesnt_allow_access_from_all_stacks()
     {

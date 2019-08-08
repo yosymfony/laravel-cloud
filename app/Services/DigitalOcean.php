@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use Exception;
-use GuzzleHttp\Client;
-use App\ServerProvider;
-use InvalidArgumentException;
 use App\Contracts\Provisionable;
 use App\Contracts\ServerProviderClient;
+use App\ServerProvider;
+use Exception;
+use GuzzleHttp\Client;
+use InvalidArgumentException;
 
 class DigitalOcean implements ServerProviderClient
 {
@@ -21,7 +21,8 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Create a new DigitalOcean service instance.
      *
-     * @param  \App\ServerProvider  $provider
+     * @param \App\ServerProvider $provider
+     *
      * @return void
      */
     public function __construct(ServerProvider $provider)
@@ -77,15 +78,15 @@ class DigitalOcean implements ServerProviderClient
     {
         return [
             '512MB' => ['cpu' => '1 Core', 'ram' => '512MB', 'hdd' => '20GB', 'price' => 5],
-            '1GB' => ['cpu' => '1 Core', 'ram' => '1GB', 'hdd' => '30GB', 'price' => 10],
-            '2GB' => ['cpu' => '2 Core', 'ram' => '2GB', 'hdd' => '40GB', 'price' => 20],
-            '4GB' => ['cpu' => '2 Core', 'ram' => '4GB', 'hdd' => '60GB', 'price' => 40],
-            '8GB' => ['cpu' => '4 Core', 'ram' => '8GB', 'hdd' => '80GB', 'price' => 80],
-            '16GB' => ['cpu' => '8 Core', 'ram' => '16GB', 'hdd' => '160GB', 'price' => 160],
+            '1GB'   => ['cpu' => '1 Core', 'ram' => '1GB', 'hdd' => '30GB', 'price' => 10],
+            '2GB'   => ['cpu' => '2 Core', 'ram' => '2GB', 'hdd' => '40GB', 'price' => 20],
+            '4GB'   => ['cpu' => '2 Core', 'ram' => '4GB', 'hdd' => '60GB', 'price' => 40],
+            '8GB'   => ['cpu' => '4 Core', 'ram' => '8GB', 'hdd' => '80GB', 'price' => 80],
+            '16GB'  => ['cpu' => '8 Core', 'ram' => '16GB', 'hdd' => '160GB', 'price' => 160],
             'm16GB' => ['cpu' => '2 Core', 'ram' => '16GB (High Memory)', 'hdd' => '30GB', 'price' => 120],
-            '32GB' => ['cpu' => '12 Core', 'ram' => '32GB', 'hdd' => '320GB', 'price' => 320],
+            '32GB'  => ['cpu' => '12 Core', 'ram' => '32GB', 'hdd' => '320GB', 'price' => 320],
             'm32GB' => ['cpu' => '4 Core', 'ram' => '32GB (High Memory)', 'hdd' => '90GB', 'price' => 240],
-            '64GB' => ['cpu' => '20 Core', 'ram' => '64GB', 'hdd' => '640GB', 'price' => 640],
+            '64GB'  => ['cpu' => '20 Core', 'ram' => '64GB', 'hdd' => '640GB', 'price' => 640],
             'm64GB' => ['cpu' => '8 Core', 'ram' => '64GB (High Memory)', 'hdd' => '200GB', 'price' => 480],
         ];
     }
@@ -93,7 +94,8 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Get the size of the server in megabytes.
      *
-     * @param  string  $size
+     * @param string $size
+     *
      * @return int
      */
     public function sizeInMegabytes($size)
@@ -123,13 +125,14 @@ class DigitalOcean implements ServerProviderClient
                 return 65536 + 1;
         }
 
-        throw new InvalidArgumentException("Invalid size.");
+        throw new InvalidArgumentException('Invalid size.');
     }
 
     /**
      * Get the recommended balancer size for a given server size.
      *
-     * @param  string  $size
+     * @param string $size
+     *
      * @return string
      */
     public function recommendedBalancerSize($size)
@@ -153,28 +156,29 @@ class DigitalOcean implements ServerProviderClient
                 return '8GB';
         }
 
-        throw new InvalidArgumentException("Invalid size.");
+        throw new InvalidArgumentException('Invalid size.');
     }
 
     /**
      * Create a new server.
      *
-     * @param  string  $name
-     * @param  string  $size
-     * @param  string  $region
+     * @param string $name
+     * @param string $size
+     * @param string $region
+     *
      * @return string
      */
     public function createServer($name, $size, $region)
     {
         return $this->request('post', '/droplets', [
-            'name' => $name,
-            'size' => $size,
-            'region' => $region,
-            'image' => 'ubuntu-17-04-x64',
-            'ipv6' => true,
+            'name'               => $name,
+            'size'               => $size,
+            'region'             => $region,
+            'image'              => 'ubuntu-17-04-x64',
+            'ipv6'               => true,
             'private_networking' => true,
-            'ssh_keys' => [$this->keyId()],
-            'monitoring' => true,
+            'ssh_keys'           => [$this->keyId()],
+            'monitoring'         => true,
         ])['droplet']['id'];
     }
 
@@ -216,7 +220,7 @@ class DigitalOcean implements ServerProviderClient
     public function addKey()
     {
         return $this->request('post', '/account/keys', [
-            'name' => 'Laravel Cloud',
+            'name'       => 'Laravel Cloud',
             'public_key' => $this->provider->user->public_worker_key,
         ])['ssh_key']['id'];
     }
@@ -240,7 +244,8 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Get the public IP address for a server by ID.
      *
-     * @param  \App\Contracts\Provisionable  $server
+     * @param \App\Contracts\Provisionable $server
+     *
      * @return string|null
      */
     public function getPublicIpAddress(Provisionable $server)
@@ -251,7 +256,8 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Get the private IP address for a server by ID.
      *
-     * @param  \App\Contracts\Provisionable  $server
+     * @param \App\Contracts\Provisionable $server
+     *
      * @return string|null
      */
     public function getPrivateIpAddress(Provisionable $server)
@@ -262,7 +268,8 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Delete the given server.
      *
-     * @param  \App\Contracts\Provisionable  $server
+     * @param \App\Contracts\Provisionable $server
+     *
      * @return void
      */
     public function deleteServer(Provisionable $server)
@@ -273,7 +280,8 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Delete the given server.
      *
-     * @param  string  $providerServerId
+     * @param string $providerServerId
+     *
      * @return void
      */
     public function deleteServerById($providerServerId)
@@ -284,8 +292,9 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Get an IP address for the server.
      *
-     * @param  \App\Contracts\Provisionable  $server
-     * @param  string  $type
+     * @param \App\Contracts\Provisionable $server
+     * @param string                       $type
+     *
      * @return string|null
      */
     protected function getIpAddress(Provisionable $server, $type = 'public')
@@ -302,17 +311,18 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Make an HTTP request to DigitalOcean.
      *
-     * @param  string  $method
-     * @param  string  $path
-     * @param  array  $parameters
+     * @param string $method
+     * @param string $path
+     * @param array  $parameters
+     *
      * @return array
      */
     protected function request($method, $path, array $parameters = [])
     {
-        $response = (new Client)->{$method}('https://api.digitalocean.com/v2/'.ltrim($path, '/'), [
+        $response = (new Client())->{$method}('https://api.digitalocean.com/v2/'.ltrim($path, '/'), [
             'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer '.$this->provider->meta['token']
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer '.$this->provider->meta['token'],
             ],
             'json' => $parameters,
         ]);
@@ -323,10 +333,11 @@ class DigitalOcean implements ServerProviderClient
     /**
      * Aggregate pages of results into a single result array.
      *
-     * @param  string  $method
-     * @param  string  $path
-     * @param  array  $target
-     * @param  array  $parameters
+     * @param string $method
+     * @param string $path
+     * @param array  $target
+     * @param array  $parameters
+     *
      * @return array
      */
     protected function aggregate($method, $path, $target, array $parameters = [])

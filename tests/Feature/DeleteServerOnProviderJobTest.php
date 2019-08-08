@@ -2,16 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Project;
-use Tests\TestCase;
 use App\Jobs\DeleteServerOnProvider;
+use App\Project;
 use Facades\App\ServerProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DeleteServerOnProviderJobTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -19,7 +18,6 @@ class DeleteServerOnProviderJobTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_server_is_deleted_using_provider()
     {

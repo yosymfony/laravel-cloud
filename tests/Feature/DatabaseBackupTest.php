@@ -2,20 +2,19 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\DatabaseBackup;
-use App\Jobs\DeleteDatabaseBackup;
-use Illuminate\Support\Facades\Bus;
 use App\Events\DatabaseBackupFailed;
-use App\Events\DatabaseBackupRunning;
-use Illuminate\Support\Facades\Event;
 use App\Events\DatabaseBackupFinished;
+use App\Events\DatabaseBackupRunning;
+use App\Jobs\DeleteDatabaseBackup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class DatabaseBackupTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -23,7 +22,6 @@ class DatabaseBackupTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_mark_as_running()
     {
@@ -36,7 +34,6 @@ class DatabaseBackupTest extends TestCase
 
         Event::assertDispatched(DatabaseBackupRunning::class);
     }
-
 
     public function test_mark_as_finished()
     {
@@ -51,7 +48,6 @@ class DatabaseBackupTest extends TestCase
         Event::assertDispatched(DatabaseBackupFinished::class);
     }
 
-
     public function test_mark_as_failed()
     {
         Event::fake();
@@ -65,7 +61,6 @@ class DatabaseBackupTest extends TestCase
 
         Event::assertDispatched(DatabaseBackupFailed::class);
     }
-
 
     public function test_deleting_a_backup_dispatches_the_delete_job()
     {

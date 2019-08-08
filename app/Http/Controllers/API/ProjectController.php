@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Project;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProjectRequest;
+use App\Project;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ProjectController extends Controller
@@ -13,7 +13,8 @@ class ProjectController extends Controller
     /**
      * Get all of the projects for the current user.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function index(Request $request)
@@ -26,7 +27,8 @@ class ProjectController extends Controller
     /**
      * Get the project with the given ID.
      *
-     * @param  \App\Project  $project
+     * @param \App\Project $project
+     *
      * @return Response
      */
     public function show(Project $project)
@@ -39,17 +41,18 @@ class ProjectController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  CreateProjectRequest  $request
+     * @param CreateProjectRequest $request
+     *
      * @return mixed
      */
     public function store(CreateProjectRequest $request)
     {
         $project = $request->user()->projects()->create([
-            'name' => $request->name,
+            'name'               => $request->name,
             'server_provider_id' => $request->server_provider_id,
-            'region' => $request->region,
+            'region'             => $request->region,
             'source_provider_id' => $request->source_provider_id,
-            'repository' => $request->repository,
+            'repository'         => $request->repository,
         ]);
 
         if ($request->database) {
@@ -64,15 +67,16 @@ class ProjectController extends Controller
     /**
      * Destroy the given project.
      *
-     * @param  Request  $request
-     * @param  \App\Project  $project
+     * @param Request      $request
+     * @param \App\Project $project
+     *
      * @return Response
      */
     public function destroy(Request $request, Project $project)
     {
         $this->authorize('delete', $project);
 
-        if (! $project->allStacks()->every->isProvisioned() ||
+        if (!$project->allStacks()->every->isProvisioned() ||
             $project->allStacks()->contains->isDeploying()) {
             throw ValidationException::withMessages([
                 'stack' => ['This project has stacks that are provisioning or deploying.'],

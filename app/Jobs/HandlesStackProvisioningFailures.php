@@ -9,7 +9,8 @@ trait HandlesStackProvisioningFailures
     /**
      * Handle a job failure.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
+     *
      * @return void
      */
     public function failed(Exception $exception)
@@ -21,9 +22,9 @@ trait HandlesStackProvisioningFailures
         }
 
         $this->stack->environment->project->alerts()->create([
-            'type' => 'StackProvisioningFailed',
+            'type'      => 'StackProvisioningFailed',
             'exception' => (string) $exception,
-            'meta' => [],
+            'meta'      => [],
         ]);
     }
 }

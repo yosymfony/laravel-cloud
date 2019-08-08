@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Services\DigitalOcean;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProviderControllerTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -17,7 +16,6 @@ class ProviderControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_provider_can_be_created()
     {
@@ -38,7 +36,6 @@ class ProviderControllerTest extends TestCase
         $this->assertEquals(env('DIGITAL_OCEAN_TEST_KEY'), $provider->meta['token']);
         $this->assertInstanceOf(DigitalOcean::class, $provider->client());
     }
-
 
     public function test_provider_can_be_validated()
     {

@@ -23,8 +23,9 @@ class CaddyServerConfiguration
     /**
      * Create a new Caddy configuration instance.
      *
-     * @param  \App\Server  $server
-     * @param  string  $domain
+     * @param \App\Server $server
+     * @param string      $domain
+     *
      * @return void
      */
     public function __construct(Server $server, $domain)
@@ -42,10 +43,10 @@ class CaddyServerConfiguration
     {
         return view($this->script(), [
             'canonicalDomain' => $this->server->stack->canonicalDomain($this->domain),
-            'domain' => $this->domain,
-            'root' => $this->root(),
-            'tls' => $this->tls(),
-            'index' => ! Str::contains($this->domain, '.laravel.build'),
+            'domain'          => $this->domain,
+            'root'            => $this->root(),
+            'tls'             => $this->tls(),
+            'index'           => !Str::contains($this->domain, '.laravel.build'),
         ])->render();
     }
 
@@ -56,7 +57,7 @@ class CaddyServerConfiguration
      */
     protected function script()
     {
-        if (! $this->server->stack->isCanonicalDomain($this->domain) ||
+        if (!$this->server->stack->isCanonicalDomain($this->domain) ||
             Str::contains($this->domain, ':80')) {
             return 'scripts.caddy-configuration.redirect';
         }
@@ -72,7 +73,7 @@ class CaddyServerConfiguration
     protected function root()
     {
         if ($this->server->stack->under_maintenance &&
-            ! Str::contains($this->domain, 'laravel.build')) {
+            !Str::contains($this->domain, 'laravel.build')) {
             return '/home/cloud/maintenance/public';
         }
 

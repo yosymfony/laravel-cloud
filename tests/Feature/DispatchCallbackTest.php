@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Task;
-use Tests\TestCase;
 use App\Callbacks\Dispatch;
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DispatchCallbackTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -21,7 +20,6 @@ class DispatchCallbackTest extends TestCase
         TestDispatchCallbackJob::$ran = false;
         TestDispatchCallbackJob::$database = null;
     }
-
 
     public function test_proper_job_is_dispatched()
     {
@@ -36,7 +34,6 @@ class DispatchCallbackTest extends TestCase
         $this->assertEquals($task->provisionable->id, TestDispatchCallbackJob::$database->id);
     }
 }
-
 
 class TestDispatchCallbackJob
 {

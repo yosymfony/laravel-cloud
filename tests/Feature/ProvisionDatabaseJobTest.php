@@ -2,21 +2,20 @@
 
 namespace Tests\Feature;
 
-use Mockery;
-use Exception;
 use App\Database;
 use App\IpAddress;
-use Tests\TestCase;
-use App\Jobs\ProvisionDatabase;
-use Illuminate\Support\Facades\Bus;
 use App\Jobs\DeleteServerOnProvider;
+use App\Jobs\ProvisionDatabase;
+use Exception;
 use Facades\App\ServerProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Mockery;
+use Tests\TestCase;
 
 class ProvisionDatabaseJobTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -24,7 +23,6 @@ class ProvisionDatabaseJobTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_databases_is_deleted_on_failure()
     {
@@ -38,7 +36,7 @@ class ProvisionDatabaseJobTest extends TestCase
         }));
 
         $job = new ProvisionDatabase($database);
-        $job->failed(new Exception);
+        $job->failed(new Exception());
 
         Bus::assertDispatched(DeleteServerOnProvider::class);
         $this->assertCount(1, $database->project->alerts);

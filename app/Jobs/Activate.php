@@ -2,16 +2,16 @@
 
 namespace App\Jobs;
 
-use Exception;
-use App\ServerDeployment;
-use Illuminate\Bus\Queueable;
 use App\Callbacks\CheckActivation;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Callbacks\StartBackgroundServices;
 use App\Scripts\Activate as ActivateScript;
+use App\ServerDeployment;
+use Exception;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class Activate implements ShouldQueue
 {
@@ -27,7 +27,8 @@ class Activate implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \App\ServerDeployment  $deployment
+     * @param \App\ServerDeployment $deployment
+     *
      * @return void
      */
     public function __construct(ServerDeployment $deployment)
@@ -67,16 +68,17 @@ class Activate implements ShouldQueue
     /**
      * Handle a job failure.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
+     *
      * @return void
      */
     public function failed(Exception $exception)
     {
         $this->deployment->project()->alerts()->create([
-            'stack_id' => $this->deployment->stack()->id,
-            'type' => 'ActivationFailed',
+            'stack_id'  => $this->deployment->stack()->id,
+            'type'      => 'ActivationFailed',
             'exception' => (string) $exception,
-            'meta' => [],
+            'meta'      => [],
         ]);
     }
 }

@@ -13,10 +13,10 @@
 
 $factory->define(App\DatabaseRestore::class, function () {
     return [
-        'database_id' => factory(App\Database::class),
+        'database_id'        => factory(App\Database::class),
         'database_backup_id' => factory(App\DatabaseBackup::class),
-        'database_name' => 'Test Database',
-        'status' => 'running',
-        'output' => '',
+        'database_name'      => 'Test Database',
+        'status'             => 'running',
+        'output'             => '',
     ];
 });

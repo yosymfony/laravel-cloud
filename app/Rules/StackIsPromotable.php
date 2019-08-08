@@ -17,7 +17,8 @@ class StackIsPromotable implements Rule
     /**
      * Create a new rule instance.
      *
-     * @param  \App\Stack  $stack
+     * @param \App\Stack $stack
+     *
      * @return void
      */
     public function __construct($stack)
@@ -28,8 +29,9 @@ class StackIsPromotable implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)

@@ -2,42 +2,40 @@
 
 namespace Tests\Feature;
 
-use App\Hook;
-use App\Stack;
-use App\Database;
-use App\Balancer;
-use App\StackTask;
-use App\IpAddress;
 use App\AppServer;
-use App\WebServer;
+use App\Balancer;
+use App\Database;
 use App\Deployment;
-use Tests\TestCase;
-use App\ServerDeployment;
-use App\Jobs\SyncNetwork;
-use App\Jobs\MonitorDeployment;
-use Illuminate\Support\Facades\Bus;
-use App\Jobs\EnsureFloatingIpExists;
+use App\Hook;
+use App\IpAddress;
 use App\Jobs\DeleteServerOnProvider;
+use App\Jobs\EnsureFloatingIpExists;
+use App\Jobs\MonitorDeployment;
+use App\Jobs\SyncNetwork;
+use App\ServerDeployment;
+use App\Stack;
+use App\StackTask;
+use App\WebServer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Tests\TestCase;
 
 class StackTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function test_not_promotable_when_app_server_and_no_serves_directive_is_present()
     {
         $stack = factory(Stack::class)->create();
         $stack->appServer()->save(factory(AppServer::class)->make([
-            'meta' => ['serves' => []]
+            'meta' => ['serves' => []],
         ]));
 
         $this->assertFalse($stack->promotable());
 
-
         $stack = factory(Stack::class)->create();
         $stack->appServer()->save(factory(AppServer::class)->make([
-            'meta' => []
+            'meta' => [],
         ]));
 
         $this->assertFalse($stack->promotable());
@@ -48,7 +46,6 @@ class StackTest extends TestCase
         ]));
         $this->assertTrue($stack->promotable());
     }
-
 
     public function test_can_retrieve_web_addresses()
     {
@@ -69,7 +66,6 @@ class StackTest extends TestCase
             $stack->privateWebAddresses()
         );
     }
-
 
     public function test_can_determine_the_urls_the_stack_responds_to()
     {
@@ -118,21 +114,19 @@ class StackTest extends TestCase
         );
     }
 
-
     public function test_cannot_provision_if_already_provisioning()
     {
         Bus::fake();
 
         $stack = factory(Stack::class)->create([
             'environment_id' => 1,
-            'status' => 'provisioning',
+            'status'         => 'provisioning',
         ]);
 
         $stack->provision();
 
         Bus::assertNotDispatched(EnsureFloatingIpExists::class);
     }
-
 
     public function test_recommended_balancer_size_returns_proper_size()
     {
@@ -143,7 +137,6 @@ class StackTest extends TestCase
 
         $this->assertEquals('1GB', $stack->recommendedBalancerSize());
     }
-
 
     public function test_stack_entrypoint_can_be_determined()
     {
@@ -168,7 +161,6 @@ class StackTest extends TestCase
         $this->assertEquals($balancer2->address->public_address, $stack->entrypoint());
     }
 
-
     public function test_stack_entrypoint_returns_master_server_ip_with_only_web_servers()
     {
         $stack = factory(Stack::class)->create();
@@ -179,7 +171,6 @@ class StackTest extends TestCase
 
         $this->assertEquals($server->address->public_address, $stack->entrypoint());
     }
-
 
     public function test_stack_can_be_deployed()
     {
@@ -196,7 +187,6 @@ class StackTest extends TestCase
 
         Bus::assertDispatched(MonitorDeployment::class);
     }
-
 
     public function test_deleting_stack_deletes_related_entities()
     {
@@ -219,7 +209,6 @@ class StackTest extends TestCase
         });
     }
 
-
     public function test_deleting_stack_detaches_from_all_databases()
     {
         Bus::fake();
@@ -239,7 +228,6 @@ class StackTest extends TestCase
         });
     }
 
-
     public function test_deleting_stack_deletes_all_deployments()
     {
         $stack = factory(Stack::class)->create();
@@ -257,7 +245,6 @@ class StackTest extends TestCase
         $this->assertEquals(0, ServerDeployment::count());
     }
 
-
     public function test_can_return_canonical_domain()
     {
         // Test non-www...
@@ -272,7 +259,6 @@ class StackTest extends TestCase
         $this->assertEquals('dev.laravel.com', $stack->canonicalDomain('dev.laravel.com'));
         $this->assertEquals('www.laravel.com', $stack->nonCanonicalDomain('laravel.com'));
         $this->assertEquals('dev.laravel.com', $stack->nonCanonicalDomain('dev.laravel.com'));
-
 
         // Test www...
         $stack = factory(Stack::class)->create();
@@ -292,7 +278,6 @@ class StackTest extends TestCase
         $this->assertEquals('laravel.com', $stack->nonCanonicalDomain('www.laravel.com'));
         $this->assertEquals('laravel.com', $stack->nonCanonicalDomain('laravel.com'));
     }
-
 
     public function test_can_deploy_pending_deployments()
     {
@@ -318,7 +303,6 @@ class StackTest extends TestCase
         $this->assertNull($deployment->branch);
         $this->assertEquals('d8f05f1696032982dd8bf77aa9186d2aea744801', $deployment->commit_hash);
     }
-
 
     public function test_pending_deployments_not_deployed_for_commits_that_dont_exist()
     {
