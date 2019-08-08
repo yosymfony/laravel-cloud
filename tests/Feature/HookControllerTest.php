@@ -14,14 +14,12 @@ class HookControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_hook_can_be_created()
     {
@@ -58,7 +56,6 @@ class HookControllerTest extends TestCase
         $this->assertEquals('master', $hook->branch);
     }
 
-
     public function test_hook_can_be_created_without_publishing_to_the_source_control_provider()
     {
         Bus::fake();
@@ -88,7 +85,6 @@ class HookControllerTest extends TestCase
         $response->assertStatus(201);
     }
 
-
     public function test_can_not_be_created_with_invalid_branch()
     {
         Bus::fake();
@@ -108,7 +104,6 @@ class HookControllerTest extends TestCase
         $response->assertStatus(422);
     }
 
-
     public function test_hook_can_be_deleted()
     {
         Bus::fake();
@@ -123,7 +118,6 @@ class HookControllerTest extends TestCase
 
         $this->assertCount(0, $hook->stack->fresh()->hooks);
     }
-
 
     public function test_cant_delete_the_hook_if_not_a_collaborator()
     {

@@ -2,11 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Stack;
-use App\Project;
 use Tests\TestCase;
-use App\Environment;
 use App\Jobs\RunStackTask;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,14 +12,12 @@ class StackTaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stack_tasks_can_be_created()
     {
@@ -47,7 +42,6 @@ class StackTaskControllerTest extends TestCase
         });
     }
 
-
     public function test_user_with_access_may_run_tasks()
     {
         Bus::fake();
@@ -71,7 +65,6 @@ class StackTaskControllerTest extends TestCase
         Bus::assertDispatched(RunStackTask::class);
     }
 
-
     public function test_user_may_not_run_tasks_without_ssh_permission()
     {
         Bus::fake();
@@ -94,7 +87,6 @@ class StackTaskControllerTest extends TestCase
 
         Bus::assertNotDispatched(RunStackTask::class);
     }
-
 
     public function test_users_with_ssh_access_still_cant_run_as_root()
     {

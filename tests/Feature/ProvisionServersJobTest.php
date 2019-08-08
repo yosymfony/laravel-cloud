@@ -16,14 +16,12 @@ class ProvisionServersJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_servers_are_created_and_provisioning_jobs_are_dispatched()
     {
@@ -42,7 +40,6 @@ class ProvisionServersJobTest extends TestCase
         $this->assertEquals(1, $stack->fresh()->initial_server_count);
     }
 
-
     public function test_servers_are_not_created_if_provider_id_already_present()
     {
         Bus::fake();
@@ -57,7 +54,6 @@ class ProvisionServersJobTest extends TestCase
 
         Bus::assertDispatched(ProvisionAppServer::class);
     }
-
 
     public function test_provisioning_job_not_dispatched_if_already_dispatched()
     {

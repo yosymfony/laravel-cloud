@@ -12,14 +12,12 @@ class StorageProviderControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_storage_provider_can_be_created()
     {
@@ -45,7 +43,6 @@ class StorageProviderControllerTest extends TestCase
         $this->assertInstanceOf(S3::class, $storage->client());
     }
 
-
     public function test_storage_provider_can_be_validated()
     {
         $user = $this->user();
@@ -60,7 +57,6 @@ class StorageProviderControllerTest extends TestCase
         $this->assertCount(0, $user->storageProviders);
     }
 
-
     public function test_storage_provider_can_be_deleted()
     {
         $provider = factory(StorageProvider::class)->create();
@@ -74,7 +70,6 @@ class StorageProviderControllerTest extends TestCase
         $this->assertCount(0, $provider->user->storageProviders()->get());
         $this->assertCount(0, $provider->backups);
     }
-
 
     public function test_only_owners_may_delete_storage_providers()
     {

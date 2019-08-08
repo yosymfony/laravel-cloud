@@ -8,8 +8,8 @@ use App\Balancer;
 use App\Database;
 use App\AppServer;
 use Tests\TestCase;
-use App\SourceProvider;
 use App\ServerProvider;
+use App\SourceProvider;
 use App\Jobs\ProvisionDatabase;
 use Illuminate\Support\Facades\Bus;
 use Facades\App\ServerProviderClientFactory;
@@ -19,14 +19,12 @@ class ProjectControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_projects_can_be_listed()
     {
@@ -41,7 +39,6 @@ class ProjectControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertCount(2, $response->original);
     }
-
 
     public function test_no_database_is_created_if_no_database_is_specified()
     {
@@ -73,7 +70,6 @@ class ProjectControllerTest extends TestCase
         $this->assertEquals('nyc3', $project->region);
         $this->assertEquals('Laravel', $project->name);
     }
-
 
     public function test_job_to_provision_database_server_is_dispatched()
     {
@@ -115,7 +111,6 @@ class ProjectControllerTest extends TestCase
         $this->assertEquals(123, $project->databases->first()->provider_server_id);
     }
 
-
     public function test_projects_can_be_deleted()
     {
         Bus::fake();
@@ -138,7 +133,6 @@ class ProjectControllerTest extends TestCase
         $this->assertTrue($project->fresh()->archived);
     }
 
-
     public function test_project_cant_be_deleted_if_stacks_are_provisioning()
     {
         Bus::fake();
@@ -152,7 +146,6 @@ class ProjectControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_project_cant_be_deleted_if_stacks_are_deploying()
     {

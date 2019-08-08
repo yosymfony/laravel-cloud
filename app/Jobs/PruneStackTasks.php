@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
 use App\StackTask;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

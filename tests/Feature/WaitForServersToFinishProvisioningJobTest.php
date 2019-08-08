@@ -14,14 +14,12 @@ class WaitForServersToFinishProvisioningJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_job_is_not_deleted_when_stack_is_provisioned_but_balancer_isnt_finished()
     {
@@ -35,7 +33,6 @@ class WaitForServersToFinishProvisioningJobTest extends TestCase
         $this->assertFalse($job->deleted);
     }
 
-
     public function test_job_is_deleted_when_stack_is_provisioned_and_no_balancers()
     {
         $stack = factory(Stack::class)->create(['initial_server_count' => 1]);
@@ -47,7 +44,6 @@ class WaitForServersToFinishProvisioningJobTest extends TestCase
 
         $this->assertTrue($job->deleted);
     }
-
 
     public function test_job_is_deleted_when_stack_is_provisioned_and_has_provisioned_balancer()
     {
@@ -63,7 +59,6 @@ class WaitForServersToFinishProvisioningJobTest extends TestCase
         $this->assertTrue($job->deleted);
     }
 
-
     public function test_job_fails_when_stack_is_old()
     {
         $stack = factory(Stack::class)->create(['created_at' => Carbon::now()->subDays(10)]);
@@ -74,7 +69,6 @@ class WaitForServersToFinishProvisioningJobTest extends TestCase
         $this->assertNotNull($job->exception);
     }
 
-
     public function test_job_fails_when_no_app_or_web_servers()
     {
         $stack = factory(Stack::class)->create(['initial_server_count' => 3]);
@@ -84,7 +78,6 @@ class WaitForServersToFinishProvisioningJobTest extends TestCase
         $this->assertNotNull($job->exception);
     }
 }
-
 
 class WaitForServersToFinishProvisioningFakeJob extends WaitForServersToFinishProvisioning
 {

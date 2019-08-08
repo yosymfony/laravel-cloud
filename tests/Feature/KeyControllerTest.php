@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\User;
-use App\Project;
-use App\Database;
 use App\Balancer;
 use App\IpAddress;
 use Tests\TestCase;
@@ -17,14 +15,12 @@ class KeyControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_key_can_be_retrieved()
     {
@@ -44,7 +40,6 @@ class KeyControllerTest extends TestCase
         Bus::assertDispatched(RemoveKeyFromServer::class);
     }
 
-
     public function test_key_is_shared_with_authorized_users()
     {
         Bus::fake();
@@ -63,7 +58,6 @@ class KeyControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-
     public function test_key_is_not_shared_with_unauthorized_users()
     {
         $user = factory(User::class)->create();
@@ -74,7 +68,6 @@ class KeyControllerTest extends TestCase
 
         $response->assertStatus(403);
     }
-
 
     public function test_server_keys_can_be_shared_with_collaborators()
     {
@@ -96,7 +89,6 @@ class KeyControllerTest extends TestCase
 
         Bus::assertDispatched(RemoveKeyFromServer::class);
     }
-
 
     public function test_balancer_keys_can_be_shared_with_collaborators()
     {

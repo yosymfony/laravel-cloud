@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Stack;
-use App\Project;
 use Tests\TestCase;
 use App\Jobs\SyncServers;
 use Illuminate\Support\Facades\Bus;
@@ -13,14 +12,12 @@ class ServerConfigurationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stack_server_configurations_can_be_rebuilt()
     {

@@ -40,7 +40,7 @@ class PromotedStackController extends Controller
         $request->validate([
             'stack' => [
                 'required',
-                new StackIsPromotable($stack = Stack::findOrFail($request->stack))
+                new StackIsPromotable($stack = Stack::findOrFail($request->stack)),
             ],
             'hooks' => 'nullable|boolean',
             'wait' => 'nullable|boolean',

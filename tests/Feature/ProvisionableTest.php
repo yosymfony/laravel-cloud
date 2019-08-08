@@ -13,7 +13,6 @@ class ProvisionableTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function test_basic_accessors_and_helpers()
     {
         $database = factory(Database::class)->create();
@@ -36,7 +35,6 @@ class ProvisionableTest extends TestCase
         $this->assertTrue($database->isProvisioned());
     }
 
-
     public function test_determining_if_ready_for_provisioning_will_retrieve_ip_addresses()
     {
         $database = factory(Database::class)->create();
@@ -57,7 +55,6 @@ class ProvisionableTest extends TestCase
         $this->assertEquals('127.0.0.4', $database->privateIpAddress());
     }
 
-
     public function test_determining_if_ready_for_provisioning_will_skip_pulling_ip_addresses_if_already_present()
     {
         $database = factory(Database::class)->create();
@@ -74,7 +71,6 @@ class ProvisionableTest extends TestCase
         $this->assertTrue($database->isReadyForProvisioning());
     }
 
-
     public function test_determining_if_ready_for_provisioning_will_return_false_if_no_output()
     {
         $database = factory(Database::class)->create();
@@ -89,7 +85,6 @@ class ProvisionableTest extends TestCase
 
         $this->assertFalse($database->isReadyForProvisioning());
     }
-
 
     public function test_determining_if_ready_for_provisioning_will_return_false_if_apt_is_locked()
     {

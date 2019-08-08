@@ -13,14 +13,12 @@ class StackDatabaseControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_database_can_be_added_to_stack()
     {
@@ -47,7 +45,6 @@ class StackDatabaseControllerTest extends TestCase
 
         Bus::assertDispatched(SyncNetwork::class);
     }
-
 
     public function test_database_can_be_removed_from_stack()
     {
@@ -76,7 +73,6 @@ class StackDatabaseControllerTest extends TestCase
 
         Bus::assertDispatched(SyncNetwork::class);
     }
-
 
     public function test_nothing_happens_if_no_databases_are_affected()
     {

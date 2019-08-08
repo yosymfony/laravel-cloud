@@ -55,7 +55,7 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'App\Events\StackProvisioned' => [
-            'App\Listeners\CreateAlert'
+            'App\Listeners\CreateAlert',
         ],
 
         'App\Events\StackDeleting' => [

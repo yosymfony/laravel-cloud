@@ -6,7 +6,6 @@ use App\Hook;
 use App\Stack;
 use App\Deployment;
 use Tests\TestCase;
-use App\Environment;
 use App\SourceProvider;
 use App\Services\GitHub;
 use Symfony\Component\Yaml\Yaml;
@@ -16,14 +15,12 @@ class GitHubTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_can_determine_if_credentials_are_valid()
     {
@@ -38,7 +35,6 @@ class GitHubTest extends TestCase
         $this->assertFalse($github->valid());
     }
 
-
     public function test_can_determine_if_repository_is_valid()
     {
         $source = factory(SourceProvider::class)->create();
@@ -48,7 +44,6 @@ class GitHubTest extends TestCase
         $this->assertFalse($source->client()->validRepository('doesnt/exist', 'master'));
     }
 
-
     public function test_can_retrieve_latest_commit_hash()
     {
         $source = factory(SourceProvider::class)->create();
@@ -57,7 +52,6 @@ class GitHubTest extends TestCase
         $this->assertNotNull($hash);
     }
 
-
     public function test_can_get_deployment_url()
     {
         $source = factory(SourceProvider::class)->create();
@@ -65,7 +59,6 @@ class GitHubTest extends TestCase
 
         $this->assertNotNull($url);
     }
-
 
     public function test_hooks_can_be_published()
     {
@@ -80,7 +73,6 @@ class GitHubTest extends TestCase
         $source->client()->unpublishHook($hook);
     }
 
-
     public function test_hooks_can_be_added_twice_without_errors()
     {
         $hook = factory(Hook::class)->create([]);
@@ -93,7 +85,6 @@ class GitHubTest extends TestCase
 
         $this->assertTrue(true);
     }
-
 
     public function test_manifest_can_be_retrieved()
     {

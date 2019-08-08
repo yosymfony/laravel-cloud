@@ -15,14 +15,12 @@ class DatabaseBackupControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_backups_can_be_listed()
     {
@@ -35,7 +33,6 @@ class DatabaseBackupControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertEquals($backup->id, $response->original['Test Database'][0]['id']);
 
-
         // Filter by database...
         $response = $this->actingAs($backup->database->project->user, 'api')->json(
             'GET', "/api/database/{$backup->database->id}/backups?database_name=Test+Database"
@@ -43,7 +40,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertEquals($backup->id, $response->original['Test Database'][0]['id']);
-
 
         // Filter that doesn't exist...
         $response = $this->actingAs($backup->database->project->user, 'api')->json(
@@ -53,7 +49,6 @@ class DatabaseBackupControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertCount(0, $response->original);
     }
-
 
     public function test_backup_can_be_created()
     {
@@ -79,7 +74,6 @@ class DatabaseBackupControllerTest extends TestCase
         });
     }
 
-
     public function test_backup_cant_be_started_if_database_is_not_finished_provisioning()
     {
         Bus::fake();
@@ -102,7 +96,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         Bus::assertNotDispatched(StoreDatabaseBackup::class);
     }
-
 
     public function test_collaborators_can_manually_start_database_backups()
     {
@@ -128,7 +121,6 @@ class DatabaseBackupControllerTest extends TestCase
         $response->assertStatus(201);
     }
 
-
     public function test_backups_can_be_deleted()
     {
         Bus::fake();
@@ -143,7 +135,6 @@ class DatabaseBackupControllerTest extends TestCase
 
         Bus::assertDispatched(DeleteDatabaseBackup::class);
     }
-
 
     public function test_only_project_owners_can_delete_backups()
     {

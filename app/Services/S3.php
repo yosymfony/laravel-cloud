@@ -186,7 +186,7 @@ class S3 implements StorageProviderClient
     public function uploadScript(DatabaseBackup $backup)
     {
         return sprintf(
-            "aws s3 cp /home/cloud/backups/%s s3://%s/%s",
+            'aws s3 cp /home/cloud/backups/%s s3://%s/%s',
             basename($backup->backup_path),
             $backup->storageProvider->bucket(),
             $backup->backup_path
@@ -202,7 +202,7 @@ class S3 implements StorageProviderClient
     public function downloadScript(DatabaseBackup $backup)
     {
         return sprintf(
-            "aws s3 cp s3://%s/%s /home/cloud/restores/%s",
+            'aws s3 cp s3://%s/%s /home/cloud/restores/%s',
             $backup->storageProvider->bucket(),
             $backup->backup_path,
             basename($backup->backup_path)

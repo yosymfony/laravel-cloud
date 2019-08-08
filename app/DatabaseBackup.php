@@ -118,7 +118,7 @@ class DatabaseBackup extends Model
     public function updateSize()
     {
         $this->update([
-            'size' => $this->storageProvider->client()->size($this->backup_path)
+            'size' => $this->storageProvider->client()->size($this->backup_path),
         ]);
     }
 

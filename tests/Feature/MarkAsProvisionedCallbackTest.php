@@ -12,7 +12,6 @@ class MarkAsProvisionedCallbackTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
@@ -20,11 +19,10 @@ class MarkAsProvisionedCallbackTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-
     public function test_provisionable_is_marked_as_provisioned()
     {
         $database = factory(Database::class)->create([
-            'status' => 'provisioning'
+            'status' => 'provisioning',
         ]);
 
         $database->tasks()->save($task = factory(Task::class)->create());
@@ -34,7 +32,6 @@ class MarkAsProvisionedCallbackTest extends TestCase
 
         $this->assertEquals('provisioned', $database->fresh()->status);
     }
-
 
     public function test_can_be_called_for_models_that_dont_exist_without_errors()
     {

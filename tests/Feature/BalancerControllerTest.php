@@ -20,14 +20,12 @@ class BalancerControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_balancers_can_be_listed()
     {
@@ -40,7 +38,6 @@ class BalancerControllerTest extends TestCase
         $this->assertCount(1, $response->original);
         $this->assertEquals($balancer->id, $response->original[0]->id);
     }
-
 
     public function test_duplicate_balancer_names_cant_be_created()
     {
@@ -55,7 +52,6 @@ class BalancerControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_balancers_can_be_created()
     {
@@ -83,7 +79,6 @@ class BalancerControllerTest extends TestCase
         $this->assertEquals('2GB', $project->balancers[0]->size);
     }
 
-
     public function test_balancers_can_be_deleted()
     {
         Bus::fake();
@@ -107,7 +102,6 @@ class BalancerControllerTest extends TestCase
                    $job->providerServerId == $balancer->providerServerId();
         });
     }
-
 
     public function test_balancers_cant_be_deleted_when_they_are_last_balancer_and_have_balanced_stacks()
     {

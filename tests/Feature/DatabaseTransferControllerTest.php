@@ -13,14 +13,12 @@ class DatabaseTransferControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_databases_can_be_transferred_to_another_project()
     {
@@ -30,7 +28,7 @@ class DatabaseTransferControllerTest extends TestCase
         $project = $database->project;
 
         $anotherProject = factory(Project::class)->create([
-            'user_id' => $project->user->id
+            'user_id' => $project->user->id,
         ]);
 
         $response = $this->actingAs(
@@ -46,7 +44,6 @@ class DatabaseTransferControllerTest extends TestCase
 
         Bus::assertDispatched(SyncNetwork::class);
     }
-
 
     public function test_databases_cant_be_transferred_to_another_users_project()
     {
@@ -66,7 +63,6 @@ class DatabaseTransferControllerTest extends TestCase
         $response->assertStatus(422);
     }
 
-
     public function test_databases_cant_be_transferred_without_permission()
     {
         Bus::fake();
@@ -75,7 +71,7 @@ class DatabaseTransferControllerTest extends TestCase
         $project = $database->project;
 
         $anotherProject = factory(Project::class)->create([
-            'user_id' => $project->user->id
+            'user_id' => $project->user->id,
         ]);
 
         $project->shareWith($user = $this->user());

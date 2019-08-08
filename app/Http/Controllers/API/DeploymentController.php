@@ -42,7 +42,7 @@ class DeploymentController extends Controller
         return $deployment->load([
             'serverDeployments.deployable',
             'serverDeployments.buildTask',
-            'serverDeployments.activationTask'
+            'serverDeployments.activationTask',
         ]);
     }
 

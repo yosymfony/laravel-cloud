@@ -13,10 +13,9 @@ use App\Jobs\DeleteServerOnProvider;
 use Facades\App\ServerProviderClientFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ProvisionBalancerJobtest extends TestCase
+class ProvisionBalancerJobTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -24,7 +23,6 @@ class ProvisionBalancerJobtest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_balancer_is_deleted_on_failure()
     {

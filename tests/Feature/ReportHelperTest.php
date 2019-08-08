@@ -8,10 +8,9 @@ use Tests\TestCase;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class FeatureHelperTest extends TestCase
+class ReportHelperTest extends TestCase
 {
     use RefreshDatabase;
-
 
     public function setUp()
     {
@@ -19,7 +18,6 @@ class FeatureHelperTest extends TestCase
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_helper_reports_exceptions()
     {

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\WebServer;
 use App\AppServer;
+use App\WebServer;
 use App\Deployment;
 use Tests\TestCase;
 use App\WorkerServer;
@@ -20,14 +20,12 @@ class DeploymentTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_deployment_can_determine_if_built()
     {
@@ -43,7 +41,6 @@ class DeploymentTest extends TestCase
         $this->assertTrue($deployment->fresh()->isBuilt());
     }
 
-
     public function test_deployment_can_determine_if_activated()
     {
         $deployment = factory(Deployment::class)->create();
@@ -57,7 +54,6 @@ class DeploymentTest extends TestCase
 
         $this->assertTrue($deployment->fresh()->isActivated());
     }
-
 
     public function test_activate_method_dispatches_activate_jobs()
     {
@@ -74,7 +70,6 @@ class DeploymentTest extends TestCase
             return $job->deployment->id === $serverDeployment->id;
         });
     }
-
 
     public function test_build_fans_out_deployment_commands_properly()
     {
@@ -149,7 +144,6 @@ class DeploymentTest extends TestCase
         ], $worker1Deployment->activation_commands);
     }
 
-
     public function test_build_fans_out_deployment_commands_properly_with_app_server()
     {
         Bus::fake();
@@ -193,7 +187,6 @@ class DeploymentTest extends TestCase
         ], $app1Deployment->activation_commands);
     }
 
-
     public function test_can_be_marked_as_finished()
     {
         Event::fake();
@@ -205,7 +198,6 @@ class DeploymentTest extends TestCase
 
         Event::assertDispatched(DeploymentFinished::class);
     }
-
 
     public function test_can_determine_if_activated()
     {
@@ -224,7 +216,6 @@ class DeploymentTest extends TestCase
         $this->assertFalse($deployment->fresh()->isActivated());
     }
 
-
     public function test_can_be_marked_as_timed_out()
     {
         Event::fake();
@@ -236,7 +227,6 @@ class DeploymentTest extends TestCase
 
         Event::assertDispatched(DeploymentTimedOut::class);
     }
-
 
     public function test_can_determine_if_failures_exist()
     {
@@ -250,7 +240,6 @@ class DeploymentTest extends TestCase
 
         $this->assertTrue($deployment->fresh()->hasFailures());
     }
-
 
     public function test_can_be_marked_as_failed()
     {

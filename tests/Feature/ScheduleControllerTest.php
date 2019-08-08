@@ -11,14 +11,12 @@ class ScheduleControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_prune_tasks_can_is_dispatched()
     {

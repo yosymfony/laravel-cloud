@@ -13,14 +13,12 @@ class DeploymentControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_deployment_can_be_retrieved()
     {
@@ -36,7 +34,6 @@ class DeploymentControllerTest extends TestCase
             'id' => $deployment->id,
         ]);
     }
-
 
     public function test_deployment_can_be_created()
     {
@@ -70,7 +67,6 @@ class DeploymentControllerTest extends TestCase
         Bus::assertDispatched(MonitorDeployment::class);
     }
 
-
     public function test_deployment_can_not_be_created_with_invalid_branch()
     {
         Bus::fake();
@@ -89,7 +85,6 @@ class DeploymentControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_deployment_can_be_created_via_hash()
     {
@@ -118,7 +113,6 @@ class DeploymentControllerTest extends TestCase
         Bus::assertDispatched(MonitorDeployment::class);
     }
 
-
     public function test_deployment_fails_if_stack_is_not_provisioned()
     {
         Bus::fake();
@@ -137,7 +131,6 @@ class DeploymentControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_deployment_fails_if_hash_is_invalid()
     {
@@ -158,7 +151,6 @@ class DeploymentControllerTest extends TestCase
         $response->assertStatus(422);
     }
 
-
     public function test_deployment_can_be_cancelled()
     {
         $deployment = factory(Deployment::class)->create();
@@ -170,7 +162,6 @@ class DeploymentControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-
     public function test_latest_deployment_can_be_cancelled()
     {
         $deployment = factory(Deployment::class)->create();
@@ -181,7 +172,6 @@ class DeploymentControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
-
 
     public function test_deployment_cant_be_cancelled_when_its_already_activating()
     {
@@ -195,7 +185,6 @@ class DeploymentControllerTest extends TestCase
 
         $response->assertStatus(400);
     }
-
 
     public function test_cant_cancel_deployment_for_stack_with_no_deployments()
     {

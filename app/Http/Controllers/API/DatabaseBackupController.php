@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Database;
 use App\DatabaseBackup;
-use App\StorageProvider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;

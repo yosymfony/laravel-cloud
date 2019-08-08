@@ -123,7 +123,7 @@ class DigitalOcean implements ServerProviderClient
                 return 65536 + 1;
         }
 
-        throw new InvalidArgumentException("Invalid size.");
+        throw new InvalidArgumentException('Invalid size.');
     }
 
     /**
@@ -153,7 +153,7 @@ class DigitalOcean implements ServerProviderClient
                 return '8GB';
         }
 
-        throw new InvalidArgumentException("Invalid size.");
+        throw new InvalidArgumentException('Invalid size.');
     }
 
     /**
@@ -312,7 +312,7 @@ class DigitalOcean implements ServerProviderClient
         $response = (new Client)->{$method}('https://api.digitalocean.com/v2/'.ltrim($path, '/'), [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer '.$this->provider->meta['token']
+                'Authorization' => 'Bearer '.$this->provider->meta['token'],
             ],
             'json' => $parameters,
         ]);

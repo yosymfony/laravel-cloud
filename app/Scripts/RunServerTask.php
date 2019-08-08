@@ -39,7 +39,7 @@ class RunServerTask extends Script
      */
     public function name()
     {
-        return "Running Server Task";
+        return 'Running Server Task';
     }
 
     /**

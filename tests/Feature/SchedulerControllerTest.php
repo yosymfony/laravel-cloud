@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Stack;
-use App\Project;
 use App\Deployment;
 use Tests\TestCase;
 use App\ServerDeployment;
@@ -16,14 +15,12 @@ class SchedulerControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_scheduler_can_be_started()
     {
@@ -34,7 +31,7 @@ class SchedulerControllerTest extends TestCase
         $stack->deployments()->save(factory(Deployment::class)->make());
 
         $stack->deployments()->save($lastDeployment = factory(Deployment::class)->make([
-            'schedule' => ['first']
+            'schedule' => ['first'],
         ]));
 
         $lastDeployment->serverDeployments()->save(
@@ -51,7 +48,6 @@ class SchedulerControllerTest extends TestCase
         });
     }
 
-
     public function test_scheduler_can_be_stopped()
     {
         Bus::fake();
@@ -61,7 +57,7 @@ class SchedulerControllerTest extends TestCase
         $stack->deployments()->save(factory(Deployment::class)->make());
 
         $stack->deployments()->save($lastDeployment = factory(Deployment::class)->make([
-            'schedule' => ['first']
+            'schedule' => ['first'],
         ]));
 
         $lastDeployment->serverDeployments()->save(

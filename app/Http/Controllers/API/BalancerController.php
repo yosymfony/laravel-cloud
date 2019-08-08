@@ -55,7 +55,7 @@ class BalancerController extends Controller
         if (count($balancer->project->balancers) === 1 &&
             $balancer->project->allStacks()->contains->balanced) {
             throw ValidationException::withMessages(['balancer' => [
-                'You may not delete the last load balancer if it is currently in use.'
+                'You may not delete the last load balancer if it is currently in use.',
             ]]);
         }
 

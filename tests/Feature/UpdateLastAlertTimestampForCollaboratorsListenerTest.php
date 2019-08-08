@@ -11,14 +11,12 @@ class UpdateLastAlertTimestampForCollaboratorsListenerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_last_alert_received_at_timestamps_are_updated()
     {

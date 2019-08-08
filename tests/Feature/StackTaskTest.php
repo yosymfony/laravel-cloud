@@ -20,14 +20,12 @@ class StackTaskTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_commands_are_distributed_to_appropriate_servers()
     {
@@ -72,7 +70,6 @@ class StackTaskTest extends TestCase
         $this->assertInstanceOf(WorkerServer::class, $serverTasks[1]->taskable);
     }
 
-
     public function test_server_tasks_are_not_created_if_no_applicable_commands()
     {
         ShellProcessRunner::mock([
@@ -99,7 +96,6 @@ class StackTaskTest extends TestCase
         $this->assertCount(0, $serverTasks);
     }
 
-
     public function test_updating_status_is_properly_synced()
     {
         Event::fake();
@@ -110,7 +106,6 @@ class StackTaskTest extends TestCase
         Event::assertDispatched(ServerTaskFinished::class);
         Event::assertDispatched(StackTaskFinished::class);
     }
-
 
     public function test_stack_task_not_marked_as_finished_if_server_tasks_still_running()
     {
@@ -127,7 +122,6 @@ class StackTaskTest extends TestCase
         Event::assertNotDispatched(StackTaskFinished::class);
     }
 
-
     public function test_stack_test_is_updated_if_all_server_tasks_have_failed()
     {
         Event::fake();
@@ -141,7 +135,6 @@ class StackTaskTest extends TestCase
         $this->assertTrue($task->hasFailed());
         $this->assertTrue($task->stackTask->hasFailed());
     }
-
 
     public function test_tasks_actually_execute()
     {

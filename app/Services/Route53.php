@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Exception;
 use App\Stack;
+use Exception;
 use App\Contracts\DnsProvider;
 use Aws\Route53\Route53Client;
 

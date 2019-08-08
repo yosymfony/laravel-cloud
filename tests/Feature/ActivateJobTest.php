@@ -17,14 +17,12 @@ class ActivateJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_task_id_is_stored()
     {
@@ -48,7 +46,6 @@ class ActivateJobTest extends TestCase
         $this->assertInstanceOf(StartBackgroundServices::class, $deployable->options['then'][1]);
     }
 }
-
 
 class ActivateJobTestFakeDeployable extends AppServer
 {

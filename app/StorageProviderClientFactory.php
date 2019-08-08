@@ -19,7 +19,7 @@ class StorageProviderClientFactory
             case 'S3':
                 return new S3($provider);
             default:
-                throw new InvalidArgumentException("Invalid provider type.");
+                throw new InvalidArgumentException('Invalid provider type.');
         }
     }
 }

@@ -6,7 +6,6 @@ use App\User;
 use App\Stack;
 use App\WebServer;
 use Tests\TestCase;
-use App\Environment;
 use App\Jobs\PromoteStack;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,14 +14,12 @@ class PromotedStackControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stacks_can_be_promoted()
     {
@@ -48,7 +45,6 @@ class PromotedStackControllerTest extends TestCase
         $stack->environment->promotionLock()->release();
     }
 
-
     public function test_stacks_cant_be_promoted_if_not_serving()
     {
         Bus::fake();
@@ -65,7 +61,6 @@ class PromotedStackControllerTest extends TestCase
 
         $stack->environment->promotionLock()->release();
     }
-
 
     public function test_stacks_can_be_promoted_and_daemons_will_wait()
     {
@@ -95,7 +90,6 @@ class PromotedStackControllerTest extends TestCase
         $stack->environment->promotionLock()->release();
     }
 
-
     public function test_stack_cant_be_promoted_if_locked()
     {
         Bus::fake();
@@ -118,7 +112,6 @@ class PromotedStackControllerTest extends TestCase
         $stack->environment->promotionLock()->release();
     }
 
-
     public function test_stacks_cant_be_promoted_if_not_promotable()
     {
         $stack = factory(Stack::class)->create();
@@ -132,7 +125,6 @@ class PromotedStackControllerTest extends TestCase
 
         $stack->environment->promotionLock()->release();
     }
-
 
     public function test_collaborator_can_promote_stacks()
     {

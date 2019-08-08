@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Jobs\Build;
+use Tests\TestCase;
 use App\ServerDeployment;
 use App\ShellProcessRunner;
 use App\Callbacks\CheckBuild;
@@ -14,14 +14,12 @@ class BuildJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_task_id_is_stored()
     {
@@ -41,7 +39,6 @@ class BuildJobTest extends TestCase
         $this->assertInstanceOf(CheckBuild::class, $deployable->options['then'][0]);
     }
 }
-
 
 class BuildJobTestFakeDeployable
 {

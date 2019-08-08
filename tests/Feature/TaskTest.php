@@ -15,7 +15,6 @@ class TaskTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function test_scripts_can_be_run_in_foreground()
     {
         $database = factory(Database::class)->create([
@@ -28,7 +27,6 @@ class TaskTest extends TestCase
         $this->assertEquals(0, $task->exit_code);
         $this->assertEquals('/root', $task->output);
     }
-
 
     public function test_scripts_can_be_run_in_background()
     {
@@ -45,7 +43,6 @@ class TaskTest extends TestCase
         $this->assertEquals('Hello World', $output);
     }
 
-
     public function test_scripts_can_timeout()
     {
         $database = factory(Database::class)->create([
@@ -58,7 +55,6 @@ class TaskTest extends TestCase
         $this->assertNotEquals(0, $task->exit_code);
         $this->assertEquals('', $task->output);
     }
-
 
     public function test_tasks_can_be_pruned()
     {

@@ -10,14 +10,12 @@ class ProviderControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_provider_can_be_created()
     {
@@ -38,7 +36,6 @@ class ProviderControllerTest extends TestCase
         $this->assertEquals(env('DIGITAL_OCEAN_TEST_KEY'), $provider->meta['token']);
         $this->assertInstanceOf(DigitalOcean::class, $provider->client());
     }
-
 
     public function test_provider_can_be_validated()
     {

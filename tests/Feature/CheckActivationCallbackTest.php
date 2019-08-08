@@ -12,14 +12,12 @@ class CheckActivationCallbackTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_deployment_status_is_properly_updated_if_successful()
     {
@@ -34,7 +32,6 @@ class CheckActivationCallbackTest extends TestCase
 
         $this->assertEquals('activated', $deployment->fresh()->status);
     }
-
 
     public function test_deployment_status_is_properly_updated_if_failed()
     {

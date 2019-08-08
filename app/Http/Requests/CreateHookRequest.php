@@ -35,7 +35,7 @@ class CreateHookRequest extends FormRequest
                 'max:255',
                 new ValidBranch(
                     $this->stack->project()->sourceProvider, $this->stack->project()->repository
-                )
+                ),
             ],
             'publish' => 'required|boolean',
         ]);

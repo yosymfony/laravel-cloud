@@ -2,7 +2,7 @@
 
 namespace App\Scripts;
 
-class UnpauseDaemon extends DaemonScript
+class UnpauseDaemons extends DaemonScript
 {
     /**
      * Get the name of the script.

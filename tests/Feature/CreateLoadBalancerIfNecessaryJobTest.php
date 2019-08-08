@@ -13,14 +13,12 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_balancer_is_provisioned_if_multiple_servers_are_present_and_balancer_doesnt_exist()
     {
@@ -37,7 +35,6 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $this->assertEquals('1GB', $fake->size);
         $this->assertTrue($stack->balanced);
     }
-
 
     public function test_balancer_is_not_provisioned_if_a_balancer_already_exists()
     {
@@ -56,7 +53,6 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $this->assertTrue($stack->balanced);
     }
 
-
     public function test_balancer_is_not_provisioned_if_only_single_web_server()
     {
         $stack = factory(Stack::class)->create();
@@ -71,7 +67,6 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $this->assertNull($fake->size);
         $this->assertFalse($stack->balanced);
     }
-
 
     public function test_balancer_is_not_provisioned_if_only_single_app_server()
     {
@@ -88,7 +83,6 @@ class CreateLoadBalancerIfNecessaryJobTest extends TestCase
         $this->assertFalse($stack->balanced);
     }
 }
-
 
 class CreateLoadBalancerIfNecessaryJobTestFakeProject
 {

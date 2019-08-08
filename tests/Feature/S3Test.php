@@ -11,14 +11,12 @@ class S3Test extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_can_determine_if_credentials_are_valid()
     {
@@ -27,15 +25,13 @@ class S3Test extends TestCase
 
         $this->assertTrue($s3->valid());
 
-
         $provider = factory(StorageProvider::class)->create([
-            'meta' => ['key' => 'foo', 'secret' => 'baz', 'region' => 'us-east-1', 'bucket' => 'foobarbaz']
+            'meta' => ['key' => 'foo', 'secret' => 'baz', 'region' => 'us-east-1', 'bucket' => 'foobarbaz'],
         ]);
         $s3 = new S3($provider);
 
         $this->assertFalse($s3->valid());
     }
-
 
     public function test_can_create_and_delete_buckets()
     {
@@ -58,7 +54,6 @@ class S3Test extends TestCase
             $this->assertFalse($s3->hasBucket('laravel-cloud-dummy'));
         }, 1000);
     }
-
 
     public function test_can_delete_files()
     {

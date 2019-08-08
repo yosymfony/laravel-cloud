@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use App\Stack;
+use Exception;
 
 class ManifestNotFoundException extends Exception
 {

@@ -64,7 +64,7 @@ class SourceProviderController extends Controller
 
         if (count($provider->projects) > 0) {
             throw ValidationException::withMessages(['balancer' => [
-                'This source control provider is being used by active projects.'
+                'This source control provider is being used by active projects.',
             ]]);
         }
 

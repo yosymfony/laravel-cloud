@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Stack;
 use App\Database;
 use App\AppServer;
-use App\WebServer;
 use App\IpAddress;
+use App\WebServer;
 use Tests\TestCase;
 use App\Jobs\SyncNetwork;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,14 +14,12 @@ class SyncNetworkJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_task_id_is_stored()
     {
@@ -56,7 +53,6 @@ class SyncNetworkJobTest extends TestCase
         );
     }
 
-
     public function test_job_is_released_if_database_is_not_provisioned()
     {
         $database = factory(Database::class)->create([
@@ -71,7 +67,6 @@ class SyncNetworkJobTest extends TestCase
 
         $this->assertEquals(15, $job->released);
     }
-
 
     public function test_job_is_released_if_no_lock_can_be_acquired()
     {
@@ -88,7 +83,6 @@ class SyncNetworkJobTest extends TestCase
         $this->assertEquals(15, $job->released);
     }
 }
-
 
 class SyncNetworkFakeJob extends SyncNetwork
 {

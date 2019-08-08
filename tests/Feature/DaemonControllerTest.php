@@ -3,13 +3,12 @@
 namespace Tests\Feature;
 
 use App\Stack;
-use App\Project;
 use App\Deployment;
 use Tests\TestCase;
 use App\ServerDeployment;
 use App\Jobs\PauseDaemons;
-use App\Jobs\UnpauseDaemons;
 use App\Jobs\RestartDaemons;
+use App\Jobs\UnpauseDaemons;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -17,14 +16,12 @@ class DaemonControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     /**
      * @dataProvider modifierProvider
@@ -37,7 +34,7 @@ class DaemonControllerTest extends TestCase
         $stack->deployments()->save(factory(Deployment::class)->make());
 
         $stack->deployments()->save($lastDeployment = factory(Deployment::class)->make([
-            'daemons' => ['first']
+            'daemons' => ['first'],
         ]));
 
         $lastDeployment->serverDeployments()->save(
@@ -57,7 +54,6 @@ class DaemonControllerTest extends TestCase
             return $job->deployment->id === $serverDeployment->id;
         });
     }
-
 
     /**
      * @dataProvider modifierProvider
@@ -82,7 +78,6 @@ class DaemonControllerTest extends TestCase
         });
     }
 
-
     public function test_cant_modify_daemons_if_the_stack_has_no_deployments()
     {
         Bus::fake();
@@ -96,7 +91,6 @@ class DaemonControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function modifierProvider()
     {

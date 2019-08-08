@@ -12,14 +12,12 @@ class DeleteServerOnProviderJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_server_is_deleted_using_provider()
     {

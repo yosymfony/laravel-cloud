@@ -22,11 +22,11 @@ class DatabaseTransferController extends Controller
 
         $request->validate([
             'project_id' => [
-                'required' ,
+                'required',
                 'integer',
                 Rule::exists('projects', 'id')->where(function ($query) use ($request) {
                     $query->where('user_id', $request->user()->id);
-                })
+                }),
             ],
         ]);
 
