@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Deployment;
-use App\Jobs\StartScheduler;
-use App\Jobs\StopScheduler;
-use App\ServerDeployment;
 use App\Stack;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
+use App\Deployment;
 use Tests\TestCase;
+use App\ServerDeployment;
+use App\Jobs\StopScheduler;
+use App\Jobs\StartScheduler;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SchedulerControllerTest extends TestCase
 {

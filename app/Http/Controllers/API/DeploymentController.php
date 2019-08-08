@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Deployment;
-use App\DeploymentInstructions;
-use App\Exceptions\AlreadyDeployingException;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateDeploymentRequest;
 use App\Stack;
+use App\Deployment;
 use Illuminate\Http\Request;
+use App\DeploymentInstructions;
+use App\Http\Controllers\Controller;
+use App\Exceptions\AlreadyDeployingException;
+use App\Http\Requests\CreateDeploymentRequest;
 use Illuminate\Validation\ValidationException;
 
 class DeploymentController extends Controller
@@ -59,7 +59,7 @@ class DeploymentController extends Controller
     {
         $this->authorize('view', $request->stack);
 
-        if (!$request->stack->isProvisioned()) {
+        if (! $request->stack->isProvisioned()) {
             throw ValidationException::withMessages([
                 'stack' => ['This stack has not finished provisioning.'],
             ]);

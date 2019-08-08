@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\Scripts\GetAptLockStatus;
-use App\Scripts\GetCurrentDirectory;
 use App\Scripts\Script;
 use Facades\App\TaskFactory;
+use App\Scripts\GetAptLockStatus;
+use App\Scripts\GetCurrentDirectory;
 
 trait Provisionable
 {
@@ -129,7 +129,7 @@ trait Provisionable
      */
     public function isReadyForProvisioning()
     {
-        if (!$this->ipAddress()) {
+        if (! $this->ipAddress()) {
             $this->retrieveIpAddresses();
         }
 
@@ -161,7 +161,7 @@ trait Provisionable
             $project->withProvider()->getPrivateIpAddress($this),
         ];
 
-        if (!$publicIp || !$privateIp) {
+        if (! $publicIp || ! $privateIp) {
             return;
         }
 
@@ -218,7 +218,7 @@ trait Provisionable
      */
     public function provisioningJobDispatched()
     {
-        return !is_null($this->provisioning_job_dispatched_at);
+        return ! is_null($this->provisioning_job_dispatched_at);
     }
 
     /**
@@ -231,7 +231,7 @@ trait Provisionable
      */
     public function run(Script $script, array $options = [])
     {
-        if (!array_key_exists('timeout', $options)) {
+        if (! array_key_exists('timeout', $options)) {
             $options['timeout'] = $script->timeout();
         }
 

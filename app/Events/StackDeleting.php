@@ -2,11 +2,11 @@
 
 namespace App\Events;
 
-use App\Contracts\Alertable;
 use App\Stack;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Foundation\Events\Dispatchable;
+use App\Contracts\Alertable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
 
 class StackDeleting implements Alertable
 {

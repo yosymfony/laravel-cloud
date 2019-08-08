@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Environment;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Encryption\Encrypter;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class EnvironmentController extends Controller
@@ -95,7 +95,7 @@ class EnvironmentController extends Controller
     {
         $this->authorize('delete', $environment);
 
-        if (!$environment->stacks->every->isProvisioned() ||
+        if (! $environment->stacks->every->isProvisioned() ||
             $environment->stacks->contains->isDeploying()) {
             throw ValidationException::withMessages([
                 'stack' => ['This environment has stacks that are provisioning or deploying.'],

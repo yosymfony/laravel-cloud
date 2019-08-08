@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Balancer;
 use App\User;
+use App\Balancer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BalancerPolicy

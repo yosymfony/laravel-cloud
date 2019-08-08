@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Hook;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateHookRequest;
 use App\Stack;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateHookRequest;
 use Illuminate\Validation\ValidationException;
 
 class HookController extends Controller
@@ -40,7 +40,7 @@ class HookController extends Controller
     {
         $this->authorize('view', $stack->project());
 
-        if (!$stack->isProvisioned()) {
+        if (! $stack->isProvisioned()) {
             throw ValidationException::withMessages([
                 'stack' => ['This stack has not finished provisioning.'],
             ]);

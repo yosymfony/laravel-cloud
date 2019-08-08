@@ -3,8 +3,8 @@
 namespace App;
 
 use App\Jobs\PromoteStack;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\Model;
 
 class Environment extends Model
 {
@@ -69,7 +69,7 @@ class Environment extends Model
      */
     public function promote(Stack $stack, array $options = [])
     {
-        if (!$stack->promotable()) {
+        if (! $stack->promotable()) {
             return false;
         }
 

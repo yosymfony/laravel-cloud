@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Contracts\StorageProviderClient;
+use Exception;
+use Aws\S3\S3Client;
 use App\DatabaseBackup;
 use App\StorageProvider;
-use Aws\S3\S3Client;
-use Exception;
+use App\Contracts\StorageProviderClient;
 
 class S3 implements StorageProviderClient
 {
@@ -37,7 +37,7 @@ class S3 implements StorageProviderClient
     public function valid()
     {
         try {
-            if (!isset($this->provider->meta['bucket'])) {
+            if (! isset($this->provider->meta['bucket'])) {
                 return false;
             }
 

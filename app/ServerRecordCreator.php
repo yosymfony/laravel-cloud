@@ -43,7 +43,7 @@ class ServerRecordCreator
     {
         $definition = $this->definition->toArray();
 
-        if (!isset($definition[$this->type]) || empty($definition[$this->type])) {
+        if (! isset($definition[$this->type]) || empty($definition[$this->type])) {
             return;
         }
 

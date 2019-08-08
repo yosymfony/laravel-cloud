@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class StackDatabaseController extends Controller
 {
@@ -28,8 +28,8 @@ class StackDatabaseController extends Controller
         $databases->reject(function ($database) use ($request) {
             return (in_array($database->name, $request->databases) &&
                      $database->stacks->contains($request->stack)) ||
-                   (!in_array($database->name, $request->databases) &&
-                    !$database->stacks->contains($request->stack));
+                   (! in_array($database->name, $request->databases) &&
+                    ! $database->stacks->contains($request->stack));
         })->each(function ($database) use ($request) {
             $database->stacks()->toggle($request->stack);
 

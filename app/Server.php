@@ -3,9 +3,9 @@
 namespace App;
 
 use App\Callbacks\MarkAsProvisioned;
-use App\Contracts\Provisionable as ProvisionableContract;
 use App\Jobs\DeleteServerOnProvider;
 use Illuminate\Database\Eloquent\Model;
+use App\Contracts\Provisionable as ProvisionableContract;
 
 abstract class Server extends Model implements ProvisionableContract
 {
@@ -258,7 +258,7 @@ abstract class Server extends Model implements ProvisionableContract
      */
     public function runProvisioningScript()
     {
-        if (!$this->isProvisioning()) {
+        if (! $this->isProvisioning()) {
             $this->markAsProvisioning();
 
             return $this->runInBackground($this->provisioningScript(), [
@@ -294,7 +294,7 @@ abstract class Server extends Model implements ProvisionableContract
      */
     protected function deleteOnProvider()
     {
-        if (!$this->providerServerId()) {
+        if (! $this->providerServerId()) {
             return;
         }
 

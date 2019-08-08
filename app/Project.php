@@ -6,8 +6,8 @@ use App\Events\ProjectShared;
 use App\Events\ProjectUnshared;
 use App\Jobs\ProvisionBalancer;
 use App\Jobs\ProvisionDatabase;
-use Facades\App\ServerProviderClientFactory;
 use Illuminate\Database\Eloquent\Model;
+use Facades\App\ServerProviderClientFactory;
 
 class Project extends Model
 {

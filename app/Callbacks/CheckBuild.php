@@ -2,8 +2,8 @@
 
 namespace App\Callbacks;
 
-use App\ServerDeployment;
 use App\Task;
+use App\ServerDeployment;
 
 class CheckBuild
 {

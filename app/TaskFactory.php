@@ -15,7 +15,7 @@ class TaskFactory
      */
     public function createFromScript($provisionable, $script, array $options = [])
     {
-        if (!array_key_exists('timeout', $options)) {
+        if (! array_key_exists('timeout', $options)) {
             $options['timeout'] = $script->timeout();
         }
 

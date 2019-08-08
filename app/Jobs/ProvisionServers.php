@@ -4,10 +4,10 @@ namespace App\Jobs;
 
 use App\Stack;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
 class ProvisionServers implements ShouldQueue
 {
@@ -44,13 +44,13 @@ class ProvisionServers implements ShouldQueue
         ]);
 
         foreach ($this->stack->allServers() as $server) {
-            if (!$server->providerServerId()) {
+            if (! $server->providerServerId()) {
                 $server->update([
                     'provider_server_id' => $this->createServer($server),
                 ]);
             }
 
-            if (!$server->provisioningJobDispatched()) {
+            if (! $server->provisioningJobDispatched()) {
                 $server->provision();
             }
         }

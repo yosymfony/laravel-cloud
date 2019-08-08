@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ValidRepository;
 use App\SourceProvider;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidRepository;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CreateProjectRequest extends FormRequest
 {
@@ -59,11 +59,11 @@ class CreateProjectRequest extends FormRequest
         return $validator->after(function ($validator) {
             $provider = $this->user()->serverProviders()->find($this->server_provider_id);
 
-            if (!$provider->validRegion($this->region)) {
+            if (! $provider->validRegion($this->region)) {
                 $validator->errors()->add('region', 'Invalid region for provider.');
             }
 
-            if ($this->database && !$provider->validSize($this->database_size)) {
+            if ($this->database && ! $provider->validSize($this->database_size)) {
                 $validator->errors()->add('database_size', 'Invalid size for database.');
             }
         });

@@ -63,7 +63,7 @@ class Activate extends Script
      */
     public function shouldRestartFpm()
     {
-        return !$this->deployment->deployable->isTrueWorker();
+        return ! $this->deployment->deployable->isTrueWorker();
     }
 
     /**

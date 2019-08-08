@@ -2,17 +2,17 @@
 
 namespace App;
 
-use App\Contracts\StackDefinition;
+use Exception;
+use Carbon\Carbon;
+use App\Jobs\SyncServers;
+use Illuminate\Support\Str;
 use App\Events\StackDeleting;
 use App\Events\StackProvisioned;
 use App\Events\StackProvisioning;
-use App\Exceptions\AlreadyDeployingException;
-use App\Jobs\SyncServers;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Database\Eloquent\Model;
+use App\Contracts\StackDefinition;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\AlreadyDeployingException;
 
 class Stack extends Model
 {
@@ -357,7 +357,7 @@ class Stack extends Model
      */
     public function shouldRespondTo()
     {
-        if (!$this->promoted) {
+        if (! $this->promoted) {
             return [$this->url.'.laravel.build'];
         }
 
@@ -437,7 +437,7 @@ class Stack extends Model
             return Str::replaceFirst('www.', '', $domain);
         }
 
-        if (!Str::startsWith($domain, 'www.') && in_array('www.'.$domain, $canonicals)) {
+        if (! Str::startsWith($domain, 'www.') && in_array('www.'.$domain, $canonicals)) {
             return 'www.'.$domain;
         }
 
@@ -531,7 +531,7 @@ class Stack extends Model
         // First we will make sure we can actually deploy this stack. If the stack is not
         // provisioned or we cannot obtain a lock, we will return out since we are not
         // able to safely deploy to the stack. Otherwise, we can keep on going here.
-        if ($this->isDeploying() || !$this->deploymentLock()->get()) {
+        if ($this->isDeploying() || ! $this->deploymentLock()->get()) {
             throw new AlreadyDeployingException();
         }
 
@@ -663,7 +663,7 @@ class Stack extends Model
      */
     public function hasPendingDeployment()
     {
-        return !empty($this->pending_deployment);
+        return ! empty($this->pending_deployment);
     }
 
     /**
@@ -691,8 +691,8 @@ class Stack extends Model
      */
     public function deployPending()
     {
-        if (!$this->hasPendingDeployment() ||
-            !$hook = Hook::find($this->pending_deployment['hook_id'])) {
+        if (! $this->hasPendingDeployment() ||
+            ! $hook = Hook::find($this->pending_deployment['hook_id'])) {
             return $this->resetPendingDeployment();
         }
 

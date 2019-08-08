@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Callbacks\CheckActivation;
-use App\ServerDeployment;
 use App\Task;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\ServerDeployment;
+use App\Callbacks\CheckActivation;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CheckActivationCallbackTest extends TestCase
 {

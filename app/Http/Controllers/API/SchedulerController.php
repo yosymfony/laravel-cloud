@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Stack;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
 class SchedulerController extends Controller
@@ -21,7 +21,7 @@ class SchedulerController extends Controller
     {
         $this->authorize('view', $stack);
 
-        if (!$deployment = $stack->lastDeployment()) {
+        if (! $deployment = $stack->lastDeployment()) {
             throw ValidationException::withMessages([
                 'stack' => ['This stack does not have any deployments.'],
             ]);
@@ -44,7 +44,7 @@ class SchedulerController extends Controller
     {
         $this->authorize('view', $stack);
 
-        if (!$deployment = $stack->lastDeployment()) {
+        if (! $deployment = $stack->lastDeployment()) {
             throw ValidationException::withMessages([
                 'stack' => ['This stack does not have any deployments.'],
             ]);

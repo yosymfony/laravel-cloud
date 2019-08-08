@@ -17,7 +17,7 @@ trait CancelsDeployments
     {
         $deployment->stack->resetDeploymentStatus();
 
-        if (!$deployment->cancel()) {
+        if (! $deployment->cancel()) {
             return response()->json([
                 'deployment' => ['We were unable to cancel this deployment.'],
             ], 400);

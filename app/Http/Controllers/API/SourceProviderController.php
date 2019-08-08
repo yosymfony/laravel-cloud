@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\SourceProvider;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
 class SourceProviderController extends Controller
@@ -42,7 +42,7 @@ class SourceProviderController extends Controller
             'meta' => $request->meta,
         ]);
 
-        if (!$source->client()->valid()) {
+        if (! $source->client()->valid()) {
             $source->delete();
 
             throw ValidationException::withMessages([
@@ -63,7 +63,7 @@ class SourceProviderController extends Controller
      */
     public function destroy(Request $request, SourceProvider $provider)
     {
-        abort_if(!$request->user()->sourceProviders->contains($provider), 403);
+        abort_if(! $request->user()->sourceProviders->contains($provider), 403);
 
         if (count($provider->projects) > 0) {
             throw ValidationException::withMessages(['balancer' => [

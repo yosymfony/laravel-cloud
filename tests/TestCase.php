@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use App\SecureShellKey;
 use App\User;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use App\SecureShellKey;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {

@@ -2,8 +2,8 @@
 
 namespace App\Callbacks;
 
-use App\ServerDeployment;
 use App\Task;
+use App\ServerDeployment;
 
 class StartBackgroundServices
 {
@@ -35,7 +35,7 @@ class StartBackgroundServices
      */
     public function handle(Task $task)
     {
-        if (!$deployment = ServerDeployment::find($this->id)) {
+        if (! $deployment = ServerDeployment::find($this->id)) {
             return;
         }
 
@@ -54,7 +54,7 @@ class StartBackgroundServices
     protected function shouldStartBackgroundServices(ServerDeployment $deployment)
     {
         return $deployment->deployable->daemonsArePending()
-                        ? !$deployment->isProduction()
+                        ? ! $deployment->isProduction()
                         : $deployment->deployable->daemonsAreRunning();
     }
 }

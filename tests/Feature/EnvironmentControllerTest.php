@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\AppServer;
-use App\Environment;
-use App\Project;
 use App\Stack;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
+use App\Project;
+use App\AppServer;
 use Tests\TestCase;
+use App\Environment;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EnvironmentControllerTest extends TestCase
 {

@@ -83,7 +83,7 @@ class SecureShellKey
      */
     protected static function ensureKeyDirectoryExists()
     {
-        if (!is_dir(storage_path('app/keys'))) {
+        if (! is_dir(storage_path('app/keys'))) {
             mkdir(storage_path('app/keys'), 0755, true);
         }
     }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\StorageProvider;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
 class StorageProviderController extends Controller
@@ -42,7 +42,7 @@ class StorageProviderController extends Controller
             'meta' => $request->meta,
         ]);
 
-        if (!$provider->client()->valid()) {
+        if (! $provider->client()->valid()) {
             $provider->delete();
 
             throw ValidationException::withMessages([
@@ -63,7 +63,7 @@ class StorageProviderController extends Controller
      */
     public function destroy(Request $request, StorageProvider $provider)
     {
-        abort_if(!$request->user()->storageProviders->contains($provider), 403);
+        abort_if(! $request->user()->storageProviders->contains($provider), 403);
 
         $provider->delete();
     }

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Jobs\SyncServers;
 use App\Stack;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
+use App\Jobs\SyncServers;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ServerConfigurationControllerTest extends TestCase
 {

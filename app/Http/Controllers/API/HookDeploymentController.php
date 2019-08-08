@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Exceptions\AlreadyDeployingException;
 use App\Hook;
 use App\Http\Controllers\Controller;
+use App\Exceptions\AlreadyDeployingException;
 use App\Http\Requests\CreateHookDeploymentRequest;
 
 class HookDeploymentController extends Controller
@@ -26,7 +26,7 @@ class HookDeploymentController extends Controller
             return;
         }
 
-        if (!$request->receivable() || !$hook->receives($request->all())) {
+        if (! $request->receivable() || ! $hook->receives($request->all())) {
             return response('', 204);
         }
 

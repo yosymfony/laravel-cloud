@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\AppServer;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ServerTest extends TestCase
 {

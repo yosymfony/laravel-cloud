@@ -74,7 +74,7 @@ class CaddyBalancerConfiguration
      */
     protected function script()
     {
-        return !$this->stack->isCanonicalDomain($this->domain) || Str::contains($this->domain, ':80')
+        return ! $this->stack->isCanonicalDomain($this->domain) || Str::contains($this->domain, ':80')
                         ? 'scripts.caddy-configuration.redirect'
                         : 'scripts.caddy-configuration.proxy';
     }

@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\AppServer;
-use App\Jobs\CreateLoadBalancerIfNecessary;
 use App\Stack;
+use App\AppServer;
 use App\WebServer;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Jobs\CreateLoadBalancerIfNecessary;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateLoadBalancerIfNecessaryJobTest extends TestCase
 {
