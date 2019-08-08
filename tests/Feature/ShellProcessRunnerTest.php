@@ -12,14 +12,12 @@ class ShellProcessRunnerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_process_runner_runs_process()
     {
@@ -34,7 +32,6 @@ class ShellProcessRunnerTest extends TestCase
         $this->assertEquals('', $response->output);
         $this->assertFalse($response->timedOut);
     }
-
 
     public function test_process_runner_handles_timeouts()
     {

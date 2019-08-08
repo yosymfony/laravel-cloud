@@ -11,7 +11,6 @@ class DispatchCallbackTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
@@ -21,7 +20,6 @@ class DispatchCallbackTest extends TestCase
         TestDispatchCallbackJob::$ran = false;
         TestDispatchCallbackJob::$database = null;
     }
-
 
     public function test_proper_job_is_dispatched()
     {
@@ -36,7 +34,6 @@ class DispatchCallbackTest extends TestCase
         $this->assertEquals($task->provisionable->id, TestDispatchCallbackJob::$database->id);
     }
 }
-
 
 class TestDispatchCallbackJob
 {

@@ -13,14 +13,12 @@ class HandlesStackProvisioningFailuresTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stack_is_deleted_and_alert_created()
     {
@@ -32,7 +30,6 @@ class HandlesStackProvisioningFailuresTest extends TestCase
         $this->assertTrue($stack->wasDeleted);
     }
 }
-
 
 class HandlesStackProvisioningFailuresTestFakeStack extends Stack
 {

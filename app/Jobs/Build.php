@@ -4,8 +4,8 @@ namespace App\Jobs;
 
 use Exception;
 use App\ServerDeployment;
-use Illuminate\Bus\Queueable;
 use App\Callbacks\CheckBuild;
+use Illuminate\Bus\Queueable;
 use App\Scripts\Build as BuildScript;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

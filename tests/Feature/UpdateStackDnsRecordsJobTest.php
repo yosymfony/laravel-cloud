@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use Mockery;
 use App\Stack;
-use App\Project;
 use Tests\TestCase;
 use App\Environment;
 use App\Contracts\DnsProvider;
@@ -15,7 +14,6 @@ class UpdateStackDnsRecordsJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
@@ -23,13 +21,12 @@ class UpdateStackDnsRecordsJobTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-
     public function test_proper_stacks_are_updated()
     {
         $environment = factory(Environment::class)->create();
 
         $environment->stacks()->save($stack1 = factory(Stack::class)->make([
-            'dns_address' => '192.168.1.1'
+            'dns_address' => '192.168.1.1',
         ]));
 
         $environment->stacks()->save($stack2 = factory(Stack::class)->make([

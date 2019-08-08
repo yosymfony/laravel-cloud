@@ -13,14 +13,12 @@ class RestartDaemonsJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_daemons_are_restarted()
     {

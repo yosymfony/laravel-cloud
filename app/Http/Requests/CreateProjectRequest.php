@@ -38,7 +38,7 @@ class CreateProjectRequest extends FormRequest
             'repository' => [
                 'required',
                 'string',
-                new ValidRepository(SourceProvider::find($this->source_provider_id))
+                new ValidRepository(SourceProvider::find($this->source_provider_id)),
             ],
             'database' => 'string|alpha_dash|max:255',
             'database_size' => 'string',

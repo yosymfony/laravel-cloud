@@ -17,14 +17,12 @@ class ProvisionDatabaseJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_databases_is_deleted_on_failure()
     {

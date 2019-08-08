@@ -12,14 +12,12 @@ class SourceControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_source_can_be_created()
     {
@@ -41,7 +39,6 @@ class SourceControllerTest extends TestCase
         $this->assertInstanceOf(GitHub::class, $source->client());
     }
 
-
     public function test_source_can_be_validated()
     {
         $user = $this->user();
@@ -56,7 +53,6 @@ class SourceControllerTest extends TestCase
         $this->assertCount(0, $user->sourceProviders);
     }
 
-
     public function test_source_provider_can_be_deleted()
     {
         $provider = factory(SourceProvider::class)->create();
@@ -69,7 +65,6 @@ class SourceControllerTest extends TestCase
         $this->assertCount(0, $provider->user->sourceProviders()->get());
     }
 
-
     public function test_only_owner_can_delete_source_providers()
     {
         $provider = factory(SourceProvider::class)->create();
@@ -80,7 +75,6 @@ class SourceControllerTest extends TestCase
 
         $response->assertStatus(403);
     }
-
 
     public function test_source_providers_can_not_be_deleted_if_attached_to_projects()
     {

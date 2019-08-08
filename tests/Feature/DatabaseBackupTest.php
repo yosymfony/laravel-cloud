@@ -16,14 +16,12 @@ class DatabaseBackupTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_mark_as_running()
     {
@@ -36,7 +34,6 @@ class DatabaseBackupTest extends TestCase
 
         Event::assertDispatched(DatabaseBackupRunning::class);
     }
-
 
     public function test_mark_as_finished()
     {
@@ -51,7 +48,6 @@ class DatabaseBackupTest extends TestCase
         Event::assertDispatched(DatabaseBackupFinished::class);
     }
 
-
     public function test_mark_as_failed()
     {
         Event::fake();
@@ -65,7 +61,6 @@ class DatabaseBackupTest extends TestCase
 
         Event::assertDispatched(DatabaseBackupFailed::class);
     }
-
 
     public function test_deleting_a_backup_dispatches_the_delete_job()
     {

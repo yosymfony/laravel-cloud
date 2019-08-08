@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Stack;
-use App\Project;
 use App\Database;
 use Tests\TestCase;
 use App\Environment;
@@ -17,14 +15,12 @@ class StackControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_stacks_can_be_listed()
     {
@@ -39,7 +35,6 @@ class StackControllerTest extends TestCase
 
         $this->assertCount(2, $response->original);
     }
-
 
     public function test_404_returned_if_environment_doesnt_exist()
     {
@@ -82,7 +77,6 @@ class StackControllerTest extends TestCase
         Bus::assertNotDispatched(CreateLoadBalancerIfNecessary::class);
     }
 
-
     public function test_validation_fails_if_no_web_servers_present()
     {
         Bus::fake();
@@ -121,7 +115,6 @@ class StackControllerTest extends TestCase
 
         Bus::assertNotDispatched(CreateLoadBalancerIfNecessary::class);
     }
-
 
     public function test_validation_fails_if_app_servers_combined_with_other_servers()
     {
@@ -164,7 +157,6 @@ class StackControllerTest extends TestCase
 
         Bus::assertNotDispatched(CreateLoadBalancerIfNecessary::class);
     }
-
 
     public function test_stacks_can_be_provisioned()
     {
@@ -233,7 +225,6 @@ class StackControllerTest extends TestCase
         $this->assertEquals('provisioning', $stack->status);
     }
 
-
     public function test_stacks_can_be_provisioned_with_app_servers()
     {
         Bus::fake();
@@ -290,7 +281,6 @@ class StackControllerTest extends TestCase
         $this->assertEquals('provisioning', $stack->status);
     }
 
-
     public function test_stacks_may_be_deleted()
     {
         $stack = factory(Stack::class)->create();
@@ -303,7 +293,6 @@ class StackControllerTest extends TestCase
 
         $this->assertCount(0, Stack::all());
     }
-
 
     public function test_stacks_cant_be_deleted_without_permission()
     {
@@ -318,7 +307,6 @@ class StackControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
-
     public function test_stacks_can_always_be_deleted_by_the_user_that_created_them()
     {
         $stack = factory(Stack::class)->create();
@@ -332,7 +320,6 @@ class StackControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
-
 
     public function test_stacks_may_not_be_deleted_while_deploying()
     {

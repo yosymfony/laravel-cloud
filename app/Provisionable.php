@@ -155,7 +155,7 @@ trait Provisionable
     {
         $project = $this->project;
 
-        list($publicIp, $privateIp) = [
+        [$publicIp, $privateIp] = [
             $project->withProvider()->getPublicIpAddress($this),
             $project->withProvider()->getPrivateIpAddress($this),
         ];

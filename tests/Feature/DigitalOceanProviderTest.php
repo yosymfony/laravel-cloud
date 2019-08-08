@@ -11,14 +11,12 @@ class DigitalOceanProviderTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_ssh_keys_can_be_added_and_removed()
     {
@@ -38,7 +36,6 @@ class DigitalOceanProviderTest extends TestCase
 
         $this->assertNull($ocean->findKey());
     }
-
 
     public function test_can_verify_credentials_are_valid()
     {

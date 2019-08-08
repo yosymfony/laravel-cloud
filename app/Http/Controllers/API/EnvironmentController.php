@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Environment;
 use Illuminate\Http\Request;
-use Illuminate\Encryption\Encrypter;
 use App\Http\Controllers\Controller;
+use Illuminate\Encryption\Encrypter;
 use Illuminate\Validation\ValidationException;
 
 class EnvironmentController extends Controller
@@ -49,7 +49,7 @@ class EnvironmentController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255|unique:environments,name,NULL,id,project_id,'.$request->project->id,
-            'variables' => 'string|max:50000'
+            'variables' => 'string|max:50000',
         ]);
 
         return response()->json($request->project->environments()->create([
@@ -71,7 +71,7 @@ class EnvironmentController extends Controller
         $this->authorize('view', $request->environment->project);
 
         $request->validate([
-            'variables' => 'nullable|string|max:50000'
+            'variables' => 'nullable|string|max:50000',
         ]);
 
         return tap($request->environment)->update([

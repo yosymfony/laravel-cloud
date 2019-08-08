@@ -11,14 +11,12 @@ class ActivateScriptTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_script_can_be_rendered()
     {

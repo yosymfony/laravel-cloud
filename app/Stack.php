@@ -566,7 +566,7 @@ class Stack extends Model
         return tap($this->deploy(
             $hash, $build, $activate, $directories, $daemons, $schedule
         ))->update([
-            'branch' => $branch
+            'branch' => $branch,
         ]);
     }
 
@@ -821,7 +821,7 @@ class Stack extends Model
         }
 
         $this->update([
-            'status' => 'provisioning'
+            'status' => 'provisioning',
         ]);
 
         StackProvisioning::dispatch($this);

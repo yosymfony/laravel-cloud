@@ -21,7 +21,7 @@ class DaemonController extends Controller
         $this->authorize('view', $stack->project());
 
         $request->validate([
-            'action' => 'required|string|in:start,restart,pause,continue,unpause'
+            'action' => 'required|string|in:start,restart,pause,continue,unpause',
         ]);
 
         if (! $deployment = $stack->lastDeployment()) {

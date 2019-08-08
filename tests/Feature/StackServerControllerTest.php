@@ -14,14 +14,12 @@ class StackServerControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_all_servers_are_returned()
     {

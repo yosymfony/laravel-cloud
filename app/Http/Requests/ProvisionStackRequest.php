@@ -194,7 +194,7 @@ class ProvisionStackRequest extends FormRequest implements StackDefinition
             'app.serves' => [
                 'array',
                 'min:1',
-                new ValidServeList($this->project(), $this->environment()->name)
+                new ValidServeList($this->project(), $this->environment()->name),
             ],
             'app.serves.*' => 'string',
             'app.daemons' => 'array',
@@ -226,7 +226,7 @@ class ProvisionStackRequest extends FormRequest implements StackDefinition
             'web.serves' => [
                 'array',
                 'min:1',
-                new ValidServeList($this->project(), $this->environment()->name)
+                new ValidServeList($this->project(), $this->environment()->name),
             ],
             'web.serves.*' => 'string',
             'web.scripts' => 'array',

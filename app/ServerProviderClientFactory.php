@@ -19,7 +19,7 @@ class ServerProviderClientFactory
             case 'DigitalOcean':
                 return new DigitalOcean($provider);
             default:
-                throw new InvalidArgumentException("Invalid provider type.");
+                throw new InvalidArgumentException('Invalid provider type.');
         }
     }
 }

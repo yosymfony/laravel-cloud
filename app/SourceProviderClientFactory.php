@@ -19,7 +19,7 @@ class SourceProviderClientFactory
             case 'GitHub':
                 return new GitHub($source);
             default:
-                throw new InvalidArgumentException("Invalid source control provider type.");
+                throw new InvalidArgumentException('Invalid source control provider type.');
         }
     }
 }

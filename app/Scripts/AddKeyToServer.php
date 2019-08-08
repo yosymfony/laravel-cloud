@@ -3,7 +3,6 @@
 namespace App\Scripts;
 
 use App\User;
-use App\Contracts\Provisionable;
 
 class AddKeyToServer extends Script
 {
@@ -48,7 +47,7 @@ class AddKeyToServer extends Script
      */
     public function name()
     {
-        return "Syncing SSH Key";
+        return 'Syncing SSH Key';
     }
 
     /**

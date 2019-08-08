@@ -2,10 +2,8 @@
 
 namespace App;
 
-use App\Jobs\StopScheduler;
-use App\Jobs\StartScheduler;
-use App\Jobs\DeleteServerOnProvider;
 use App\Callbacks\MarkAsProvisioned;
+use App\Jobs\DeleteServerOnProvider;
 use Illuminate\Database\Eloquent\Model;
 use App\Contracts\Provisionable as ProvisionableContract;
 

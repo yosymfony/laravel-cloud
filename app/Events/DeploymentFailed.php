@@ -56,7 +56,7 @@ class DeploymentFailed implements Alertable, HasStack
             'type' => 'DeploymentFailed',
             'exception' => (string) ($this->exception ?? ''),
             'meta' => [
-                'deployment_id' => $this->deployment->id
+                'deployment_id' => $this->deployment->id,
             ],
         ]);
     }

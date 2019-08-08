@@ -17,14 +17,12 @@ class RestoreDatabaseBackupJobTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_script_is_started()
     {

@@ -53,7 +53,7 @@ class DeploymentTimedOut implements Alertable, HasStack
             'type' => 'DeploymentTimedOut',
             'exception' => '',
             'meta' => [
-                'deployment_id' => $this->deployment->id
+                'deployment_id' => $this->deployment->id,
             ],
         ]);
     }

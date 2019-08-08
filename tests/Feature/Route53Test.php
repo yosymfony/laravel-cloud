@@ -13,14 +13,12 @@ class Route53Test extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_dns_records_can_be_added()
     {

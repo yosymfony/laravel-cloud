@@ -39,5 +39,6 @@ function uuid()
     $orderedTimeFactory = new UuidFactory;
     $orderedTimeFactory->setCodec(new OrderedTimeCodec($orderedTimeFactory->getUuidBuilder()));
     $orderedTimeUuid = $orderedTimeFactory->uuid1();
+
     return (string) $orderedTimeUuid;
 }

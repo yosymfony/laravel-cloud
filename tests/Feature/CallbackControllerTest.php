@@ -11,14 +11,12 @@ class CallbackControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_task_status_is_updated()
     {
@@ -38,7 +36,6 @@ class CallbackControllerTest extends TestCase
         $this->assertEquals('finished', $task->status);
     }
 
-
     public function test_404_is_returned_for_tasks_that_dont_exist()
     {
         $response = $this->withExceptionHandling()->get('/api/callback/no');
@@ -50,7 +47,6 @@ class CallbackControllerTest extends TestCase
         $response = $this->withExceptionHandling()->get('/api/callback/alsdkjadf10390');
         $response->assertStatus(404);
     }
-
 
     public function test_task_is_updated_with_exit_code_from_query_string()
     {
@@ -69,7 +65,6 @@ class CallbackControllerTest extends TestCase
         $this->assertEquals(1, $task->exit_code);
         $this->assertEquals('finished', $task->status);
     }
-
 
     public function test_callbacks_are_executed()
     {
@@ -94,7 +89,6 @@ class CallbackControllerTest extends TestCase
         $this->assertTrue(TestCallbackHandler::$called);
     }
 }
-
 
 class TestCallbackHandler
 {

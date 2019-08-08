@@ -11,7 +11,6 @@
 |
 */
 
-
 $factory->define(App\SourceProvider::class, function () {
     return [
         'user_id' => factory(App\User::class),

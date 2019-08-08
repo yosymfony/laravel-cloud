@@ -3,7 +3,6 @@
 namespace App\Scripts;
 
 use App\User;
-use App\Contracts\Provisionable;
 
 class RemoveKeyFromServer extends Script
 {
@@ -39,7 +38,7 @@ class RemoveKeyFromServer extends Script
      */
     public function name()
     {
-        return "Removing SSH Key";
+        return 'Removing SSH Key';
     }
 
     /**

@@ -16,14 +16,12 @@ class DatabaseControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function setUp()
     {
         parent::setUp();
 
         $this->withoutExceptionHandling();
     }
-
 
     public function test_databases_can_be_listed()
     {
@@ -36,7 +34,6 @@ class DatabaseControllerTest extends TestCase
         $this->assertCount(1, $response->original);
         $this->assertEquals($database->id, $response->original[0]->id);
     }
-
 
     public function test_duplicate_database_names_cant_be_created()
     {
@@ -51,7 +48,6 @@ class DatabaseControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_databases_can_be_created()
     {
@@ -79,7 +75,6 @@ class DatabaseControllerTest extends TestCase
         $this->assertEquals('2GB', $project->databases[0]->size);
     }
 
-
     public function test_databases_can_be_deleted()
     {
         Bus::fake();
@@ -99,7 +94,6 @@ class DatabaseControllerTest extends TestCase
                    $job->providerServerId == $database->providerServerId();
         });
     }
-
 
     public function test_only_project_owners_can_delete_databases()
     {

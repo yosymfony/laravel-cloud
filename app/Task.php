@@ -66,7 +66,7 @@ class Task extends Model
      */
     public function timeout()
     {
-        return (int) ($this->options['timeout'] ?? Task::DEFAULT_TIMEOUT);
+        return (int) ($this->options['timeout'] ?? self::DEFAULT_TIMEOUT);
     }
 
     /**

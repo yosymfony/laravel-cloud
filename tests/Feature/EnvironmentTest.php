@@ -11,7 +11,6 @@ class EnvironmentTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function test_active_stack_can_be_retrieved()
     {
         $environment = factory(Environment::class)->create([

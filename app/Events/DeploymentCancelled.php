@@ -54,7 +54,7 @@ class DeploymentCancelled implements Alertable, HasStack
             'type' => 'DeploymentCancelled',
             'exception' => '',
             'meta' => [
-                'deployment_id' => $this->deployment->id
+                'deployment_id' => $this->deployment->id,
             ],
         ]);
     }

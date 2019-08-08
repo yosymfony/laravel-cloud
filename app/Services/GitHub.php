@@ -6,7 +6,6 @@ use App\Hook;
 use App\Stack;
 use Exception;
 use App\Deployment;
-use App\Environment;
 use GuzzleHttp\Client;
 use App\SourceProvider;
 use App\Contracts\SourceProviderClient;
@@ -143,7 +142,7 @@ class GitHub implements SourceProviderClient
             'name' => 'web',
             'config' => [
                 'url' => $hook->url(),
-                'content_type' => 'json'
+                'content_type' => 'json',
             ],
             'events' => ['push'],
             'active' => true,
@@ -153,7 +152,7 @@ class GitHub implements SourceProviderClient
             'published' => true,
             'meta' => array_merge($hook->meta, [
                 'provider_hook_id' => $response['id'],
-            ])
+            ]),
         ]);
     }
 
@@ -212,7 +211,7 @@ class GitHub implements SourceProviderClient
             'published' => false,
             'meta' => array_filter(array_merge($hook->meta, [
                 'provider_hook_id' => null,
-            ]))
+            ])),
         ]);
     }
 

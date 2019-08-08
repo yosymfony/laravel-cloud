@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\User;
-use App\Project;
 use App\Balancer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

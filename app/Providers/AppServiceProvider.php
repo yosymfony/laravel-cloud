@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Services\Route53;
-use App\Contracts\DnsProvider;
 use App\Contracts\YamlParser;
+use App\Contracts\DnsProvider;
 use Aws\Route53\Route53Client;
 use App\Services\LocalYamlParser;
 use Illuminate\Support\ServiceProvider;
